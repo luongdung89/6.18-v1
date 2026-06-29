@@ -1057,7 +1057,7 @@ document.addEventListener('fullscreenchange', () => {
 });
 
 // Period classification and tabs filter logic
-let currentPeriodFilter = 't1';
+let currentPeriodFilter = 'all';
 
 function getPeriodForIndex(idx) {
   // Slides 0 to 51 (first 52 slides) belong to Tiết 1, slides 52+ belong to Tiết 2
