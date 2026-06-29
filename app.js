@@ -1,4 +1,4 @@
-﻿// ==========================================================================
+// ==========================================================================
 // STATE MANAGEMENT & INITIALIZATION
 // ==========================================================================
 let slides = [];
@@ -83,7 +83,7 @@ let s5SlotData = [null, null, null, null];
 
 // Load slides from LocalStorage or fallback to INITIAL_SLIDES from slides_data.js
 function initApp() {
-  const CURRENT_VERSION = 'v43_enlarge_circles_and_fonts';
+  const CURRENT_VERSION = 'v46_fix_encoding';
   const savedVersion = safeGetItem('novastars_slides_version');
   const savedData = safeGetItem('novastars_slides');
   let loadedSuccessfully = false;
@@ -211,11 +211,11 @@ function renderSlideList() {
 
     // Get color code badge depending on stage
     let stageColor = 'var(--text-muted)';
-    if (slide.stage.includes('GIAI ÄOáº N') || slide.stage.includes('GÄ') || slide.stage.includes('GD')) {
+    if (slide.stage.includes('GIAI ĐOẠN') || slide.stage.includes('GĐ') || slide.stage.includes('GD')) {
       stageColor = 'var(--neon-orange)';
-    } else if (slide.stage.includes('KHá»žI Äá»˜NG') || slide.stage.includes('PRE-LESSON')) {
+    } else if (slide.stage.includes('KHỞI ĐỘNG') || slide.stage.includes('PRE-LESSON')) {
       stageColor = 'var(--neon-blue)';
-    } else if (slide.stage.includes('Tá»”NG Káº¾T')) {
+    } else if (slide.stage.includes('TỔNG KẾT')) {
       stageColor = 'var(--neon-green)';
     }
 
@@ -241,17 +241,17 @@ function renderCurrentSlide() {
   // Clear canvas
   canvas.innerHTML = '';
 
-  // Check if filtering for locked periods (Tiáº¿t 3)
+  // Check if filtering for locked periods (Tiết 3)
   if (currentPeriodFilter === 't3') {
-    const periodName = 'TIáº¾T 3';
+    const periodName = 'TIẾT 3';
     viewport.className = 'slide-viewport';
     canvas.innerHTML = `
       <div class="locked-slide-container">
-        <div class="lock-icon">ðŸ”’</div>
-        <div class="locked-title">Há»† THá»NG ÄANG Cáº¬P NHáº¬T</div>
-        <div class="locked-subtitle">Ná»™i dung cá»§a ${periodName} Ä‘ang Ä‘Æ°á»£c táº¡m khÃ³a</div>
-        <div class="locked-desc">CÃ¡c mÃ´-Ä‘un bÃ i há»c tiáº¿p theo Ä‘ang Ä‘Æ°á»£c cáº¥u hÃ¬nh trÃªn mÃ¡y chá»§ trung tÃ¢m. Vui lÃ²ng hoÃ n thÃ nh ná»™i dung Tiáº¿t 2 trÆ°á»›c.</div>
-        <button class="btn btn-primary" onclick="setPeriodFilter('t2')" style="margin-top: 24px; font-size: 12px; padding: 8px 20px; text-transform: uppercase;">Quay láº¡i Tiáº¿t 2</button>
+        <div class="lock-icon">🔒</div>
+        <div class="locked-title">HỆ THỐNG ĐANG CẬP NHẬT</div>
+        <div class="locked-subtitle">Nội dung của ${periodName} đang được tạm khóa</div>
+        <div class="locked-desc">Các mô-đun bài học tiếp theo đang được cấu hình trên máy chủ trung tâm. Vui lòng hoàn thành nội dung Tiết 2 trước.</div>
+        <button class="btn btn-primary" onclick="setPeriodFilter('t2')" style="margin-top: 24px; font-size: 12px; padding: 8px 20px; text-transform: uppercase;">Quay lại Tiết 2</button>
       </div>
     `;
     
@@ -389,8 +389,8 @@ function renderCurrentSlide() {
       // Quick Delete button
       const delBtn = document.createElement('div');
       delBtn.className = 'element-delete-btn';
-      delBtn.innerHTML = 'Ã—';
-      delBtn.title = 'XÃ³a Ä‘á»‘i tÆ°á»£ng nÃ y';
+      delBtn.innerHTML = '×';
+      delBtn.title = 'Xóa đối tượng này';
       delBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         deleteSelectedElement();
@@ -667,7 +667,7 @@ function addNewElement(type) {
   let defaultElement = {
     id: newId,
     type: type,
-    content: type === 'box' ? '<h3>Há»™p TiÃªu Äá»</h3><p>Nháº­p thÃ´ng tin má»›i...</p>' : 'Nháº¥p Ä‘Ãºp chuá»™t Ä‘á»ƒ sá»­a text...',
+    content: type === 'box' ? '<h3>Hộp Tiêu Đề</h3><p>Nhập thông tin mới...</p>' : 'Nhấp đúp chuột để sửa text...',
     x: 30, y: 30, w: 40, h: 20,
     fontSize: '18px',
     color: '#ffffff',
@@ -676,12 +676,12 @@ function addNewElement(type) {
   };
 
   if (type === 'badge') {
-    defaultElement.content = 'NHÃƒN TIÃŠU Äá»€';
+    defaultElement.content = 'NHÃN TIÊU ĐỀ';
     defaultElement.h = 6;
     defaultElement.fontSize = '12px';
     defaultElement.color = 'var(--neon-blue)';
   } else if (type === 'heading') {
-    defaultElement.content = 'TiÃªu Äá» Lá»›n Má»›i';
+    defaultElement.content = 'Tiêu Đề Lớn Mới';
     defaultElement.fontSize = '32px';
     defaultElement.h = 8;
   }
@@ -771,19 +771,19 @@ function saveSlides() {
   })
   .then(data => {
     if (data.status === 'success') {
-      showSystemAlert("Há»‡ thá»‘ng: ÄÃ£ lÆ°u cÃ¡c chá»‰nh sá»­a trá»±c tiáº¿p vÃ o file slides_data.js!");
+      showSystemAlert("Hệ thống: Đã lưu các chỉnh sửa trực tiếp vào file slides_data.js!");
     } else {
-      showSystemAlert("Há»‡ thá»‘ng: ÄÃ£ ghi nháº­n vÃ o bá»™ nhá»› trÃ¬nh duyá»‡t.");
+      showSystemAlert("Hệ thống: Đã ghi nhận vào bộ nhớ trình duyệt.");
     }
   })
   .catch(err => {
     console.error("Error saving slides to server:", err);
-    showSystemAlert("Há»‡ thá»‘ng: ÄÃ£ ghi nháº­n vÃ o bá»™ nhá»› trÃ¬nh duyá»‡t.");
+    showSystemAlert("Hệ thống: Đã ghi nhận vào bộ nhớ trình duyệt.");
   });
 }
 
 function resetDefaultSlides() {
-  if (confirm("Há»‡ thá»‘ng: Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n khÃ´i phá»¥c toÃ n bá»™ cÃ¡c slide vá» ná»™i dung gá»‘c? Táº¥t cáº£ thay Ä‘á»•i cá»§a báº¡n sáº½ biáº¿n máº¥t.")) {
+  if (confirm("Hệ thống: Bạn có chắc chắn muốn khôi phục toàn bộ các slide về nội dung gốc? Tất cả thay đổi của bạn sẽ biến mất.")) {
     pushUndoState();
     safeRemoveItem('novastars_slides');
     let cleanInitial = INITIAL_SLIDES;
@@ -794,7 +794,7 @@ function resetDefaultSlides() {
     currentSlideIndex = 0;
     renderSlideList();
     goToSlide(0);
-    showSystemAlert("Há»‡ thá»‘ng: KhÃ´i phá»¥c slide máº·c Ä‘á»‹nh thÃ nh cÃ´ng.");
+    showSystemAlert("Hệ thống: Khôi phục slide mặc định thành công.");
   }
 }
 
@@ -810,7 +810,7 @@ function exportJSON() {
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
-  showSystemAlert("Há»‡ thá»‘ng: Xuáº¥t file slide thÃ nh cÃ´ng.");
+  showSystemAlert("Hệ thống: Xuất file slide thành công.");
 }
 
 function importJSON(event) {
@@ -828,12 +828,12 @@ function importJSON(event) {
         saveSlidesToMemory();
         renderSlideList();
         goToSlide(0);
-        showSystemAlert("Há»‡ thá»‘ng: Náº¡p dá»¯ liá»‡u slide thÃ nh cÃ´ng.");
+        showSystemAlert("Hệ thống: Nạp dữ liệu slide thành công.");
       } else {
-        alert("Lá»—i Ä‘á»‹nh dáº¡ng: Dá»¯ liá»‡u JSON pháº£i lÃ  má»™t máº£ng slide.");
+        alert("Lỗi định dạng: Dữ liệu JSON phải là một mảng slide.");
       }
     } catch (err) {
-      alert("Lá»—i náº¡p file: " + err.message);
+      alert("Lỗi nạp file: " + err.message);
     }
   };
   reader.readAsText(file);
@@ -846,7 +846,7 @@ function showSystemAlert(msg) {
   indicator.style.borderColor = 'var(--border-neon-blue)';
   
   setTimeout(() => {
-    indicator.innerText = "Há»† THá»NG ONLINE";
+    indicator.innerText = "HỆ THỐNG ONLINE";
     indicator.style.color = 'var(--neon-green)';
     indicator.style.borderColor = 'rgba(0, 255, 204, 0.3)';
   }, 4000);
@@ -886,7 +886,7 @@ function undoAction() {
   }
   
   updateUndoButtonState();
-  showSystemAlert("Há»‡ thá»‘ng: ÄÃ£ hoÃ n tÃ¡c hÃ nh Ä‘á»™ng trÆ°á»›c.");
+  showSystemAlert("Hệ thống: Đã hoàn tác hành động trước.");
 }
 
 function updateUndoButtonState() {
@@ -1060,7 +1060,7 @@ document.addEventListener('fullscreenchange', () => {
 let currentPeriodFilter = 't1';
 
 function getPeriodForIndex(idx) {
-  // Slides 0 to 51 (first 52 slides) belong to Tiáº¿t 1, slides 52+ belong to Tiáº¿t 2
+  // Slides 0 to 51 (first 52 slides) belong to Tiết 1, slides 52+ belong to Tiết 2
   return idx < 52 ? 't1' : 't2';
 }
 
@@ -1526,7 +1526,7 @@ function getTechVisualSVG(assetName) {
         
         <!-- ID Badge Header -->
         <rect x="50" y="115" width="100" height="18" rx="3" fill="rgba(0, 255, 204, 0.1)" stroke="rgba(0, 255, 204, 0.3)" stroke-width="1" />
-        <text x="100" y="128" fill="var(--neon-green)" font-size="9" font-family="sans-serif" font-weight="bold" text-anchor="middle">CHUYÃŠN GIA AI</text>
+        <text x="100" y="128" fill="var(--neon-green)" font-size="9" font-family="sans-serif" font-weight="bold" text-anchor="middle">CHUYÊN GIA AI</text>
         
         <!-- Info lines -->
         <line x1="60" y1="145" x2="140" y2="145" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2" />
@@ -1619,7 +1619,7 @@ function getTechVisualSVG(assetName) {
         </defs>
         <rect x="10" y="10" width="180" height="180" fill="url(#boxGlow)" />
         
-        <!-- Left Chest: Math Box (ðŸ“˜ Há»™p ToÃ¡n há»c) -->
+        <!-- Left Chest: Math Box (📘 Hộp Toán học) -->
         <g transform="translate(15, 45)">
           <rect x="5" y="40" width="65" height="45" rx="4" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
           <path d="M5 40 C5 22, 70 22, 70 40 Z" fill="#020615" stroke="var(--neon-blue)" stroke-width="2" />
@@ -1629,7 +1629,7 @@ function getTechVisualSVG(assetName) {
           <circle cx="65" cy="15" r="1.5" fill="var(--neon-green)" />
         </g>
 
-        <!-- Right Chest: History Box (ðŸ“œ Há»™p Lá»‹ch sá»­) -->
+        <!-- Right Chest: History Box (📜 Hộp Lịch sử) -->
         <g transform="translate(100, 45)">
           <rect x="5" y="40" width="65" height="45" rx="4" fill="#03081a" stroke="var(--neon-orange)" stroke-width="2" />
           <path d="M5 40 C5 22, 70 22, 70 40 Z" fill="#020615" stroke="var(--neon-orange)" stroke-width="2" />
@@ -1797,7 +1797,7 @@ function getTechVisualSVG(assetName) {
         <line x1="78" y1="90" x2="82" y2="90" stroke="var(--neon-red)" stroke-width="2" />
         <line x1="118" y1="90" x2="122" y2="90" stroke="var(--neon-red)" stroke-width="2" />
         
-        <text x="100" y="132" fill="var(--neon-red)" font-size="9" text-anchor="middle" font-family="monospace">Lá»–I Há»† THá»NG: BÃ¡nh rÄƒng há»ng</text>
+        <text x="100" y="132" fill="var(--neon-red)" font-size="9" text-anchor="middle" font-family="monospace">LỖI HỆ THỐNG: Bánh răng hỏng</text>
       `;
       break;
 
@@ -1817,7 +1817,7 @@ function getTechVisualSVG(assetName) {
         <circle cx="100" cy="75" r="3" fill="var(--neon-blue)" />
         <polygon points="99,75 101,75 102,83 98,83" fill="var(--neon-blue)" />
         
-        <text x="100" y="112" fill="var(--neon-blue)" font-size="10" text-anchor="middle" font-family="monospace" font-weight="bold">Há»† THá»NG ÄÃƒ KHÃ“A</text>
+        <text x="100" y="112" fill="var(--neon-blue)" font-size="10" text-anchor="middle" font-family="monospace" font-weight="bold">HỆ THỐNG ĐÃ KHÓA</text>
         <rect x="70" y="122" width="12" height="12" rx="2" fill="none" stroke="var(--neon-blue)" stroke-width="1.5" />
         <rect x="90" y="122" width="12" height="12" rx="2" fill="none" stroke="var(--neon-blue)" stroke-width="1.5" />
         <rect x="110" y="122" width="12" height="12" rx="2" fill="none" stroke="var(--neon-blue)" stroke-width="1.5" />
@@ -1831,16 +1831,16 @@ function getTechVisualSVG(assetName) {
         <path d="M95 50 L108 65 L95 72 L105 92" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
         
         <circle cx="48" cy="40" r="22" fill="#03081a" stroke="#ff66b2" stroke-width="2" />
-        <text x="48" y="43" fill="#ff66b2" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">VAI TRÃ’</text>
+        <text x="48" y="43" fill="#ff66b2" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">VAI TRÒ</text>
         
         <circle cx="152" cy="40" r="22" fill="#03081a" stroke="#ffd633" stroke-width="2" />
-        <text x="152" y="43" fill="#ffd633" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">NHIá»†M Vá»¤</text>
+        <text x="152" y="43" fill="#ffd633" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">NHIỆM VỤ</text>
         
         <circle cx="48" cy="100" r="22" fill="#03081a" stroke="#2eb82e" stroke-width="2" />
-        <text x="48" y="103" fill="#2eb82e" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">Äá»I TÆ¯á»¢NG</text>
+        <text x="48" y="103" fill="#2eb82e" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">ĐỐI TƯỢNG</text>
         
         <circle cx="152" cy="100" r="22" fill="#03081a" stroke="#00f3ff" stroke-width="2" />
-        <text x="152" y="103" fill="#00f3ff" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">YÃŠU Cáº¦U</text>
+        <text x="152" y="103" fill="#00f3ff" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">YÊU CẦU</text>
         
         <line x1="75" y1="55" x2="70" y2="48" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3" />
         <line x1="125" y1="55" x2="130" y2="48" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3" />
@@ -1881,7 +1881,7 @@ function getTechVisualSVG(assetName) {
         <path d="M45 55 L80 55 L90 65 L155 65 L155 110 L45 110 Z" fill="rgba(3, 8, 26, 0.9)" stroke="var(--neon-blue)" stroke-width="2" />
         
         <rect x="80" y="80" width="65" height="20" rx="3" fill="#03081a" stroke="var(--neon-green)" stroke-width="2" transform="rotate(-8, 100, 90)" />
-        <text x="112" y="94" fill="var(--neon-green)" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle" transform="rotate(-8, 100, 90)">HOÃ€N THÃ€NH</text>
+        <text x="112" y="94" fill="var(--neon-green)" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle" transform="rotate(-8, 100, 90)">HOÀN THÀNH</text>
       `;
       break;
 
@@ -1903,7 +1903,7 @@ function getTechVisualSVG(assetName) {
         
         <path d="M25 70 L35 70" stroke="var(--neon-blue)" stroke-width="2" stroke-linecap="round" opacity="0.5" />
         
-        <text x="100" y="125" fill="var(--neon-green)" font-size="10" font-weight="bold" font-family="sans-serif" text-anchor="middle" letter-spacing="1">CHUYá»‚N GIAI ÄOáº N</text>
+        <text x="100" y="125" fill="var(--neon-green)" font-size="10" font-weight="bold" font-family="sans-serif" text-anchor="middle" letter-spacing="1">CHUYỂN GIAI ĐOẠN</text>
       `;
       break;
 
@@ -2082,9 +2082,9 @@ function updateTimerWidget() {
   const seconds = (timerSecondsLeft % 60).toString().padStart(2, '0');
 
   timerWidget.innerHTML = `
-    <span class="timer-digits" id="timer-digits" contenteditable="true" title="Nháº¥p vÃ o Ä‘á»ƒ chá»‰nh sá»­a thá»i gian (phÃºt:giÃ¢y)">${minutes}:${seconds}</span>
-    <button class="timer-ctrl" onclick="toggleTimer()">${timerIsRunning ? 'â¸' : 'â–¶'}</button>
-    <button class="timer-ctrl" onclick="resetTimer()" title="Äáº·t láº¡i thá»i gian">ðŸ”„</button>
+    <span class="timer-digits" id="timer-digits" contenteditable="true" title="Nhấp vào để chỉnh sửa thời gian (phút:giây)">${minutes}:${seconds}</span>
+    <button class="timer-ctrl" onclick="toggleTimer()">${timerIsRunning ? '⏸' : '▶'}</button>
+    <button class="timer-ctrl" onclick="resetTimer()" title="Đặt lại thời gian">🔄</button>
   `;
   
   viewport.appendChild(timerWidget);
@@ -2101,7 +2101,7 @@ function updateTimerWidget() {
         timerInterval = null;
         timerIsRunning = false;
         const toggleBtn = timerWidget.querySelector('button[onclick="toggleTimer()"]');
-        if (toggleBtn) toggleBtn.innerText = 'â–¶';
+        if (toggleBtn) toggleBtn.innerText = '▶';
       }
       originalText = digitsSpan.innerText;
     });
@@ -2164,7 +2164,7 @@ function selectS3Item(itemId) {
   } else if (itemId.startsWith('ans-')) {
     if (document.getElementById(`s3-${itemId}`).classList.contains('matched')) return;
     if (!s3SelectedCmd) {
-      document.getElementById('s3-game-feedback').innerText = "Vui lÃ²ng chá»n má»™t CÃ¢u lá»‡nh á»Ÿ cá»™t bÃªn trÃ¡i trÆ°á»›c!";
+      document.getElementById('s3-game-feedback').innerText = "Vui lòng chọn một Câu lệnh ở cột bên trái trước!";
       return;
     }
     s3SelectedAns = itemId;
@@ -2190,14 +2190,14 @@ function checkS3Match() {
     s3MatchedCount++;
     
     if (s3MatchedCount === 2) {
-      feedback.innerHTML = "<span style='color: var(--neon-green);'>ðŸŽ‰ XUáº¤T Sáº®C! Báº¡n Ä‘Ã£ ghÃ©p cáº·p hoÃ n toÃ n chÃ­nh xÃ¡c!</span>";
+      feedback.innerHTML = "<span style='color: var(--neon-green);'>🎉 XUẤT SẮC! Bạn đã ghép cặp hoàn toàn chính xác!</span>";
     } else {
-      feedback.innerHTML = "<span style='color: var(--neon-green);'>ChÃ­nh xÃ¡c! Tiáº¿p tá»¥c ghÃ©p cáº·p cÃ²n láº¡i nÃ o.</span>";
+      feedback.innerHTML = "<span style='color: var(--neon-green);'>Chính xác! Tiếp tục ghép cặp còn lại nào.</span>";
     }
   } else {
     cmdDom.classList.add('incorrect');
     ansDom.classList.add('incorrect');
-    feedback.innerHTML = "<span style='color: var(--neon-red);'>Sai rá»“i! HÃ£y suy nghÄ© vÃ  chá»n láº¡i nhÃ©.</span>";
+    feedback.innerHTML = "<span style='color: var(--neon-red);'>Sai rồi! Hãy suy nghĩ và chọn lại nhé.</span>";
     
     setTimeout(() => {
       cmdDom.classList.remove('selected', 'incorrect');
@@ -2226,12 +2226,12 @@ function selectS3Option(optionIndex) {
     selectedDom.classList.add('correct');
     selectedDom.style.borderColor = '#00ffcc';
     selectedDom.style.background = 'rgba(0, 255, 204, 0.15)';
-    feedback.innerHTML = "<span style='color: var(--neon-green);'>ðŸŽ‰ CHÃNH XÃC! CÃ¢u lá»‡nh cá»§a báº¡n Lan Ä‘áº§y Ä‘á»§ thÃ´ng tin nháº¥t (cÃ³ vai trÃ², viá»‡c cáº§n lÃ m, Ä‘á»‘i tÆ°á»£ng vÃ  yÃªu cáº§u cá»¥ thá»ƒ).</span>";
+    feedback.innerHTML = "<span style='color: var(--neon-green);'>🎉 CHÍNH XÁC! Câu lệnh của bạn Lan đầy đủ thông tin nhất (có vai trò, việc cần làm, đối tượng và yêu cầu cụ thể).</span>";
   } else {
     selectedDom.classList.add('incorrect');
     selectedDom.style.borderColor = '#ff4d4d';
     selectedDom.style.background = 'rgba(255, 77, 77, 0.15)';
-    feedback.innerHTML = `<span style='color: var(--neon-red);'>âŒ ChÆ°a chÃ­nh xÃ¡c. CÃ¢u lá»‡nh ${optionIndex === 1 ? 'quÃ¡ ngáº¯n' : 'chÆ°a Ä‘á»§ thÃ´ng tin Ä‘á»ƒ Ä‘á»‹nh hÃ¬nh phong cÃ¡ch tráº£ lá»i cá»§a AI'}. HÃ£y chá»n láº¡i!</span>`;
+    feedback.innerHTML = `<span style='color: var(--neon-red);'>❌ Chưa chính xác. Câu lệnh ${optionIndex === 1 ? 'quá ngắn' : 'chưa đủ thông tin để định hình phong cách trả lời của AI'}. Hãy chọn lại!</span>`;
   }
 }
 
@@ -2242,13 +2242,13 @@ function selectS4Color(color) {
   document.getElementById('s4-btn-yellow').style.boxShadow = color === 'yellow' ? '0 0 12px #ffd633' : 'none';
   document.getElementById('s4-btn-blue').style.boxShadow = color === 'blue' ? '0 0 12px #00f3ff' : 'none';
   
-  const colorNames = { pink: 'Há»“ng', green: 'Xanh lÃ¡', yellow: 'VÃ ng', blue: 'Xanh dÆ°Æ¡ng' };
-  document.getElementById('s4-game-feedback').innerText = `ÄÃ£ chá»n bÃºt mÃ u ${colorNames[color]}. Click vÃ o cá»¥m tá»« cáº§n tÃ´ mÃ u!`;
+  const colorNames = { pink: 'Hồng', green: 'Xanh lá', yellow: 'Vàng', blue: 'Xanh dương' };
+  document.getElementById('s4-game-feedback').innerText = `Đã chọn bút màu ${colorNames[color]}. Click vào cụm từ cần tô màu!`;
 }
 
 function clickS4Part(partIndex) {
   if (!s4ActiveColor) {
-    document.getElementById('s4-game-feedback').innerText = "Vui lÃ²ng chá»n má»™t mÃ u bÃºt dáº¡ á»Ÿ hÃ ng bÃªn dÆ°á»›i trÆ°á»›c!";
+    document.getElementById('s4-game-feedback').innerText = "Vui lòng chọn một màu bút dạ ở hàng bên dưới trước!";
     return;
   }
   
@@ -2285,23 +2285,23 @@ function checkS4Completion() {
                       s4ColoredParts[4] === 'blue';
                       
     if (isCorrect) {
-      feedback.innerHTML = "<span style='color: var(--neon-green);'>ðŸŽ‰ CHÃNH XÃC! Báº¡n Ä‘Ã£ phÃ¢n tÃ­ch cáº¥u trÃºc cÃ¢u lá»‡nh hoÃ n háº£o!</span>";
+      feedback.innerHTML = "<span style='color: var(--neon-green);'>🎉 CHÍNH XÁC! Bạn đã phân tích cấu trúc câu lệnh hoàn hảo!</span>";
     } else {
-      feedback.innerHTML = "<span style='color: var(--neon-red);'>CÃ³ thÃ nh pháº§n chÆ°a Ä‘Ãºng mÃ u quy Æ°á»›c. HÃ£y tÃ´ láº¡i nhÃ©!</span>";
+      feedback.innerHTML = "<span style='color: var(--neon-red);'>Có thành phần chưa đúng màu quy ước. Hãy tô lại nhé!</span>";
     }
   }
 }
 
 function clickS5Card(cardIndex) {
   const cardNames = {
-    1: "AI lÃ  ai?",
-    2: "LÃ m gÃ¬?",
+    1: "AI là ai?",
+    2: "Làm gì?",
     3: "Cho ai?",
-    4: "Káº¿t quáº£ tháº¿ nÃ o?",
-    5: "Khen ngá»£i AI",
-    6: "Icon dá»… thÆ°Æ¡ng",
-    7: "ÄÄƒng nháº­p tÃ i khoáº£n",
-    8: "Thá»i gian chat"
+    4: "Kết quả thế nào?",
+    5: "Khen ngợi AI",
+    6: "Icon dễ thương",
+    7: "Đăng nhập tài khoản",
+    8: "Thời gian chat"
   };
   
   const cardColors = {
@@ -2315,7 +2315,7 @@ function clickS5Card(cardIndex) {
   const cardName = cardNames[cardIndex];
   
   if (cardIndex >= 5) {
-    feedback.innerHTML = `<span style='color: var(--neon-red);'>âŒ "${cardName}" lÃ  cáº¥u trÃºc nhiá»…u! HÃ£y lá»c bá», khÃ´ng xáº¿p vÃ o cÃ´ng thá»©c.</span>`;
+    feedback.innerHTML = `<span style='color: var(--neon-red);'>❌ "${cardName}" là cấu trúc nhiễu! Hãy lọc bỏ, không xếp vào công thức.</span>`;
     return;
   }
   
@@ -2349,7 +2349,7 @@ function resetS5Game() {
   for (let i = 1; i <= 4; i++) {
     const slotDom = document.getElementById(`s5-slot-${i}`);
     if (slotDom) {
-      slotDom.innerText = `[ Ã” sá»‘ ${i} ]`;
+      slotDom.innerText = `[ Ô số ${i} ]`;
       slotDom.style.borderColor = 'rgba(0, 243, 255, 0.4)';
       slotDom.style.color = 'var(--text-secondary)';
       slotDom.style.background = 'transparent';
@@ -2364,22 +2364,22 @@ function resetS5Game() {
   }
   const feedback = document.getElementById('s5-game-feedback');
   if (feedback) {
-    feedback.innerHTML = "Lá»c bá» tháº» nhiá»…u vÃ  click chá»n 4 tháº» Ä‘Ãºng theo trÃ¬nh tá»± Ä‘á»ƒ táº¡o thÃ nh cÃ´ng thá»©c!";
+    feedback.innerHTML = "Lọc bỏ thẻ nhiễu và click chọn 4 thẻ đúng theo trình tự để tạo thành công thức!";
   }
 }
 
 function checkS5Completion() {
   const feedback = document.getElementById('s5-game-feedback');
   if (!s5SlotData.includes(null)) {
-    const isCorrect = s5SlotData[0] === 'AI lÃ  ai?' && 
-                      s5SlotData[1] === 'LÃ m gÃ¬?' && 
+    const isCorrect = s5SlotData[0] === 'AI là ai?' && 
+                      s5SlotData[1] === 'Làm gì?' && 
                       s5SlotData[2] === 'Cho ai?' && 
-                      s5SlotData[3] === 'Káº¿t quáº£ tháº¿ nÃ o?';
+                      s5SlotData[3] === 'Kết quả thế nào?';
                       
     if (isCorrect) {
-      feedback.innerHTML = "<span style='color: var(--neon-green);'>ðŸŽ‰ XUáº¤T Sáº®C! CÃ´ng thá»©c chuáº©n: CÃ‚U Lá»†NH = [AI lÃ  ai] + [LÃ m gÃ¬] + [Cho ai] + [Káº¿t quáº£ tháº¿ nÃ o]!</span>";
+      feedback.innerHTML = "<span style='color: var(--neon-green);'>🎉 XUẤT SẮC! Công thức chuẩn: CÂU LỆNH = [AI là ai] + [Làm gì] + [Cho ai] + [Kết quả thế nào]!</span>";
     } else {
-      feedback.innerHTML = "<span style='color: var(--neon-red);'>ChÆ°a Ä‘Ãºng thá»© tá»± logic. Nháº¥n 'Xáº¿p láº¡i tá»« Ä‘áº§u' Ä‘á»ƒ thá»­ láº¡i nhÃ©!</span>";
+      feedback.innerHTML = "<span style='color: var(--neon-red);'>Chưa đúng thứ tự logic. Nhấn 'Xếp lại từ đầu' để thử lại nhé!</span>";
     }
   }
 }
@@ -2404,7 +2404,7 @@ function jumpToPagePrompt() {
   const periodSlides = slides.filter((_, idx) => getPeriodForIndex(idx) === currentPeriod);
   const indexInPeriod = slides.filter((_, idx) => idx < currentSlideIndex && getPeriodForIndex(idx) === currentPeriod).length;
   
-  const pageNumStr = prompt(`Nháº­p sá»‘ trang slide muá»‘n di chuyá»ƒn Ä‘áº¿n cá»§a ${currentPeriod === 't1' ? 'Tiáº¿t 1' : 'Tiáº¿t 2'} (1 - ${periodSlides.length}):`, indexInPeriod + 1);
+  const pageNumStr = prompt(`Nhập số trang slide muốn di chuyển đến của ${currentPeriod === 't1' ? 'Tiết 1' : 'Tiết 2'} (1 - ${periodSlides.length}):`, indexInPeriod + 1);
   if (pageNumStr !== null) {
     const pageNum = parseInt(pageNumStr, 10);
     if (!isNaN(pageNum) && pageNum >= 1 && pageNum <= periodSlides.length) {
@@ -2423,7 +2423,7 @@ function jumpToPagePrompt() {
         goToSlide(globalIdx);
       }
     } else {
-      alert(`Sá»‘ trang khÃ´ng há»£p lá»‡! Vui lÃ²ng nháº­p sá»‘ tá»« 1 Ä‘áº¿n ${periodSlides.length}.`);
+      alert(`Số trang không hợp lệ! Vui lòng nhập số từ 1 đến ${periodSlides.length}.`);
     }
   }
 }
@@ -2432,4 +2432,3 @@ function jumpToPagePrompt() {
 // STARTUP TRIGGER
 // ==========================================================================
 window.onload = initApp;
-
