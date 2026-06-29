@@ -1,4 +1,4 @@
-# Port to run the server on
+﻿# Port to run the server on
 $port = 8080
 $listener = New-Object System.Net.HttpListener
 $listener.Prefixes.Add("http://localhost:$port/")
@@ -25,7 +25,7 @@ try {
             # Handle logging from browser
             if ($request.HttpMethod -eq "POST" -and $urlPath -eq "/log") {
                 try {
-                    $reader = New-Object System.IO.StreamReader($request.InputStream)
+                    $reader = New-Object System.IO.StreamReader($request.InputStream, [System.Text.Encoding]::UTF8)
                     $body = $reader.ReadToEnd()
                     Write-Host "BROWSER_LOG: $body"
                     $response.StatusCode = 200
@@ -42,7 +42,7 @@ try {
             # Handle saving slides back to file system
             if ($request.HttpMethod -eq "POST" -and $urlPath -eq "/save_slides") {
                 try {
-                    $reader = New-Object System.IO.StreamReader($request.InputStream)
+                    $reader = New-Object System.IO.StreamReader($request.InputStream, [System.Text.Encoding]::UTF8)
                     $body = $reader.ReadToEnd()
                     
                     # Format javascript content
@@ -126,3 +126,4 @@ try {
         $listener.Stop()
     }
 }
+

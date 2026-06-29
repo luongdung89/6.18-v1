@@ -83,7 +83,7 @@ let s5SlotData = [null, null, null, null];
 
 // Load slides from LocalStorage or fallback to INITIAL_SLIDES from slides_data.js
 function initApp() {
-  const CURRENT_VERSION = 'v44_font_resizes_and_labels';
+  const CURRENT_VERSION = 'v43_enlarge_circles_and_fonts';
   const savedVersion = safeGetItem('novastars_slides_version');
   const savedData = safeGetItem('novastars_slides');
   let loadedSuccessfully = false;
