@@ -59,7 +59,15 @@ const SLIDE_DURATIONS = {
   'S5-ACT-04': 300,  // 5 mins
   'S6-ACT-04': 480,  // 8 mins
   'S7-ACT-04': 240,  // 4 mins
-  'S8-ACT-04': 180   // 3 mins
+  'S8-ACT-04': 180,  // 3 mins
+  'T2-S3-ACT-04-A': 180,  // 3 mins
+  'T2-S3-ACT-04-B': 180,  // 3 mins
+  'T2-S3-ACT-04-C': 180,  // 3 mins
+  'T2-S3-ACT-04-D': 180,  // 3 mins
+  'T2-S4-ACT-04': 480,  // 8 mins
+  'T2-S5-ACT-04': 300,  // 5 mins
+  'T2-S6-ACT-04': 480,  // 8 mins
+  'T2-S7-ACT-04': 240   // 4 mins
 };
 
 // Interactive Games state
@@ -75,27 +83,57 @@ let s5SlotData = [null, null, null, null];
 
 // Load slides from LocalStorage or fallback to INITIAL_SLIDES from slides_data.js
 function initApp() {
-  const CURRENT_VERSION = 'v27_fixed_aspect_transform_scaling';
+  const CURRENT_VERSION = 'v43_enlarge_circles_and_fonts';
   const savedVersion = safeGetItem('novastars_slides_version');
   const savedData = safeGetItem('novastars_slides');
-  
+  let loadedSuccessfully = false;
   if (savedData && savedVersion === CURRENT_VERSION) {
     try {
-      slides = JSON.parse(savedData);
+      let parsed = JSON.parse(savedData);
+      // Handle the .NET serialization wrapper if present
+      if (parsed && !Array.isArray(parsed) && Array.isArray(parsed.value)) {
+        parsed = parsed.value;
+      }
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        slides = parsed;
+        loadedSuccessfully = true;
+      }
     } catch (e) {
-      console.error("Error loading saved slides, falling back to default.", e);
-      slides = JSON.parse(JSON.stringify(INITIAL_SLIDES));
-      safeSetItem('novastars_slides', JSON.stringify(slides));
-      safeSetItem('novastars_slides_version', CURRENT_VERSION);
+      console.error("Error loading saved slides:", e);
     }
-  } else {
-    slides = JSON.parse(JSON.stringify(INITIAL_SLIDES));
+  }
+  
+  if (!loadedSuccessfully) {
+    let cleanInitial = INITIAL_SLIDES;
+    if (cleanInitial && !Array.isArray(cleanInitial) && Array.isArray(cleanInitial.value)) {
+      cleanInitial = cleanInitial.value;
+    }
+    slides = JSON.parse(JSON.stringify(cleanInitial || []));
     safeSetItem('novastars_slides', JSON.stringify(slides));
     safeSetItem('novastars_slides_version', CURRENT_VERSION);
   }
 
   // Bind keyboard navigation
   document.addEventListener('keydown', handleKeyDown);
+
+  // Save textarea input values to slide state dynamically
+  document.addEventListener('input', (e) => {
+    if (e.target.tagName === 'TEXTAREA' && e.target.closest('#slide-canvas')) {
+      const slide = slides[currentSlideIndex];
+      if (slide) {
+        if (!slide.textareaValues) {
+          slide.textareaValues = {};
+        }
+        const parentEl = e.target.closest('.slide-element');
+        const elementId = parentEl ? parentEl.id.replace('el-dom-', '') : '';
+        const textareas = document.querySelectorAll('#slide-canvas textarea');
+        const index = Array.from(textareas).indexOf(e.target);
+        const key = elementId || e.target.placeholder || `textarea_${index}`;
+        slide.textareaValues[key] = e.target.value;
+        saveSlidesToMemory();
+      }
+    }
+  });
 
   // Bind pointer up/move globally for resizing and dragging
   document.addEventListener('pointerup', endDragOrResize);
@@ -115,8 +153,6 @@ function initApp() {
   
   window.toggleTimer = toggleTimer;
   window.resetTimer = resetTimer;
-  window.toggleTimerDropdown = toggleTimerDropdown;
-  window.setTimerDuration = setTimerDuration;
   window.setPeriodFilter = setPeriodFilter;
   window.undoAction = undoAction;
   window.saveTableCellChange = saveTableCellChange;
@@ -128,6 +164,7 @@ function initApp() {
 
   // Initialize UI
   renderSlideList();
+  setPeriodFilter('t1');
   goToSlide(0);
   setMode('present');
 }
@@ -163,6 +200,7 @@ function handleKeyDown(e) {
 // ==========================================================================
 function renderSlideList() {
   const container = document.getElementById('slide-list-container');
+  if (!container) return;
   container.innerHTML = '';
 
   slides.forEach((slide, idx) => {
@@ -173,11 +211,11 @@ function renderSlideList() {
 
     // Get color code badge depending on stage
     let stageColor = 'var(--text-muted)';
-    if (slide.stage.includes('GIAI ĐOẠN') || slide.stage.includes('GĐ')) {
+    if (slide.stage.includes('GIAI ĐOẠN') || slide.stage.includes('GĐ') || slide.stage.includes('GD')) {
       stageColor = 'var(--neon-orange)';
-    } else if (slide.stage === 'PRE-LESSON') {
+    } else if (slide.stage.includes('KHỞI ĐỘNG') || slide.stage.includes('PRE-LESSON')) {
       stageColor = 'var(--neon-blue)';
-    } else if (slide.stage === 'TỔNG KẾT') {
+    } else if (slide.stage.includes('TỔNG KẾT')) {
       stageColor = 'var(--neon-green)';
     }
 
@@ -203,17 +241,17 @@ function renderCurrentSlide() {
   // Clear canvas
   canvas.innerHTML = '';
 
-  // Check if filtering for locked periods (Tiết 2, Tiết 3)
-  if (currentPeriodFilter === 't2' || currentPeriodFilter === 't3') {
-    const periodName = currentPeriodFilter === 't2' ? 'TIẾT 2' : 'TIẾT 3';
+  // Check if filtering for locked periods (Tiết 3)
+  if (currentPeriodFilter === 't3') {
+    const periodName = 'TIẾT 3';
     viewport.className = 'slide-viewport';
     canvas.innerHTML = `
       <div class="locked-slide-container">
         <div class="lock-icon">🔒</div>
         <div class="locked-title">HỆ THỐNG ĐANG CẬP NHẬT</div>
         <div class="locked-subtitle">Nội dung của ${periodName} đang được tạm khóa</div>
-        <div class="locked-desc">Các mô-đun bài học tiếp theo đang được cấu hình trên máy chủ trung tâm. Vui lòng hoàn thành nội dung Tiết 1 trước.</div>
-        <button class="btn btn-primary" onclick="setPeriodFilter('t1')" style="margin-top: 24px; font-size: 12px; padding: 8px 20px; text-transform: uppercase;">Quay lại Tiết 1</button>
+        <div class="locked-desc">Các mô-đun bài học tiếp theo đang được cấu hình trên máy chủ trung tâm. Vui lòng hoàn thành nội dung Tiết 2 trước.</div>
+        <button class="btn btn-primary" onclick="setPeriodFilter('t2')" style="margin-top: 24px; font-size: 12px; padding: 8px 20px; text-transform: uppercase;">Quay lại Tiết 2</button>
       </div>
     `;
     
@@ -234,7 +272,10 @@ function renderCurrentSlide() {
 
   // Render current slide information in status footer
   document.getElementById('current-slide-stage').innerText = slide.stage;
-  document.getElementById('current-slide-number').innerText = `${currentSlideIndex + 1} / ${slides.length}`;
+  const currentPeriod = getPeriodForIndex(currentSlideIndex);
+  const periodSlides = slides.filter((_, idx) => getPeriodForIndex(idx) === currentPeriod);
+  const indexInPeriod = slides.filter((_, idx) => idx < currentSlideIndex && getPeriodForIndex(idx) === currentPeriod).length;
+  document.getElementById('current-slide-number').innerText = `${indexInPeriod + 1} / ${periodSlides.length}`;
   document.getElementById('current-slide-id').innerText = slide.id;
 
   // Render each slide element
@@ -359,6 +400,19 @@ function renderCurrentSlide() {
 
     canvas.appendChild(elDom);
   });
+
+  // Restore any saved input values for textareas
+  if (slide.textareaValues) {
+    const textareas = canvas.querySelectorAll('textarea');
+    textareas.forEach((textarea, index) => {
+      const parentEl = textarea.closest('.slide-element');
+      const elementId = parentEl ? parentEl.id.replace('el-dom-', '') : '';
+      const key = elementId || textarea.placeholder || `textarea_${index}`;
+      if (slide.textareaValues[key] !== undefined) {
+        textarea.value = slide.textareaValues[key];
+      }
+    });
+  }
 
   // Re-scale slide viewport
   resizeSlideViewport();
@@ -732,7 +786,11 @@ function resetDefaultSlides() {
   if (confirm("Hệ thống: Bạn có chắc chắn muốn khôi phục toàn bộ các slide về nội dung gốc? Tất cả thay đổi của bạn sẽ biến mất.")) {
     pushUndoState();
     safeRemoveItem('novastars_slides');
-    slides = JSON.parse(JSON.stringify(INITIAL_SLIDES));
+    let cleanInitial = INITIAL_SLIDES;
+    if (cleanInitial && !Array.isArray(cleanInitial) && Array.isArray(cleanInitial.value)) {
+      cleanInitial = cleanInitial.value;
+    }
+    slides = JSON.parse(JSON.stringify(cleanInitial || []));
     currentSlideIndex = 0;
     renderSlideList();
     goToSlide(0);
@@ -927,6 +985,7 @@ function prevSlide() {
 function setMode(mode) {
   currentMode = mode;
   const container = document.getElementById('app-container');
+  if (!container) return;
   const designBtn = document.getElementById('mode-btn-design');
 
   if (mode === 'present') {
@@ -998,11 +1057,11 @@ document.addEventListener('fullscreenchange', () => {
 });
 
 // Period classification and tabs filter logic
-let currentPeriodFilter = 'all';
+let currentPeriodFilter = 't1';
 
 function getPeriodForIndex(idx) {
-  // All 53 slides belong to Tiết 1
-  return 't1';
+  // Slides 0 to 51 (first 52 slides) belong to Tiết 1, slides 52+ belong to Tiết 2
+  return idx < 52 ? 't1' : 't2';
 }
 
 function setPeriodFilter(period) {
@@ -1019,13 +1078,18 @@ function setPeriodFilter(period) {
   filterSlides();
   
   // If selecting locked periods, trigger render directly to show locked screen
-  if (period === 't2' || period === 't3') {
+  if (period === 't3') {
     renderCurrentSlide();
   } else {
-    // Return to slide 0 on select Tiết 1 if currently outside (shouldn't happen since all are t1, but keeps states aligned)
+    // Return to the first slide of that period on selection if currently outside
     const currentPeriod = getPeriodForIndex(currentSlideIndex);
     if (currentPeriod !== period && period !== 'all') {
-      goToSlide(0);
+      const firstSlideIdx = slides.findIndex((_, idx) => getPeriodForIndex(idx) === period);
+      if (firstSlideIdx !== -1) {
+        goToSlide(firstSlideIdx);
+      } else {
+        goToSlide(0);
+      }
     } else {
       renderCurrentSlide();
     }
@@ -1034,11 +1098,13 @@ function setPeriodFilter(period) {
 
 // Sidebar search and period filter combined
 function filterSlides() {
-  const query = document.getElementById('slide-search').value.toLowerCase();
+  const searchInput = document.getElementById('slide-search');
+  const query = searchInput ? searchInput.value.toLowerCase() : '';
   slides.forEach((slide, idx) => {
     const item = document.getElementById(`sidebar-item-${idx}`);
     if (item) {
-      const matchSearch = slide.title.toLowerCase().includes(query) || 
+      const matchSearch = query === '' || 
+                          slide.title.toLowerCase().includes(query) || 
                           slide.id.toLowerCase().includes(query) || 
                           slide.stage.toLowerCase().includes(query);
                           
@@ -1688,6 +1754,159 @@ function getTechVisualSVG(assetName) {
       `;
       break;
 
+    case 'four-gears-error':
+      innerSVG = `
+        <!-- Gears connections -->
+        <circle cx="60" cy="50" r="18" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+        <circle cx="60" cy="50" r="4" fill="var(--neon-blue)" />
+        <circle cx="100" cy="50" r="18" fill="none" stroke="var(--neon-green)" stroke-width="2" />
+        <circle cx="100" cy="50" r="4" fill="var(--neon-green)" />
+        <circle cx="140" cy="50" r="18" fill="none" stroke="var(--neon-yellow)" stroke-width="2" />
+        <circle cx="140" cy="50" r="4" fill="var(--neon-yellow)" />
+        
+        <!-- Error gear at bottom -->
+        <circle cx="100" cy="90" r="18" fill="none" stroke="var(--neon-red)" stroke-width="2.5" />
+        <circle cx="100" cy="90" r="4" fill="var(--neon-red)" />
+        <line x1="88" y1="78" x2="112" y2="102" stroke="var(--neon-red)" stroke-width="2" />
+        <path d="M100 82 L100 88" stroke="var(--neon-red)" stroke-width="2" />
+        <circle cx="100" cy="93" r="1" fill="var(--neon-red)" />
+        
+        <!-- Connecting lines showing transmission flow -->
+        <line x1="78" y1="50" x2="82" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+        <line x1="118" y1="50" x2="122" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+        <line x1="100" y1="68" x2="100" y2="72" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+        
+        <!-- Gear teeth simulation -->
+        <line x1="60" y1="28" x2="60" y2="32" stroke="var(--neon-blue)" stroke-width="2" />
+        <line x1="60" y1="68" x2="60" y2="72" stroke="var(--neon-blue)" stroke-width="2" />
+        <line x1="38" y1="50" x2="42" y2="50" stroke="var(--neon-blue)" stroke-width="2" />
+        <line x1="78" y1="50" x2="82" y2="50" stroke="var(--neon-blue)" stroke-width="2" />
+        
+        <line x1="100" y1="28" x2="100" y2="32" stroke="var(--neon-green)" stroke-width="2" />
+        <line x1="100" y1="68" x2="100" y2="72" stroke="var(--neon-green)" stroke-width="2" />
+        <line x1="78" y1="50" x2="82" y2="50" stroke="var(--neon-green)" stroke-width="2" />
+        <line x1="118" y1="50" x2="122" y2="50" stroke="var(--neon-green)" stroke-width="2" />
+        
+        <line x1="140" y1="28" x2="140" y2="32" stroke="var(--neon-yellow)" stroke-width="2" />
+        <line x1="140" y1="68" x2="140" y2="72" stroke="var(--neon-yellow)" stroke-width="2" />
+        <line x1="118" y1="50" x2="122" y2="50" stroke="var(--neon-yellow)" stroke-width="2" />
+        <line x1="158" y1="50" x2="162" y2="50" stroke="var(--neon-yellow)" stroke-width="2" />
+        
+        <line x1="100" y1="68" x2="100" y2="72" stroke="var(--neon-red)" stroke-width="2" />
+        <line x1="100" y1="108" x2="100" y2="112" stroke="var(--neon-red)" stroke-width="2" />
+        <line x1="78" y1="90" x2="82" y2="90" stroke="var(--neon-red)" stroke-width="2" />
+        <line x1="118" y1="90" x2="122" y2="90" stroke="var(--neon-red)" stroke-width="2" />
+        
+        <text x="100" y="132" fill="var(--neon-red)" font-size="9" text-anchor="middle" font-family="monospace">LỖI HỆ THỐNG: Bánh răng hỏng</text>
+      `;
+      break;
+
+    case 'security-lock-screen':
+      innerSVG = `
+        <line x1="30" y1="40" x2="170" y2="40" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
+        <line x1="30" y1="70" x2="170" y2="70" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
+        <line x1="30" y1="100" x2="170" y2="100" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
+        <line x1="70" y1="20" x2="70" y2="120" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
+        <line x1="130" y1="20" x2="130" y2="120" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
+        
+        <line x1="30" y1="55" x2="170" y2="55" stroke="var(--neon-blue)" stroke-width="2" opacity="0.8" />
+        <circle cx="100" cy="70" r="45" fill="none" stroke="rgba(0, 243, 255, 0.2)" stroke-width="2" stroke-dasharray="10 10" />
+        
+        <rect x="85" y="65" width="30" height="24" rx="3" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+        <path d="M90 65 L90 50 C90 40, 110 40, 110 50 L110 65" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+        <circle cx="100" cy="75" r="3" fill="var(--neon-blue)" />
+        <polygon points="99,75 101,75 102,83 98,83" fill="var(--neon-blue)" />
+        
+        <text x="100" y="112" fill="var(--neon-blue)" font-size="10" text-anchor="middle" font-family="monospace" font-weight="bold">HỆ THỐNG ĐÃ KHÓA</text>
+        <rect x="70" y="122" width="12" height="12" rx="2" fill="none" stroke="var(--neon-blue)" stroke-width="1.5" />
+        <rect x="90" y="122" width="12" height="12" rx="2" fill="none" stroke="var(--neon-blue)" stroke-width="1.5" />
+        <rect x="110" y="122" width="12" height="12" rx="2" fill="none" stroke="var(--neon-blue)" stroke-width="1.5" />
+        <rect x="130" y="122" width="12" height="12" rx="2" fill="none" stroke="var(--neon-blue)" stroke-width="1.5" />
+      `;
+      break;
+
+    case 'debate-four-badges':
+      innerSVG = `
+        <path d="M100 35 L125 45 L125 75 C125 95, 100 110, 100 110 C100 110, 75 95, 75 75 L75 45 Z" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2.5" />
+        <path d="M95 50 L108 65 L95 72 L105 92" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+        
+        <circle cx="48" cy="40" r="22" fill="#03081a" stroke="#ff66b2" stroke-width="2" />
+        <text x="48" y="43" fill="#ff66b2" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">VAI TRÒ</text>
+        
+        <circle cx="152" cy="40" r="22" fill="#03081a" stroke="#ffd633" stroke-width="2" />
+        <text x="152" y="43" fill="#ffd633" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">NHIỆM VỤ</text>
+        
+        <circle cx="48" cy="100" r="22" fill="#03081a" stroke="#2eb82e" stroke-width="2" />
+        <text x="48" y="103" fill="#2eb82e" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">ĐỐI TƯỢNG</text>
+        
+        <circle cx="152" cy="100" r="22" fill="#03081a" stroke="#00f3ff" stroke-width="2" />
+        <text x="152" y="103" fill="#00f3ff" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">YÊU CẦU</text>
+        
+        <line x1="75" y1="55" x2="70" y2="48" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3" />
+        <line x1="125" y1="55" x2="130" y2="48" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3" />
+        <line x1="75" y1="90" x2="70" y2="95" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3" />
+        <line x1="125" y1="90" x2="130" y2="95" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3" />
+      `;
+      break;
+
+    case 'electric-clash-shield':
+      innerSVG = `
+        <path d="M20 70 L50 65 L40 85 L75 80" fill="none" stroke="var(--neon-blue)" stroke-width="3" />
+        <circle cx="20" cy="40" r="16" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+        <text x="20" y="46" fill="var(--neon-blue)" font-size="18" text-anchor="middle" font-family="sans-serif" font-weight="bold">?</text>
+        
+        <path d="M180 70 L150 65 L160 85 L125 80" fill="none" stroke="var(--neon-green)" stroke-width="3" />
+        <circle cx="180" cy="40" r="16" fill="#03081a" stroke="var(--neon-green)" stroke-width="2" />
+        <path d="M174 34 L180 31 L186 34 L186 42 C186 47, 180 50, 180 50 C180 50, 174 47, 174 42 Z" fill="none" stroke="var(--neon-green)" stroke-width="1.5" />
+        
+        <circle cx="100" cy="80" r="28" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
+        <polygon points="100,68 103,77 112,77 105,82 107,91 100,85 93,91 95,82 88,77 97,77" fill="var(--neon-yellow)" />
+        
+        <line x1="100" y1="80" x2="85" y2="65" stroke="var(--neon-yellow)" stroke-width="2" />
+        <line x1="100" y1="80" x2="115" y2="65" stroke="var(--neon-yellow)" stroke-width="2" />
+        <line x1="100" y1="80" x2="80" y2="85" stroke="var(--neon-yellow)" stroke-width="2" />
+        <line x1="100" y1="80" x2="120" y2="85" stroke="var(--neon-yellow)" stroke-width="2" />
+      `;
+      break;
+
+    case 'project-folder-compressed':
+      innerSVG = `
+        <circle cx="100" cy="70" r="45" fill="none" stroke="rgba(0, 255, 204, 0.1)" stroke-width="1.5" stroke-dasharray="2 4" />
+        
+        <path d="M45 40 L70 40 L80 50 L155 50 L155 110 L45 110 Z" fill="#0c1a35" stroke="var(--neon-blue)" stroke-width="2" />
+        <rect x="55" y="36" width="85" height="60" fill="#03081a" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+        <line x1="65" y1="48" x2="130" y2="48" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+        <line x1="65" y1="60" x2="120" y2="60" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+        <line x1="65" y1="72" x2="110" y2="72" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+        <path d="M45 55 L80 55 L90 65 L155 65 L155 110 L45 110 Z" fill="rgba(3, 8, 26, 0.9)" stroke="var(--neon-blue)" stroke-width="2" />
+        
+        <rect x="80" y="80" width="65" height="20" rx="3" fill="#03081a" stroke="var(--neon-green)" stroke-width="2" transform="rotate(-8, 100, 90)" />
+        <text x="112" y="94" fill="var(--neon-green)" font-size="8" font-weight="bold" font-family="monospace" text-anchor="middle" transform="rotate(-8, 100, 90)">HOÀN THÀNH</text>
+      `;
+      break;
+
+    case 'stage-transition-arrow':
+      innerSVG = `
+        <!-- Background decorative grid -->
+        <circle cx="100" cy="70" r="45" fill="none" stroke="rgba(0, 243, 255, 0.08)" stroke-width="1.5" stroke-dasharray="3 6" />
+        
+        <!-- Left chevron (blue, semi-transparent) -->
+        <path d="M45 35 L75 70 L45 105 L60 105 L90 70 L60 35 Z" fill="var(--neon-blue)" opacity="0.4" />
+        
+        <!-- Right chevron (green, solid glowing) -->
+        <path d="M75 35 L105 70 L75 105 L90 105 L120 70 L90 35 Z" fill="var(--neon-green)" />
+        
+        <!-- Motion lines/dots -->
+        <circle cx="130" cy="70" r="3.5" fill="var(--neon-green)" />
+        <circle cx="140" cy="70" r="2.5" fill="var(--neon-green)" opacity="0.6" />
+        <circle cx="148" cy="70" r="1.5" fill="var(--neon-green)" opacity="0.3" />
+        
+        <path d="M25 70 L35 70" stroke="var(--neon-blue)" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+        
+        <text x="100" y="125" fill="var(--neon-green)" font-size="10" font-weight="bold" font-family="sans-serif" text-anchor="middle" letter-spacing="1">CHUYỂN GIAI ĐOẠN</text>
+      `;
+      break;
+
     default:
       innerSVG = `
         <rect x="10" y="10" width="180" height="130" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
@@ -1829,13 +2048,6 @@ function updateTimerDigits() {
   }
 }
 
-function toggleTimerDropdown() {
-  const dropdown = document.getElementById('timer-dropdown');
-  if (dropdown) {
-    dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-  }
-}
-
 function updateTimerWidget() {
   const slide = getCurrentSlide();
   let existingWidget = document.getElementById('countdown-timer-widget');
@@ -1870,30 +2082,72 @@ function updateTimerWidget() {
   const seconds = (timerSecondsLeft % 60).toString().padStart(2, '0');
 
   timerWidget.innerHTML = `
-    <span class="timer-digits" id="timer-digits">${minutes}:${seconds}</span>
+    <span class="timer-digits" id="timer-digits" contenteditable="true" title="Nhấp vào để chỉnh sửa thời gian (phút:giây)">${minutes}:${seconds}</span>
     <button class="timer-ctrl" onclick="toggleTimer()">${timerIsRunning ? '⏸' : '▶'}</button>
-    <button class="timer-ctrl" onclick="resetTimer()">🔄</button>
-    <button class="timer-ctrl" onclick="toggleTimerDropdown()">⚙️</button>
-    <div class="timer-dropdown" id="timer-dropdown">
-      <option onclick="setTimerDuration(60)">1 phút</option>
-      <option onclick="setTimerDuration(180)">3 phút</option>
-      <option onclick="setTimerDuration(300)">5 phút</option>
-      <option onclick="setTimerDuration(480)">8 phút</option>
-      <option onclick="setTimerDuration(600)">10 phút</option>
-    </div>
+    <button class="timer-ctrl" onclick="resetTimer()" title="Đặt lại thời gian">🔄</button>
   `;
   
   viewport.appendChild(timerWidget);
-}
 
-// Close dropdown if clicking outside
-document.addEventListener('click', (e) => {
-  const dropdown = document.getElementById('timer-dropdown');
-  const timerWidget = document.getElementById('countdown-timer-widget');
-  if (dropdown && timerWidget && !timerWidget.contains(e.target)) {
-    dropdown.style.display = 'none';
+  // Bind inline edit events for digits
+  const digitsSpan = timerWidget.querySelector('#timer-digits');
+  if (digitsSpan) {
+    let originalText = `${minutes}:${seconds}`;
+    
+    digitsSpan.addEventListener('focus', () => {
+      // Pause timer on edit
+      if (timerIsRunning) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timerIsRunning = false;
+        const toggleBtn = timerWidget.querySelector('button[onclick="toggleTimer()"]');
+        if (toggleBtn) toggleBtn.innerText = '▶';
+      }
+      originalText = digitsSpan.innerText;
+    });
+
+    digitsSpan.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        digitsSpan.blur();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        digitsSpan.innerText = originalText;
+        digitsSpan.blur();
+      }
+    });
+
+    digitsSpan.addEventListener('blur', () => {
+      const text = digitsSpan.innerText.trim();
+      let totalSeconds = 0;
+      let valid = false;
+
+      // Parse format MM:SS or M:S or just MM
+      if (/^\d+:\d+$/.test(text)) {
+        const parts = text.split(':');
+        const m = parseInt(parts[0], 10);
+        const s = parseInt(parts[1], 10);
+        if (!isNaN(m) && !isNaN(s) && s < 60) {
+          totalSeconds = m * 60 + s;
+          valid = true;
+        }
+      } else if (/^\d+$/.test(text)) {
+        const m = parseInt(text, 10);
+        if (!isNaN(m)) {
+          totalSeconds = m * 60; // if just a number, treat as minutes
+          valid = true;
+        }
+      }
+
+      if (valid) {
+        timerSecondsLeft = totalSeconds;
+        // Save new duration for this slide
+        SLIDE_DURATIONS[slide.id] = totalSeconds;
+      }
+      updateTimerWidget();
+    });
   }
-});
+}
 
 // ==========================================
 // INTERACTIVE GAMES CONTROLLERS
@@ -2146,13 +2400,30 @@ function resetGamesState() {
 }
 
 function jumpToPagePrompt() {
-  const pageNumStr = prompt(`Nhập số trang slide muốn di chuyển đến (1 - ${slides.length}):`, currentSlideIndex + 1);
+  const currentPeriod = getPeriodForIndex(currentSlideIndex);
+  const periodSlides = slides.filter((_, idx) => getPeriodForIndex(idx) === currentPeriod);
+  const indexInPeriod = slides.filter((_, idx) => idx < currentSlideIndex && getPeriodForIndex(idx) === currentPeriod).length;
+  
+  const pageNumStr = prompt(`Nhập số trang slide muốn di chuyển đến của ${currentPeriod === 't1' ? 'Tiết 1' : 'Tiết 2'} (1 - ${periodSlides.length}):`, indexInPeriod + 1);
   if (pageNumStr !== null) {
     const pageNum = parseInt(pageNumStr, 10);
-    if (!isNaN(pageNum) && pageNum >= 1 && pageNum <= slides.length) {
-      goToSlide(pageNum - 1);
+    if (!isNaN(pageNum) && pageNum >= 1 && pageNum <= periodSlides.length) {
+      let count = 0;
+      let globalIdx = -1;
+      for (let i = 0; i < slides.length; i++) {
+        if (getPeriodForIndex(i) === currentPeriod) {
+          count++;
+          if (count === pageNum) {
+            globalIdx = i;
+            break;
+          }
+        }
+      }
+      if (globalIdx !== -1) {
+        goToSlide(globalIdx);
+      }
     } else {
-      alert(`Số trang không hợp lệ! Vui lòng nhập số từ 1 đến ${slides.length}.`);
+      alert(`Số trang không hợp lệ! Vui lòng nhập số từ 1 đến ${periodSlides.length}.`);
     }
   }
 }

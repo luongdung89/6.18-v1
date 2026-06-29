@@ -22,6 +22,23 @@ try {
             
             $urlPath = $request.Url.LocalPath
             
+            # Handle logging from browser
+            if ($request.HttpMethod -eq "POST" -and $urlPath -eq "/log") {
+                try {
+                    $reader = New-Object System.IO.StreamReader($request.InputStream)
+                    $body = $reader.ReadToEnd()
+                    Write-Host "BROWSER_LOG: $body"
+                    $response.StatusCode = 200
+                    $response.ContentType = "text/plain"
+                    $resBytes = [System.Text.Encoding]::UTF8.GetBytes("ok")
+                    $response.OutputStream.Write($resBytes, 0, $resBytes.Length)
+                } catch {
+                    $response.StatusCode = 500
+                }
+                $response.Close()
+                continue
+            }
+
             # Handle saving slides back to file system
             if ($request.HttpMethod -eq "POST" -and $urlPath -eq "/save_slides") {
                 try {

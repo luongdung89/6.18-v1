@@ -6,7 +6,13 @@
   <script>
     window.errors = [];
     window.onerror = function(msg, url, line, col, error) {
-      window.errors.push(msg + " at " + url + ":" + line + ":" + col);
+      var errMsg = msg + " at " + url + ":" + line + ":" + col;
+      window.errors.push(errMsg);
+      // Try to send immediately in case it crashes
+      fetch('http://localhost:8081/error', {
+        method: 'POST',
+        body: JSON.stringify({ type: 'error', message: errMsg })
+      }).catch(function(){});
       return false;
     };
   </script>
@@ -20,13 +26,17 @@
     setTimeout(function() {
       var statusDiv = document.getElementById('status');
       var outputDiv = document.getElementById('error-output');
+      var result = "";
       if (window.errors.length > 0) {
-        statusDiv.innerHTML = "FAILED";
-        outputDiv.innerHTML = window.errors.join("<br>");
+        result = "FAILED: " + window.errors.join("\n");
       } else {
-        statusDiv.innerHTML = "SUCCESS";
-        outputDiv.innerHTML = "No errors detected. slides count: " + (typeof slides !== 'undefined' ? slides.length : 'undefined');
+        result = "SUCCESS. slides count: " + (typeof slides !== 'undefined' ? slides.length : 'undefined');
       }
+      statusDiv.innerHTML = result;
+      fetch('http://localhost:8081/done', {
+        method: 'POST',
+        body: JSON.stringify({ type: 'done', message: result })
+      }).catch(function(){});
     }, 1000);
   </script>
 </body>

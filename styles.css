@@ -1,7 +1,7 @@
 /* ==========================================================================
    DESIGN SYSTEM & CSS VARIABLES
    ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;600;700&display=swap');
 
 :root {
   --bg-darker: #020617;
@@ -20,7 +20,7 @@
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   
-  --font-cyber: 'Orbitron', sans-serif;
+  --font-cyber: 'Chakra Petch', sans-serif;
   --font-standard: 'Inter', sans-serif;
   
   --shadow-glow-blue: 0 0 15px rgba(0, 243, 255, 0.35);
@@ -903,6 +903,14 @@ table th {
   font-size: calc(26px * var(--slide-scale, 1));
   min-width: calc(80px * var(--slide-scale, 1));
   text-align: center;
+  cursor: text;
+  outline: none;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.timer-digits:focus {
+  background: rgba(0, 243, 255, 0.15);
 }
 
 .timer-ctrl {
@@ -993,38 +1001,43 @@ body.present-mode .header-hover-zone:hover + header {
 .period-tabs {
   display: flex;
   margin-top: 10px;
-  margin-bottom: 10px;
-  gap: 5px;
-  background: rgba(30, 41, 59, 0.4);
-  border-radius: 6px;
-  padding: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 12px;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid rgba(0, 243, 255, 0.25);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.05);
 }
 
 .period-tab {
   flex: 1;
   font-family: var(--font-cyber);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 6px 4px;
+  font-size: 16px;
+  font-weight: 800;
+  padding: 12px 8px;
   border: none;
   background: transparent;
   color: var(--text-secondary);
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .period-tab:hover {
   color: var(--neon-blue);
-  background: rgba(0, 243, 255, 0.05);
+  background: rgba(0, 243, 255, 0.08);
+  transform: translateY(-1px);
 }
 
 .period-tab.active {
-  background: var(--neon-blue);
+  background: linear-gradient(135deg, var(--neon-blue), #00a3ff);
   color: var(--bg-darker);
-  box-shadow: 0 0 8px rgba(0, 243, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+  font-weight: 900;
 }
 
 /* Styling for Locked Period Tabs */
@@ -1035,13 +1048,15 @@ body.present-mode .header-hover-zone:hover + header {
 
 .period-tab.locked:hover {
   color: var(--neon-orange);
-  background: rgba(255, 189, 89, 0.05);
+  background: rgba(255, 189, 89, 0.08);
+  transform: translateY(-1px);
 }
 
 .period-tab.locked.active {
-  background: var(--neon-orange);
+  background: linear-gradient(135deg, var(--neon-orange), #ff9900);
   color: var(--bg-darker);
-  box-shadow: 0 0 8px rgba(255, 189, 89, 0.3);
+  box-shadow: 0 0 15px rgba(255, 189, 89, 0.5);
+  font-weight: 900;
 }
 
 /* Beautiful Spaceship Control Panel Locked State */
