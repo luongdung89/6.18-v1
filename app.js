@@ -87,7 +87,7 @@ let s5SlotData = [null, null, null, null];
 
 // Load slides from LocalStorage or fallback to INITIAL_SLIDES from slides_data.js
 function initApp() {
-  const CURRENT_VERSION = 'v71_fixed';
+  const CURRENT_VERSION = 'v72_fixed';
   const savedVersion = safeGetItem('novastars_slides_version');
   const savedData = safeGetItem('novastars_slides');
   let loadedSuccessfully = false;
@@ -2421,3 +2421,130 @@ function jumpToPagePrompt() {
 // STARTUP TRIGGER
 // ==========================================================================
 window.onload = initApp;
+
+// --- Tiết 3 Interactive Functions ---
+
+window.allowDropT3 = function(ev) {
+  ev.preventDefault();
+};
+
+window.dragT3 = function(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+};
+
+window.dropT3 = function(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  var draggedElement = document.getElementById(data);
+  if (ev.target.classList.contains('t3-dropzone')) {
+    if (ev.target.childNodes.length > 0) {
+      var existingChip = ev.target.childNodes[0];
+      document.querySelector('.t3-chips-container').appendChild(existingChip);
+    }
+    ev.target.appendChild(draggedElement);
+  } else if (ev.target.classList.contains('t3-chips-container') || ev.target.closest('.t3-chips-container')) {
+     document.querySelector('.t3-chips-container').appendChild(draggedElement);
+  }
+};
+
+window.checkT3DragAnswers = function() {
+  const dropzones = document.querySelectorAll('.t3-dropzone');
+  let allCorrect = true;
+  dropzones.forEach(dz => {
+    const correctVal = dz.getAttribute('data-correct');
+    if (dz.childNodes.length > 0) {
+      const chip = dz.childNodes[0];
+      const val = chip.getAttribute('data-val');
+      if (val === correctVal) {
+        dz.style.borderColor = '#38a169';
+        dz.style.backgroundColor = 'rgba(56, 161, 105, 0.2)';
+      } else {
+        dz.style.borderColor = '#e53e3e';
+        dz.style.backgroundColor = 'rgba(229, 62, 62, 0.2)';
+        allCorrect = false;
+      }
+    } else {
+      dz.style.borderColor = '#a0aec0';
+      dz.style.backgroundColor = 'rgba(255,255,255,0.05)';
+      allCorrect = false;
+    }
+  });
+
+  if (allCorrect) {
+    if (window.triggerConfetti) window.triggerConfetti();
+    const msg = document.createElement('div');
+    msg.innerHTML = "🎉 Tuyệt vời! Bạn đã ghép đúng tất cả các mảnh ghép!";
+    msg.style.position = 'absolute';
+    msg.style.top = '50%';
+    msg.style.left = '50%';
+    msg.style.transform = 'translate(-50%, -50%)';
+    msg.style.background = '#38a169';
+    msg.style.color = 'white';
+    msg.style.padding = '20px 40px';
+    msg.style.borderRadius = '10px';
+    msg.style.fontSize = '24px';
+    msg.style.fontWeight = 'bold';
+    msg.style.zIndex = '9999';
+    msg.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
+    document.body.appendChild(msg);
+    setTimeout(() => msg.remove(), 3000);
+  } else {
+    const msg = document.createElement('div');
+    msg.innerHTML = "❌ Còn mảnh ghép chưa chính xác, hãy thử lại!";
+    msg.style.position = 'absolute';
+    msg.style.top = '50%';
+    msg.style.left = '50%';
+    msg.style.transform = 'translate(-50%, -50%)';
+    msg.style.background = '#e53e3e';
+    msg.style.color = 'white';
+    msg.style.padding = '20px 40px';
+    msg.style.borderRadius = '10px';
+    msg.style.fontSize = '24px';
+    msg.style.fontWeight = 'bold';
+    msg.style.zIndex = '9999';
+    msg.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
+    document.body.appendChild(msg);
+    setTimeout(() => msg.remove(), 3000);
+  }
+};
+
+window.triggerCommitPopup = function() {
+    if (window.triggerConfetti) window.triggerConfetti();
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0'; overlay.style.left = '0';
+    overlay.style.width = '100vw'; overlay.style.height = '100vh';
+    overlay.style.backgroundColor = 'rgba(0,0,0,0.8)';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.zIndex = '9999';
+    
+    const popup = document.createElement('div');
+    popup.style.background = 'linear-gradient(135deg, #1a202c, #2d3748)';
+    popup.style.padding = '40px 60px';
+    popup.style.borderRadius = '20px';
+    popup.style.border = '2px solid #ffbd59';
+    popup.style.boxShadow = '0 0 40px rgba(255, 189, 89, 0.4)';
+    popup.style.textAlign = 'center';
+    popup.style.animation = 'scaleUp 0.5s ease-out forwards';
+    
+    popup.innerHTML = 
+        <div style="font-size: 60px; margin-bottom: 20px;">🏆</div>
+        <h2 style="color: #ffbd59; font-size: 32px; margin-bottom: 15px; text-transform: uppercase;">Xác nhận thành công!</h2>
+        <p style="color: white; font-size: 20px; line-height: 1.5;">Chúc mừng bạn đã hoàn thành khóa huấn luyện.<br>Hệ thống đã ghi nhận cam kết của Chuyên gia AI.</p>
+        <button onclick="this.parentElement.parentElement.remove()" style="margin-top: 30px; background: #ffbd59; color: #1a202c; border: none; padding: 12px 30px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer;">ĐÓNG</button>
+    ;
+    
+    const style = document.createElement('style');
+    style.textContent = 
+        @keyframes scaleUp {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    ;
+    document.head.appendChild(style);
+    
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+};
