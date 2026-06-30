@@ -87,7 +87,7 @@ let s5SlotData = [null, null, null, null];
 
 // Load slides from LocalStorage or fallback to INITIAL_SLIDES from slides_data.js
 function initApp() {
-  const CURRENT_VERSION = 'v72_fixed';
+  const CURRENT_VERSION = 'v73_fixed';
   const savedVersion = safeGetItem('novastars_slides_version');
   const savedData = safeGetItem('novastars_slides');
   let loadedSuccessfully = false;
@@ -2422,6 +2422,7 @@ function jumpToPagePrompt() {
 // ==========================================================================
 window.onload = initApp;
 
+
 // --- Tiết 3 Interactive Functions ---
 
 window.allowDropT3 = function(ev) {
@@ -2529,20 +2530,20 @@ window.triggerCommitPopup = function() {
     popup.style.textAlign = 'center';
     popup.style.animation = 'scaleUp 0.5s ease-out forwards';
     
-    popup.innerHTML = 
+    popup.innerHTML = `
         <div style="font-size: 60px; margin-bottom: 20px;">🏆</div>
         <h2 style="color: #ffbd59; font-size: 32px; margin-bottom: 15px; text-transform: uppercase;">Xác nhận thành công!</h2>
         <p style="color: white; font-size: 20px; line-height: 1.5;">Chúc mừng bạn đã hoàn thành khóa huấn luyện.<br>Hệ thống đã ghi nhận cam kết của Chuyên gia AI.</p>
         <button onclick="this.parentElement.parentElement.remove()" style="margin-top: 30px; background: #ffbd59; color: #1a202c; border: none; padding: 12px 30px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer;">ĐÓNG</button>
-    ;
+    `;
     
     const style = document.createElement('style');
-    style.textContent = 
+    style.textContent = `
         @keyframes scaleUp {
             0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-    ;
+    `;
     document.head.appendChild(style);
     
     overlay.appendChild(popup);
