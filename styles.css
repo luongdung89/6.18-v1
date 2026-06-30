@@ -1118,3 +1118,81 @@ body.present-mode .header-hover-zone:hover + header {
 }
 
 
+
+/* Tiết 3 Interactivity */
+.interactive-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.interactive-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 243, 255, 0.4);
+}
+.interactive-card.orange:hover {
+  box-shadow: 0 8px 20px rgba(255, 189, 89, 0.4);
+}
+.interactive-card.pink:hover {
+  box-shadow: 0 8px 20px rgba(255, 102, 178, 0.4);
+}
+.interactive-card.green:hover {
+  box-shadow: 0 8px 20px rgba(46, 184, 46, 0.4);
+}
+/* SVG Animations */
+@keyframes spin-slow {
+  100% { transform: rotate(360deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.7; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+@keyframes float-up-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes dash-move {
+  to { stroke-dashoffset: -20; }
+}
+@keyframes blink-fast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.spin-slow {
+  transform-origin: center;
+  animation: spin-slow 10s linear infinite;
+}
+.pulse-glow {
+  transform-origin: center;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+.float-up-down {
+  animation: float-up-down 3s ease-in-out infinite;
+}
+.dash-move {
+  animation: dash-move 1s linear infinite;
+}
+.blink-fast {
+  animation: blink-fast 1.5s ease-in-out infinite;
+}
+/* --- Interactive Hover Effects --- */
+.tech-visual-container {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.tech-visual-container:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+.glass-card, .glass-panel, .info-box {
+  transition: all 0.3s ease;
+}
+.glass-card:hover, .glass-panel:hover, .info-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 243, 255, 0.2);
+}
+
+/* Make SVG elements inside interactive containers have slightly brighter animations on hover */
+.tech-visual-container:hover .pulse-glow {
+  animation-duration: 1.5s;
+}

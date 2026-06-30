@@ -53,21 +53,25 @@ let timerIsRunning = false;
 
 // Slide default activity durations in seconds
 const SLIDE_DURATIONS = {
-  'S1-ACT-04': 300,  // 5 mins
-  'S3-ACT-04': 480,  // 8 mins
-  'S4-ACT-04': 360,  // 6 mins
-  'S5-ACT-04': 300,  // 5 mins
-  'S6-ACT-04': 480,  // 8 mins
-  'S7-ACT-04': 240,  // 4 mins
-  'S8-ACT-04': 180,  // 3 mins
-  'T2-S3-ACT-04-A': 180,  // 3 mins
-  'T2-S3-ACT-04-B': 180,  // 3 mins
-  'T2-S3-ACT-04-C': 180,  // 3 mins
-  'T2-S3-ACT-04-D': 180,  // 3 mins
-  'T2-S4-ACT-04': 480,  // 8 mins
-  'T2-S5-ACT-04': 300,  // 5 mins
-  'T2-S6-ACT-04': 480,  // 8 mins
-  'T2-S7-ACT-04': 240   // 4 mins
+    'S1-ACT-04': 300,  // 5 mins
+    'S3-ACT-04': 480,  // 8 mins
+    'S4-ACT-04': 360,  // 6 mins
+    'S5-ACT-04': 300,  // 5 mins
+    'S6-ACT-04': 480,  // 8 mins
+    'S7-ACT-04': 240,  // 4 mins
+    'S8-ACT-04': 180,  // 3 mins
+    'T2-S4-ACT-04': 600, // 10 mins
+    'T2-S5-ACT-04': 300, // 5 mins
+    'T2-S6-ACT-04': 600, // 10 mins
+    'T3-S1-ACT-04': 180, // 3 mins
+    'T3-S3-ACT-04': 300, // 5 mins
+    'T3-S4-ACT-04': 600, // 10 mins
+    'T3-S7-ACT-04': 240, // 4 mins
+    'T3-S8-ACT-04': 300, // 5 mins
+    'T2-S3-ACT-04-A': 180,  // 3 mins
+    'T2-S3-ACT-04-B': 180,  // 3 mins
+    'T2-S3-ACT-04-C': 180,  // 3 mins
+    'T2-S3-ACT-04-D': 180   // 3 mins
 };
 
 // Interactive Games state
@@ -83,7 +87,7 @@ let s5SlotData = [null, null, null, null];
 
 // Load slides from LocalStorage or fallback to INITIAL_SLIDES from slides_data.js
 function initApp() {
-  const CURRENT_VERSION = 'v47_ui_encoding';
+  const CURRENT_VERSION = 'v71_fixed';
   const savedVersion = safeGetItem('novastars_slides_version');
   const savedData = safeGetItem('novastars_slides');
   let loadedSuccessfully = false;
@@ -241,25 +245,7 @@ function renderCurrentSlide() {
   // Clear canvas
   canvas.innerHTML = '';
 
-  // Check if filtering for locked periods (Tiết 3)
-  if (currentPeriodFilter === 't3') {
-    const periodName = 'TIẾT 3';
-    viewport.className = 'slide-viewport';
-    canvas.innerHTML = `
-      <div class="locked-slide-container">
-        <div class="lock-icon">🔒</div>
-        <div class="locked-title">HỆ THỐNG ĐANG CẬP NHẬT</div>
-        <div class="locked-subtitle">Nội dung của ${periodName} đang được tạm khóa</div>
-        <div class="locked-desc">Các mô-đun bài học tiếp theo đang được cấu hình trên máy chủ trung tâm. Vui lòng hoàn thành nội dung Tiết 2 trước.</div>
-        <button class="btn btn-primary" onclick="setPeriodFilter('t2')" style="margin-top: 24px; font-size: 12px; padding: 8px 20px; text-transform: uppercase;">Quay lại Tiết 2</button>
-      </div>
-    `;
-    
-    // Remove timer widget if present
-    const timerWidget = document.getElementById('countdown-timer-widget');
-    if (timerWidget) timerWidget.remove();
-    return;
-  }
+  
 
   const slide = slides[currentSlideIndex];
   if (!slide) return;
@@ -1060,8 +1046,11 @@ document.addEventListener('fullscreenchange', () => {
 let currentPeriodFilter = 'all';
 
 function getPeriodForIndex(idx) {
-  // Slides 0 to 51 (first 52 slides) belong to Tiết 1, slides 52+ belong to Tiết 2
-  return idx < 52 ? 't1' : 't2';
+  const slide = slides[idx];
+  if (!slide || !slide.id) return 't1';
+  if (slide.id.startsWith('T3-')) return 't3';
+  if (slide.id.startsWith('T2-')) return 't2';
+  return 't1';
 }
 
 function setPeriodFilter(period) {
@@ -1134,12 +1123,12 @@ function getTechVisualSVG(assetName) {
         <!-- Orbiting grid elements -->
         <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(0, 243, 255, 0.08)" stroke-width="1" stroke-dasharray="4 8" />
         <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(0, 255, 204, 0.15)" stroke-width="1.5" />
-        <circle cx="100" cy="100" r="50" fill="none" stroke="var(--neon-blue)" stroke-width="2" stroke-dasharray="20 10 5 10" />
+        <circle cx="100" cy="100" r="50" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" stroke-dasharray="20 10 5 10" />
         <!-- Glowing background -->
         <circle cx="100" cy="100" r="45" fill="url(#radialGlow)" />
         <!-- Core node -->
         <circle cx="100" cy="100" r="25" fill="#03081a" stroke="var(--neon-green)" stroke-width="3" />
-        <path d="M92 90 L108 90 L108 110 L92 110 Z" fill="none" stroke="var(--neon-blue)" stroke-width="2"/>
+        <path d="M92 90 L108 90 L108 110 L92 110 Z" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down"/>
         <circle cx="100" cy="100" r="8" fill="var(--neon-green)" />
         <!-- Connecting waves -->
         <line x1="100" y1="15" x2="100" y2="30" stroke="var(--neon-blue)" stroke-width="2" />
@@ -1166,7 +1155,7 @@ function getTechVisualSVG(assetName) {
         <circle cx="100" cy="90" r="28" fill="none" stroke="var(--neon-orange)" stroke-dasharray="5 5" stroke-width="2" />
         <!-- Student outline -->
         <path d="M50 170 C50 135, 70 120, 100 120 C130 120, 150 135, 150 170" fill="none" stroke="var(--neon-blue)" stroke-width="2.5" />
-        <circle cx="100" cy="142" r="16" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2.5" />
+        <circle cx="100" cy="142" r="16" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2.5" class="pulse-glow" />
         <!-- Hologram data links -->
         <line x1="100" y1="90" x2="100" y2="120" stroke="var(--neon-orange)" stroke-width="1.5" stroke-dasharray="3 3" />
         <!-- Complex code flow representation -->
@@ -1212,7 +1201,7 @@ function getTechVisualSVG(assetName) {
         <line x1="50" y1="50" x2="150" y2="110" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1"/>
         <line x1="50" y1="110" x2="150" y2="50" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1"/>
         <!-- Tech modules inside -->
-        <circle cx="100" cy="80" r="18" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+        <circle cx="100" cy="80" r="18" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <circle cx="100" cy="80" r="4" fill="var(--neon-green)" />
         <circle cx="150" cy="50" r="5" fill="var(--neon-green)" />
         <circle cx="50" cy="50" r="5" fill="var(--neon-blue)" />
@@ -1235,8 +1224,8 @@ function getTechVisualSVG(assetName) {
         <circle cx="100" cy="75" r="35" fill="none" stroke="var(--neon-green)" stroke-width="1" />
         <circle cx="100" cy="75" r="20" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-dasharray="5 5" />
         <!-- Data packets entering -->
-        <path d="M20 75 Q 60 40, 100 75" fill="none" stroke="var(--neon-blue)" stroke-width="2" stroke-dasharray="4 4" />
-        <path d="M180 75 Q 140 110, 100 75" fill="none" stroke="var(--neon-green)" stroke-width="2" stroke-dasharray="4 4" />
+        <path d="M20 75 Q 60 40, 100 75" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" stroke-dasharray="4 4" class="spin-slow" style="transform-origin: 100px 75px; animation-direction: reverse; animation-duration: 15s;" />
+        <path d="M180 75 Q 140 110, 100 75" fill="none" stroke="var(--neon-green)" stroke-width="2" stroke-dasharray="4 4" class="spin-slow" style="transform-origin: 100px 75px; animation-direction: reverse; animation-duration: 15s;" />
         <!-- Glowing pulse nodes -->
         <circle cx="50" cy="62" r="4" fill="var(--neon-blue)" />
         <circle cx="150" cy="88" r="4" fill="var(--neon-green)" />
@@ -1267,7 +1256,7 @@ function getTechVisualSVG(assetName) {
     case 'icon-stationery-personal':
       innerSVG = `
         <!-- Floating pencil & pad -->
-        <rect x="35" y="30" width="55" height="85" rx="3" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+        <rect x="35" y="30" width="55" height="85" rx="3" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <line x1="45" y1="45" x2="80" y2="45" stroke="rgba(0, 243, 255, 0.3)" stroke-width="1.5" />
         <line x1="45" y1="60" x2="80" y2="60" stroke="rgba(0, 243, 255, 0.3)" stroke-width="1.5" />
         <line x1="45" y1="75" x2="70" y2="75" stroke="rgba(0, 243, 255, 0.3)" stroke-width="1.5" />
@@ -1275,8 +1264,8 @@ function getTechVisualSVG(assetName) {
         <path d="M110 30 L145 65 L135 75 L100 40 Z" fill="none" stroke="var(--neon-green)" stroke-width="2" />
         <path d="M100 40 L95 50 L105 45 Z" fill="var(--neon-green)" />
         <!-- User avatar badge -->
-        <circle cx="115" cy="115" r="20" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
-        <path d="M103 125 C103 115, 127 115, 127 125" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+        <circle cx="115" cy="115" r="20" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
+        <path d="M103 125 C103 115, 127 115, 127 125" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <circle cx="115" cy="110" r="6" fill="var(--neon-blue)" />
       `;
       break;
@@ -1290,7 +1279,7 @@ function getTechVisualSVG(assetName) {
         <rect x="55" y="55" width="90" height="60" rx="4" fill="#03081a" stroke="var(--neon-green)" stroke-width="2" />
         <path d="M55 58 L100 90 L145 58" fill="none" stroke="var(--neon-green)" stroke-width="2" />
         <!-- Lock details -->
-        <circle cx="100" cy="85" r="10" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+        <circle cx="100" cy="85" r="10" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <path d="M100 78 L100 85" stroke="var(--neon-blue)" stroke-width="2" />
         <circle cx="100" cy="15" r="3" fill="var(--neon-green)" />
         <circle cx="100" cy="155" r="3" fill="var(--neon-green)" />
@@ -1322,7 +1311,7 @@ function getTechVisualSVG(assetName) {
     case 'human-ai-connection-graph':
       innerSVG = `
         <!-- Left: Human Silhouette Nodes -->
-        <circle cx="50" cy="70" r="18" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+        <circle cx="50" cy="70" r="18" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <path d="M38 98 C38 88, 62 88, 62 98" stroke="var(--neon-blue)" fill="none" stroke-width="2" />
         <circle cx="50" cy="65" r="6" fill="var(--neon-blue)" />
         <!-- Right: AI Node -->
@@ -1333,7 +1322,7 @@ function getTechVisualSVG(assetName) {
         <!-- Multi connections -->
         <path d="M68 70 C90 50, 110 50, 128 70" fill="none" stroke="var(--neon-pink)" stroke-width="2" />
         <path d="M68 70 C90 70, 110 70, 128 70" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
-        <path d="M68 70 C90 90, 110 90, 128 70" fill="none" stroke="var(--neon-blue)" stroke-width="2" stroke-dasharray="2 2" />
+        <path d="M68 70 C90 90, 110 90, 128 70" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" stroke-dasharray="2 2" />
         <circle cx="98" cy="60" r="3" fill="var(--neon-pink)" />
       `;
       break;
@@ -1341,10 +1330,10 @@ function getTechVisualSVG(assetName) {
     case 'icon-group-4-people':
       innerSVG = `
         <!-- Group of 4 connected nodes -->
-        <circle cx="60" cy="50" r="12" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
-        <circle cx="140" cy="50" r="12" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
-        <circle cx="60" cy="120" r="12" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
-        <circle cx="140" cy="120" r="12" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+        <circle cx="60" cy="50" r="12" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
+        <circle cx="140" cy="50" r="12" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
+        <circle cx="60" cy="120" r="12" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
+        <circle cx="140" cy="120" r="12" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <!-- Interconnection mesh -->
         <line x1="72" y1="50" x2="128" y2="50" stroke="var(--neon-green)" stroke-width="1.5" />
         <line x1="72" y1="120" x2="128" y2="120" stroke="var(--neon-green)" stroke-width="1.5" />
@@ -1441,7 +1430,7 @@ function getTechVisualSVG(assetName) {
         <!-- Top -->
         <polygon points="100,35 140,55 100,75 60,55" fill="rgba(255, 102, 178, 0.1)" stroke="var(--neon-pink)" stroke-width="2" />
         <!-- Glowing central node -->
-        <circle cx="100" cy="75" r="8" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+        <circle cx="100" cy="75" r="8" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <line x1="100" y1="55" x2="100" y2="67" stroke="var(--neon-blue)" stroke-width="1.5" />
         <line x1="100" y1="83" x2="100" y2="95" stroke="var(--neon-blue)" stroke-width="1.5" />
         <line x1="80" y1="75" x2="92" y2="75" stroke="var(--neon-blue)" stroke-width="1.5" />
@@ -1489,7 +1478,7 @@ function getTechVisualSVG(assetName) {
         <path d="M90 30 L110 30 L110 55 L135 105 A 15 15 0 0 1 125 125 L75 125 A 15 15 0 0 1 65 105 L90 55 Z" 
               fill="none" stroke="var(--neon-blue)" stroke-width="2.5" stroke-linejoin="round" />
         <!-- Fluid level -->
-        <path d="M72 110 L128 110 L123 120 L77 120 Z" fill="rgba(0, 243, 255, 0.25)" />
+        <path d="M72 110 L128 110 L123 120 L77 120 Z" fill="rgba(0, 243, 255, 0.25)" class="float-up-down" />
         <!-- Sparks -->
         <circle cx="100" cy="80" r="3" fill="var(--neon-green)" />
         <circle cx="115" cy="70" r="2.5" fill="var(--neon-pink)" />
@@ -1539,7 +1528,7 @@ function getTechVisualSVG(assetName) {
         <!-- Stack of 4 cards -->
         <!-- Card D (Blue) -->
         <g transform="translate(105, 100) rotate(10)">
-          <rect x="-25" y="-35" width="50" height="70" rx="6" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+          <rect x="-25" y="-35" width="50" height="70" rx="6" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
           <text x="0" y="12" fill="var(--neon-blue)" font-size="28" font-family="sans-serif" font-weight="bold" text-anchor="middle">D</text>
         </g>
         
@@ -1579,7 +1568,7 @@ function getTechVisualSVG(assetName) {
         <rect x="70" y="170" width="60" height="6" rx="2" fill="#070c18" stroke="var(--neon-blue)" stroke-width="2" />
         
         <!-- Monitor frame -->
-        <rect x="20" y="35" width="160" height="110" rx="8" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2.5" />
+        <rect x="20" y="35" width="160" height="110" rx="8" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2.5" class="pulse-glow" />
         <rect x="25" y="40" width="150" height="90" rx="3" fill="#000000" />
         
         <!-- Screen Data illustration (Dashboard) -->
@@ -1621,7 +1610,7 @@ function getTechVisualSVG(assetName) {
         
         <!-- Left Chest: Math Box (📘 Hộp Toán học) -->
         <g transform="translate(15, 45)">
-          <rect x="5" y="40" width="65" height="45" rx="4" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+          <rect x="5" y="40" width="65" height="45" rx="4" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
           <path d="M5 40 C5 22, 70 22, 70 40 Z" fill="#020615" stroke="var(--neon-blue)" stroke-width="2" />
           <rect x="33" y="36" width="9" height="12" rx="1.5" fill="#000" stroke="var(--neon-green)" stroke-width="1.5" />
           <text x="37" y="68" fill="var(--neon-green)" font-size="16" font-family="monospace" font-weight="bold" text-anchor="middle">f(x)</text>
@@ -1645,7 +1634,7 @@ function getTechVisualSVG(assetName) {
       innerSVG = `
         <!-- Simulated Sandbox Arena grid -->
         <polygon points="100,20 180,60 180,120 100,160 20,120 20,60" fill="none" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1.5" />
-        <polygon points="100,35 160,65 160,110 100,140 40,110 40,65" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+        <polygon points="100,35 160,65 160,110 100,140 40,110 40,65" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <!-- Diagonal division lasers -->
         <line x1="100" y1="35" x2="100" y2="140" stroke="rgba(0, 255, 204, 0.3)" stroke-width="1" />
         <line x1="40" y1="87" x2="160" y2="87" stroke="rgba(0, 255, 204, 0.3)" stroke-width="1" />
@@ -1709,8 +1698,8 @@ function getTechVisualSVG(assetName) {
     case 'icon-personal-notebook':
       innerSVG = `
         <!-- Vertical personal tablet mockup -->
-        <rect x="55" y="20" width="90" height="115" rx="5" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
-        <circle cx="100" cy="126" r="3" fill="var(--neon-blue)" />
+        <rect x="55" y="20" width="90" height="115" rx="5" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
+        <circle cx="100" cy="126" r="3" fill="var(--neon-blue)" class="pulse-glow" />
         <!-- Lines inside -->
         <line x1="68" y1="40" x2="132" y2="40" stroke="rgba(0, 243, 255, 0.2)" stroke-width="2" />
         <line x1="68" y1="55" x2="120" y2="55" stroke="rgba(0, 243, 255, 0.2)" stroke-width="2" />
@@ -1726,12 +1715,12 @@ function getTechVisualSVG(assetName) {
     case 'system-operation-check':
       innerSVG = `
         <!-- Floating circular dials -->
-        <circle cx="100" cy="75" r="55" fill="none" stroke="var(--neon-blue)" stroke-width="2" stroke-dasharray="15 5 10 5" />
-        <circle cx="100" cy="75" r="42" fill="none" stroke="var(--neon-green)" stroke-width="1.5" stroke-dasharray="4 4" />
+        <circle cx="100" cy="75" r="55" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" stroke-dasharray="15 5 10 5" class="spin-slow" style="transform-origin: 100px 75px;" />
+        <circle cx="100" cy="75" r="42" fill="none" stroke="var(--neon-green)" stroke-width="1.5" stroke-dasharray="4 4" class="spin-slow" style="transform-origin: 100px 75px; animation-direction: reverse; animation-duration: 15s;" />
         <!-- Rotating teeth effect dial -->
         <circle cx="100" cy="75" r="28" fill="none" stroke="var(--neon-pink)" stroke-width="3" stroke-dasharray="35 5" />
         <!-- Core metrics -->
-        <circle cx="100" cy="75" r="14" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+        <circle cx="100" cy="75" r="14" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <polygon points="100,70 104,78 96,78" fill="var(--neon-green)" />
       `;
       break;
@@ -1757,7 +1746,7 @@ function getTechVisualSVG(assetName) {
     case 'four-gears-error':
       innerSVG = `
         <!-- Gears connections -->
-        <circle cx="60" cy="50" r="18" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+        <circle cx="60" cy="50" r="18" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <circle cx="60" cy="50" r="4" fill="var(--neon-blue)" />
         <circle cx="100" cy="50" r="18" fill="none" stroke="var(--neon-green)" stroke-width="2" />
         <circle cx="100" cy="50" r="4" fill="var(--neon-green)" />
@@ -1809,11 +1798,11 @@ function getTechVisualSVG(assetName) {
         <line x1="70" y1="20" x2="70" y2="120" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
         <line x1="130" y1="20" x2="130" y2="120" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
         
-        <line x1="30" y1="55" x2="170" y2="55" stroke="var(--neon-blue)" stroke-width="2" opacity="0.8" />
-        <circle cx="100" cy="70" r="45" fill="none" stroke="rgba(0, 243, 255, 0.2)" stroke-width="2" stroke-dasharray="10 10" />
+        <line x1="30" y1="55" x2="170" y2="55" stroke="var(--neon-blue)" stroke-width="2" opacity="0.8" class="float-up-down" />
+        <circle cx="100" cy="70" r="45" fill="none" stroke="rgba(0, 243, 255, 0.2)" stroke-width="2" stroke-dasharray="10 10" class="spin-slow" style="transform-origin: 100px 70px;" />
         
-        <rect x="85" y="65" width="30" height="24" rx="3" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
-        <path d="M90 65 L90 50 C90 40, 110 40, 110 50 L110 65" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+        <rect x="85" y="65" width="30" height="24" rx="3" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
+        <path d="M90 65 L90 50 C90 40, 110 40, 110 50 L110 65" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <circle cx="100" cy="75" r="3" fill="var(--neon-blue)" />
         <polygon points="99,75 101,75 102,83 98,83" fill="var(--neon-blue)" />
         
@@ -1827,8 +1816,8 @@ function getTechVisualSVG(assetName) {
 
     case 'debate-four-badges':
       innerSVG = `
-        <path d="M100 35 L125 45 L125 75 C125 95, 100 110, 100 110 C100 110, 75 95, 75 75 L75 45 Z" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2.5" />
-        <path d="M95 50 L108 65 L95 72 L105 92" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+        <path d="M100 35 L125 45 L125 75 C125 95, 100 110, 100 110 C100 110, 75 95, 75 75 L75 45 Z" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2.5" class="pulse-glow" />
+        <path d="M95 50 L108 65 L95 72 L105 92" fill="none" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         
         <circle cx="48" cy="40" r="22" fill="#03081a" stroke="#ff66b2" stroke-width="2" />
         <text x="48" y="43" fill="#ff66b2" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">VAI TRÒ</text>
@@ -1851,16 +1840,16 @@ function getTechVisualSVG(assetName) {
 
     case 'electric-clash-shield':
       innerSVG = `
-        <path d="M20 70 L50 65 L40 85 L75 80" fill="none" stroke="var(--neon-blue)" stroke-width="3" />
-        <circle cx="20" cy="40" r="16" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+        <path d="M20 70 L50 65 L40 85 L75 80" fill="none" stroke="var(--neon-blue)" stroke-width="3" class="dash-move" stroke-dasharray="10 5" />
+        <circle cx="20" cy="40" r="16" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" class="float-up-down" />
         <text x="20" y="46" fill="var(--neon-blue)" font-size="18" text-anchor="middle" font-family="sans-serif" font-weight="bold">?</text>
         
-        <path d="M180 70 L150 65 L160 85 L125 80" fill="none" stroke="var(--neon-green)" stroke-width="3" />
+        <path d="M180 70 L150 65 L160 85 L125 80" fill="none" stroke="var(--neon-green)" stroke-width="3" class="dash-move" stroke-dasharray="10 5" />
         <circle cx="180" cy="40" r="16" fill="#03081a" stroke="var(--neon-green)" stroke-width="2" />
         <path d="M174 34 L180 31 L186 34 L186 42 C186 47, 180 50, 180 50 C180 50, 174 47, 174 42 Z" fill="none" stroke="var(--neon-green)" stroke-width="1.5" />
         
         <circle cx="100" cy="80" r="28" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
-        <polygon points="100,68 103,77 112,77 105,82 107,91 100,85 93,91 95,82 88,77 97,77" fill="var(--neon-yellow)" />
+        <polygon points="100,68 103,77 112,77 105,82 107,91 100,85 93,91 95,82 88,77 97,77" fill="var(--neon-yellow)" class="blink-fast float-up-down" />
         
         <line x1="100" y1="80" x2="85" y2="65" stroke="var(--neon-yellow)" stroke-width="2" />
         <line x1="100" y1="80" x2="115" y2="65" stroke="var(--neon-yellow)" stroke-width="2" />

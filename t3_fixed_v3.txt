@@ -1,0 +1,1086 @@
+  ,{
+    "id": "T3-P0-01",
+    "stage": "PRE-LESSON",
+    "title": "Welcome Screen",
+    "type": "welcome",
+    "bgStyle": "welcome-bg",
+    "elements": [
+      {
+        "id": "t3-w-1",
+        "type": "heading",
+        "content": "Bài 6.18: Sử dụng AI hiệu quả",
+        "x": 5, "y": 10, "w": 90, "h": 10, "fontSize": "48px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-w-2",
+        "type": "subheading",
+        "content": "Tiết 3: Diễn đàn chuyên gia công nghệ",
+        "x": 5, "y": 22, "w": 90, "h": 8, "fontSize": "32px", "color": "#ffffff", "align": "center"
+      },
+      {
+        "id": "t3-w-3",
+        "type": "box",
+        "content": "<div style='text-align:center;'><strong>Chủ đề:</strong> Kỹ năng công nghệ và học tập chủ động<br><strong>Role:</strong> Chuyên gia công nghệ</div>",
+        "x": 20, "y": 32, "w": 60, "h": 10, "fontSize": "22px", "color": "#00ffcc", "align": "center", "bg": "transparent", "border": "none"
+      },
+      {
+        "id": "t3-w-4",
+        "type": "box",
+        "content": "<strong>MỤC TIÊU BÀI HỌC:</strong><br><br>o Kiến thức: Tổng hợp các góc nhìn về tầm quan trọng của từng thành phần câu lệnh<br>o Kỹ năng: Trình bày ý kiến rõ ràng, biết lắng nghe, đặt câu hỏi phản biện và làm việc nhóm hiệu quả.<br>o Thái độ: Tôn trọng ý kiến khác biệt.",
+        "x": 5, "y": 45, "w": 55, "h": 45, "fontSize": "20px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      },
+      {
+        "id": "t3-w-5",
+        "type": "visual",
+        "content": "dashboard-ai-mesh",
+        "x": 63, "y": 45, "w": 32, "h": 45
+      }
+    ]
+  },
+  {
+    "id": "T3-P0-02",
+    "stage": "PRE-LESSON",
+    "title": "Big Question",
+    "type": "big-question",
+    "bgStyle": "dashboard-bg",
+    "elements": [
+      {
+        "id": "t3-bq-1",
+        "type": "heading",
+        "content": "CÂU HỎI LỚN",
+        "x": 5, "y": 10, "w": 90, "h": 10, "fontSize": "40px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-bq-2",
+        "type": "box",
+        "content": "<div class='glow-text' style='font-size: 32px; line-height: 1.5; color: #ffbd59; text-align: center; padding: 10px;'>Thuyết phục như thế nào để hội đồng chuyên gia phê duyệt xây dựng bộ khuyến nghị sử dụng AI hiệu quả?</div>",
+        "x": 5, "y": 30, "w": 55, "h": 45, "fontSize": "26px", "color": "#ffffff", "align": "center", "bg": "rgba(255, 189, 89, 0.05)", "border": "2px solid rgba(255, 189, 89, 0.3)"
+      },
+      {
+        "id": "t3-bq-3",
+        "type": "box",
+        "content": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><filter id=\"glow\"><feGaussianBlur stdDeviation=\"3\" result=\"coloredBlur\"/><feMerge><feMergeNode in=\"coloredBlur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><text x=\"100\" y=\"140\" font-size=\"120\" font-family=\"sans-serif\" font-weight=\"bold\" fill=\"#00f3ff\" text-anchor=\"middle\" filter=\"url(#glow)\">?</text><circle cx=\"100\" cy=\"100\" r=\"80\" fill=\"none\" stroke=\"#00f3ff\" stroke-width=\"4\" stroke-dasharray=\"10 5\" filter=\"url(#glow)\"/><circle cx=\"100\" cy=\"100\" r=\"90\" fill=\"none\" stroke=\"rgba(0, 243, 255, 0.3)\" stroke-width=\"2\"/></svg>",
+        "x": 63, "y": 30, "w": 32, "h": 45, "bg": "transparent", "border": "none"
+      }
+    ]
+  },
+  {
+    "id": "T3-P0-03",
+    "stage": "PRE-LESSON",
+    "title": "Role Introduction",
+    "type": "activity",
+    "bgStyle": "role-bg",
+    "elements": [
+      {
+        "id": "t3-r-1",
+        "type": "heading",
+        "content": "VAI TRÒ CỦA BẠN",
+        "x": 5, "y": 10, "w": 90, "h": 10, "fontSize": "36px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-r-2",
+        "type": "box",
+        "content": "<strong>Tên Role:</strong> Chuyên gia công nghệ<br><br><strong>Bạn sẽ trở thành:</strong> Những chuyên gia công nghệ tham gia diễn đàn để trao đổi, phản biện và bảo vệ ý tưởng của mình.<br><br><strong>Nhiệm vụ của bạn:</strong> Thảo luận và bảo vệ ý kiến của nhóm, đặt câu hỏi, phản biện dựa trên các bằng chứng và cùng xây dựng bộ khuyến nghị sử dụng AI hiệu quả.",
+        "x": 5, "y": 30, "w": 55, "h": 45, "fontSize": "22px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.3)"
+      },
+      {
+        "id": "t3-r-3",
+        "type": "visual",
+        "content": "specialist-id-badge",
+        "x": 63, "y": 30, "w": 32, "h": 45
+      }
+    ]
+  },
+  {
+    "id": "T3-S1-Intro",
+    "stage": "GĐ1 - MỞ KHÓA NHIỆM VỤ",
+    "title": "Giai đoạn 1: Mở khóa nhiệm vụ",
+    "type": "stage-intro",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s1-1",
+        "type": "heading",
+        "content": "GIAI ĐOẠN 1",
+        "x": 5, "y": 35, "w": 90, "h": 15, "fontSize": "60px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-s1-2",
+        "type": "subheading",
+        "content": "MỞ KHÓA NHIỆM VỤ",
+        "x": 5, "y": 55, "w": 90, "h": 10, "fontSize": "40px", "color": "#ffffff", "align": "center"
+      },
+      {
+        "id": "t3-s1-3",
+        "type": "visual",
+        "content": "security-lock-screen",
+        "x": 40, "y": 70, "w": 20, "h": 15
+      }
+    ]
+  },
+  {
+    "id": "T3-S1-ACT-01",
+    "stage": "GĐ1 - MỞ KHÓA NHIỆM VỤ",
+    "title": "Khởi động Diễn đàn",
+    "type": "activity-intro",
+    "bgStyle": "dashboard-bg",
+    "elements": [
+      {
+        "id": "t3-s1-act-01-1",
+        "type": "heading",
+        "content": "GIỚI THIỆU HOẠT ĐỘNG",
+        "x": 5, "y": 10, "w": 90, "h": 10, "fontSize": "36px", "color": "#ffbd59", "align": "center"
+      },
+      {
+        "id": "t3-s1-act-01-2",
+        "type": "box",
+        "content": "<strong>Tên hoạt động:</strong> Khởi động Diễn đàn<br><br><strong>Nội dung:</strong> Diễn đàn chuyên gia AI sắp bắt đầu. Các nhóm hãy kiểm tra lại các hồ sơ chuyên gia đang bị thiếu dữ liệu.",
+        "x": 5, "y": 25, "w": 55, "h": 50, "fontSize": "22px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.3)"
+      },
+      {
+        "id": "t3-s1-act-01-3",
+        "type": "visual",
+        "content": "icon-element-cards",
+        "x": 63, "y": 30, "w": 32, "h": 45
+      }
+    ]
+  },
+  {
+    "id": "T3-S1-ACT-02",
+    "stage": "GĐ1 - MỞ KHÓA NHIỆM VỤ",
+    "title": "Chuẩn bị",
+    "type": "activity-prep",
+    "bgStyle": "digital-workspace",
+    "elements": [
+      {
+        "id": "t3-s1-a2-title",
+        "type": "heading",
+        "content": "CHUẨN BỊ",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#00ffcc", "align": "center"
+      },
+      {
+        "id": "t3-s1-a2-items",
+        "type": "box",
+        "content": "<h3>DỤNG CỤ:</h3><div style='font-size: 28px; color: #ffd633; margin-top: 20px;'>👉 Giấy<br>👉 Bút</div>",
+        "x": 10, "y": 20, "w": 38, "h": 48, "fontSize": "18px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 255, 204, 0.05)", "border": "1px solid rgba(0, 255, 204, 0.2)"
+      },
+      {
+        "id": "t3-s1-a2-format",
+        "type": "box",
+        "content": "<h3>HÌNH THỨC:</h3><div style='font-size: 32px; color: #00f3ff; margin-top: 25px;'>👉 Nhóm 4</div>",
+        "x": 52, "y": 20, "w": 38, "h": 48, "fontSize": "18px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S1-ACT-03",
+    "stage": "GĐ1 - MỞ KHÓA NHIỆM VỤ",
+    "title": "Hướng dẫn thực hiện",
+    "type": "activity-howto",
+    "bgStyle": "dashboard-bg",
+    "elements": [
+      {
+        "id": "t3-s1-a3-title",
+        "type": "heading",
+        "content": "QUY TRÌNH THỰC HIỆN",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-s1-a3-steps",
+        "type": "box",
+        "content": "<div style='font-size: 18pt; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;'><div style='padding: 15px; border-top: 4px solid #ff66b2; background: rgba(255,102,178,0.03); border-radius: 6px;'><strong style='color: #ff66b2; display: block; margin-bottom: 8px;'>BƯỚC 1:</strong> Đọc các câu mô tả vai trò của thành phần câu lệnh trên màn hình.</div><div style='padding: 15px; border-top: 4px solid #ffd633; background: rgba(255,214,51,0.03); border-radius: 6px;'><strong style='color: #ffd633; display: block; margin-bottom: 8px;'>BƯỚC 2:</strong> Thảo luận nhanh và xác định từ phù hợp để hoàn thành câu mô tả.</div><div style='padding: 15px; border-top: 4px solid #00f3ff; background: rgba(0,243,255,0.03); border-radius: 6px;'><strong style='color: #00f3ff; display: block; margin-bottom: 8px;'>BƯỚC 3:</strong> Viết đáp án ra giấy và giơ cao đáp án.</div></div>",
+        "x": 10, "y": 18, "w": 80, "h": 58, "fontSize": "16px", "color": "#ffffff", "align": "left", "bg": "rgba(255,255,255,0.02)", "border": "1px solid rgba(255,255,255,0.1)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S1-ACT-04",
+    "stage": "GĐ1 - MỞ KHÓA NHIỆM VỤ",
+    "title": "Không gian thực hiện",
+    "type": "activity-workspace",
+    "bgStyle": "digital-workspace",
+    "elements": [
+      {
+        "id": "t3-s1-act-04-1",
+        "type": "heading",
+        "content": "NHIỆM VỤ: ĐIỀN TỪ PHÙ HỢP",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#ffd633", "align": "center"
+      },
+      {
+        "id": "t3-s1-act-04-2",
+        "type": "box",
+        "content": "<div style='color: #00f3ff; font-size: 20px; font-weight: bold; margin-bottom: 15px;'>👉 ĐỀ BÀI: Chọn từ khóa tương ứng điền vào ô trống.</div><p style='font-size: 18px; line-height: 1.8; color: #ffffff;'>1. Thành phần <select style='background: rgba(3, 8, 26, 0.65); border: 1px solid rgba(0, 243, 255, 0.45); border-radius: 4px; color: #ffbd59; padding: 4px; width: 150px; font-size: 16px; outline: none; cursor: pointer; font-weight: bold;'><option value='' style='color: white'>-- Chọn từ --</option><option value='Vai trò' style='color: #ffbd59'>Vai trò</option><option value='Nhiệm vụ' style='color: #00f3ff'>Nhiệm vụ</option><option value='Đối tượng' style='color: #ff66b2'>Đối tượng</option><option value='Yêu cầu' style='color: #2eb82e'>Yêu cầu</option></select> giúp AI hiểu mình cần nhập vai thành ai.<br><br>2. Thành phần <select style='background: rgba(3, 8, 26, 0.65); border: 1px solid rgba(0, 243, 255, 0.45); border-radius: 4px; color: #00f3ff; padding: 4px; width: 150px; font-size: 16px; outline: none; cursor: pointer; font-weight: bold;'><option value='' style='color: white'>-- Chọn từ --</option><option value='Vai trò' style='color: #ffbd59'>Vai trò</option><option value='Nhiệm vụ' style='color: #00f3ff'>Nhiệm vụ</option><option value='Đối tượng' style='color: #ff66b2'>Đối tượng</option><option value='Yêu cầu' style='color: #2eb82e'>Yêu cầu</option></select> cho AI biết cần thực hiện công việc gì.<br><br>3. Thành phần <select style='background: rgba(3, 8, 26, 0.65); border: 1px solid rgba(0, 243, 255, 0.45); border-radius: 4px; color: #ff66b2; padding: 4px; width: 150px; font-size: 16px; outline: none; cursor: pointer; font-weight: bold;'><option value='' style='color: white'>-- Chọn từ --</option><option value='Vai trò' style='color: #ffbd59'>Vai trò</option><option value='Nhiệm vụ' style='color: #00f3ff'>Nhiệm vụ</option><option value='Đối tượng' style='color: #ff66b2'>Đối tượng</option><option value='Yêu cầu' style='color: #2eb82e'>Yêu cầu</option></select> giúp AI xác định nội dung được tạo ra dành cho ai.<br><br>4. Thành phần <select style='background: rgba(3, 8, 26, 0.65); border: 1px solid rgba(0, 243, 255, 0.45); border-radius: 4px; color: #2eb82e; padding: 4px; width: 150px; font-size: 16px; outline: none; cursor: pointer; font-weight: bold;'><option value='' style='color: white'>-- Chọn từ --</option><option value='Vai trò' style='color: #ffbd59'>Vai trò</option><option value='Nhiệm vụ' style='color: #00f3ff'>Nhiệm vụ</option><option value='Đối tượng' style='color: #ff66b2'>Đối tượng</option><option value='Yêu cầu' style='color: #2eb82e'>Yêu cầu</option></select> giúp AI hiểu kết quả cần đáp ứng những đặc điểm nào.</p><br><div style='text-align: center;'><button onclick='window.checkT3Answers()' style='background: linear-gradient(90deg, #ffbd59, #ff3366); border: none; padding: 10px 30px; border-radius: 20px; color: white; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(255,189,89,0.5);'>KIỂM TRA ĐÁP ÁN</button></div>",
+        "x": 10, "y": 15, "w": 65, "h": 70, "fontSize": "16px", "color": "#ffffff", "align": "left", "bg": "rgba(255,255,255,0.03)", "border": "1px solid rgba(255,255,255,0.1)"
+      },
+      {
+        "id": "t3-s1-act-04-3",
+        "type": "visual",
+        "content": "algorithm-puzzle-pieces",
+        "x": 78, "y": 30, "w": 18, "h": 30
+      },
+      {
+        "id": "t3-s1-timer",
+        "type": "box",
+        "content": "<div style='text-align: center; font-size: 20px; color: #ffbd59; font-weight: bold;'>⏳ 03:00</div>",
+        "x": 78, "y": 70, "w": 18, "h": 10, "fontSize": "20px", "color": "#ffbd59", "align": "center", "bg": "rgba(0,0,0,0.5)", "border": "2px solid #ffbd59"
+      }
+    ]
+  },
+  {
+    "id": "T3-S1-ACT-06",
+    "stage": "GĐ1 - MỞ KHÓA NHIỆM VỤ",
+    "title": "Chuyển tiếp",
+    "type": "activity-transition",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s1-a6-header",
+        "type": "subheading",
+        "content": "CHUYỂN TIẾP NHIỆM VỤ",
+        "x": 10, "y": 10, "w": 80, "h": 8, "fontSize": "24px", "color": "#8ab4f8", "align": "center"
+      },
+      {
+        "id": "t3-s1-a6-left",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Chúng ta vừa hoàn thành:</div><div style='font-size: 20px; color: #00f3ff; font-weight: bold; margin-top: 10px;'>👉 Ôn lại vai trò của 4 thành phần trong câu lệnh AI.</div>",
+        "x": 10, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      },
+      {
+        "id": "t3-s1-a6-visual",
+        "type": "visual",
+        "content": "stage-transition-arrow",
+        "x": 51, "y": 38, "w": 10, "h": 15
+      },
+      {
+        "id": "t3-s1-a6-right",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Câu hỏi tiếp theo:</div><div style='font-size: 20px; color: #ffd633; font-weight: bold; margin-top: 10px;'>👉 Nếu phải bảo vệ ý kiến của mình trước các nhóm khác, chúng ta sẽ lập luận như thế nào để chứng minh thành phần mình phụ trách là quan trọng?</div>",
+        "x": 64, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(255, 214, 51, 0.05)", "border": "1px solid rgba(255, 214, 51, 0.2)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S2-Intro",
+    "stage": "GĐ2 - NHẬN LUẬT TRANH BIỆN",
+    "title": "Giai đoạn 2: Nhận luật tranh biện",
+    "type": "stage-intro",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s2-1",
+        "type": "heading",
+        "content": "GIAI ĐOẠN 2",
+        "x": 5, "y": 35, "w": 90, "h": 15, "fontSize": "60px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-s2-2",
+        "type": "subheading",
+        "content": "NHẬN LUẬT TRANH BIỆN",
+        "x": 5, "y": 55, "w": 90, "h": 10, "fontSize": "40px", "color": "#ffffff", "align": "center"
+      },
+      {
+        "id": "t3-s2-3",
+        "type": "visual",
+        "content": "debate-four-badges",
+        "x": 40, "y": 70, "w": 20, "h": 15
+      }
+    ]
+  },
+  {
+    "id": "T3-S2-ACT-01",
+    "stage": "GĐ2 - NHẬN LUẬT TRANH BIỆN",
+    "title": "KÍCH HOẠT BỘ QUY TẮC DIỄN ĐÀN",
+    "type": "activity-intro",
+    "bgStyle": "dashboard-bg",
+    "elements": [
+      {
+        "id": "t3-s2-act-01-1",
+        "type": "heading",
+        "content": "GIỚI THIỆU HOẠT ĐỘNG",
+        "x": 5, "y": 10, "w": 90, "h": 10, "fontSize": "36px", "color": "#ffbd59", "align": "center"
+      },
+      {
+        "id": "t3-s2-act-01-2",
+        "type": "box",
+        "content": "<strong>Tên hoạt động:</strong> Kích hoạt bộ quy tắc diễn đàn<br><br><strong>Nội dung:</strong> Diễn đàn chuyên gia AI sắp bước vào phần tranh biện. Hệ thống yêu cầu các nhóm tìm hiểu những quy tắc cần tuân thủ để cuộc tranh biện diễn ra công bằng và hiệu quả.",
+        "x": 5, "y": 25, "w": 55, "h": 50, "fontSize": "22px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.3)"
+      },
+      {
+        "id": "t3-s2-act-01-3",
+        "type": "visual",
+        "content": "debate-four-badges",
+        "x": 63, "y": 30, "w": 32, "h": 45
+      }
+    ]
+  },
+  {
+    "id": "T3-S2-ACT-04A",
+    "stage": "GĐ2 - NHẬN LUẬT TRANH BIỆN",
+    "title": "Quy tắc tranh biện",
+    "type": "activity-workspace",
+    "bgStyle": "digital-workspace",
+    "elements": [
+      {
+        "id": "t3-s2-act-04a-1",
+        "type": "heading",
+        "content": "QUY TẮC TRANH BIỆN",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-s2-act-04a-2",
+        "type": "box",
+        "content": "<div style='display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 100%;'><div style='background: rgba(0, 243, 255, 0.05); border: 1px solid rgba(0, 243, 255, 0.3); padding: 20px; border-radius: 8px; text-align: center;'><div style='font-size: 40px; margin-bottom: 10px;'>🎯</div><div style='color: #e2e8f0; font-size: 20px;'>Tập trung trao đổi về ý kiến và lập luận.</div></div><div style='background: rgba(255, 189, 89, 0.05); border: 1px solid rgba(255, 189, 89, 0.3); padding: 20px; border-radius: 8px; text-align: center;'><div style='font-size: 40px; margin-bottom: 10px;'>🤝</div><div style='color: #e2e8f0; font-size: 20px;'>Tôn trọng ý kiến của các nhóm khác, không công kích cá nhân.</div></div><div style='background: rgba(255, 102, 178, 0.05); border: 1px solid rgba(255, 102, 178, 0.3); padding: 20px; border-radius: 8px; text-align: center;'><div style='font-size: 40px; margin-bottom: 10px;'>👂</div><div style='color: #e2e8f0; font-size: 20px;'>Lắng nghe hết lượt nói của đội bạn, không ngắt lời.</div></div><div style='background: rgba(46, 184, 46, 0.05); border: 1px solid rgba(46, 184, 46, 0.3); padding: 20px; border-radius: 8px; text-align: center;'><div style='font-size: 40px; margin-bottom: 10px;'>📊</div><div style='color: #e2e8f0; font-size: 20px;'>Sử dụng ví dụ hoặc tình huống thực tế để bảo vệ quan điểm của nhóm.</div></div></div>",
+        "x": 10, "y": 18, "w": 80, "h": 60, "fontSize": "16px", "color": "#ffffff", "align": "left", "bg": "transparent", "border": "none"
+      }
+    ]
+  },
+  {
+    "id": "T3-S2-ACT-04B",
+    "stage": "GĐ2 - NHẬN LUẬT TRANH BIỆN",
+    "title": "Tiêu chí đánh giá",
+    "type": "activity-workspace",
+    "bgStyle": "digital-workspace",
+    "elements": [
+      {
+        "id": "t3-s2-act-04b-1",
+        "type": "heading",
+        "content": "TIÊU CHÍ ĐÁNH GIÁ",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#ffbd59", "align": "center"
+      },
+      {
+        "id": "t3-s2-act-04b-2",
+        "type": "box",
+        "content": "<div style='display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 100%;'><div style='background: rgba(0, 243, 255, 0.05); border: 1px solid rgba(0, 243, 255, 0.3); padding: 20px; border-radius: 8px; text-align: center;'><div style='font-size: 40px; margin-bottom: 10px;'>💡</div><div style='color: #ffbd59; font-weight: bold; font-size: 22px; margin-bottom: 10px;'>Lập luận rõ ràng</div><div style='color: #e2e8f0; font-size: 18px;'>Nêu được ý kiến và giải thích hợp lý.</div></div><div style='background: rgba(255, 189, 89, 0.05); border: 1px solid rgba(255, 189, 89, 0.3); padding: 20px; border-radius: 8px; text-align: center;'><div style='font-size: 40px; margin-bottom: 10px;'>🔎</div><div style='color: #ffbd59; font-weight: bold; font-size: 22px; margin-bottom: 10px;'>Có bằng chứng</div><div style='color: #e2e8f0; font-size: 18px;'>Đưa ra được ví dụ hoặc tình huống phù hợp.</div></div><div style='background: rgba(255, 102, 178, 0.05); border: 1px solid rgba(255, 102, 178, 0.3); padding: 20px; border-radius: 8px; text-align: center;'><div style='font-size: 40px; margin-bottom: 10px;'>🛡️</div><div style='color: #ffbd59; font-weight: bold; font-size: 22px; margin-bottom: 10px;'>Phản biện hợp lý</div><div style='color: #e2e8f0; font-size: 18px;'>Trả lời đúng câu hỏi mà nhóm khác đưa ra.</div></div><div style='background: rgba(46, 184, 46, 0.05); border: 1px solid rgba(46, 184, 46, 0.3); padding: 20px; border-radius: 8px; text-align: center;'><div style='font-size: 40px; margin-bottom: 10px;'>🎤</div><div style='color: #ffbd59; font-weight: bold; font-size: 22px; margin-bottom: 10px;'>Trình bày tự tin</div><div style='color: #e2e8f0; font-size: 18px;'>Nói rõ ràng, dễ hiểu và đúng thời gian.</div></div></div>",
+        "x": 10, "y": 18, "w": 80, "h": 60, "fontSize": "16px", "color": "#ffffff", "align": "left", "bg": "transparent", "border": "none"
+      },
+      {
+        "id": "t3-s2-timer",
+        "type": "box",
+        "content": "<div style='text-align: center; font-size: 20px; color: #ffbd59; font-weight: bold;'>⏳ 04:00</div>",
+        "x": 80, "y": 80, "w": 18, "h": 10, "fontSize": "20px", "color": "#ffbd59", "align": "center", "bg": "rgba(0,0,0,0.5)", "border": "2px solid #ffbd59"
+      }
+    ]
+  },
+  {
+    "id": "T3-S2-ACT-06",
+    "stage": "GĐ2 - NHẬN LUẬT TRANH BIỆN",
+    "title": "Chuyển tiếp",
+    "type": "activity-transition",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s2-a6-header",
+        "type": "subheading",
+        "content": "CHUYỂN TIẾP NHIỆM VỤ",
+        "x": 10, "y": 10, "w": 80, "h": 8, "fontSize": "24px", "color": "#8ab4f8", "align": "center"
+      },
+      {
+        "id": "t3-s2-a6-left",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Chúng ta vừa hoàn thành:</div><div style='font-size: 20px; color: #00f3ff; font-weight: bold; margin-top: 10px;'>👉 Tìm hiểu các quy tắc tranh biện và tiêu chí đánh giá của Diễn đàn chuyên gia AI.</div>",
+        "x": 10, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      },
+      {
+        "id": "t3-s2-a6-visual",
+        "type": "visual",
+        "content": "stage-transition-arrow",
+        "x": 51, "y": 38, "w": 10, "h": 15
+      },
+      {
+        "id": "t3-s2-a6-right",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Câu hỏi tiếp theo:</div><div style='font-size: 20px; color: #ffd633; font-weight: bold; margin-top: 10px;'>👉 Các nhóm sẽ phân công nhiệm vụ và chuẩn bị lập luận như thế nào trước khi bước vào tranh biện?</div>",
+        "x": 64, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(255, 214, 51, 0.05)", "border": "1px solid rgba(255, 214, 51, 0.2)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S3-Intro",
+    "stage": "GĐ3 - DIỄN TẬP CUỐI",
+    "title": "Giai đoạn 3: Diễn tập cuối",
+    "type": "stage-intro",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s3-1",
+        "type": "heading",
+        "content": "GIAI ĐOẠN 3",
+        "x": 5, "y": 35, "w": 90, "h": 15, "fontSize": "60px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-s3-2",
+        "type": "subheading",
+        "content": "DIỄN TẬP CUỐI",
+        "x": 5, "y": 55, "w": 90, "h": 10, "fontSize": "40px", "color": "#ffffff", "align": "center"
+      },
+      {
+        "id": "t3-s3-3",
+        "type": "visual",
+        "content": "process-sandbox-testing",
+        "x": 40, "y": 70, "w": 20, "h": 15
+      }
+    ]
+  },
+  {
+    "id": "T3-S3-ACT-01",
+    "stage": "GĐ3 - DIỄN TẬP CUỐI",
+    "title": "CHUẨN BỊ ĐỘI HÌNH TRANH BIỆN",
+    "type": "activity-intro",
+    "bgStyle": "dashboard-bg",
+    "elements": [
+      {
+        "id": "t3-s3-act-01-1",
+        "type": "heading",
+        "content": "GIỚI THIỆU HOẠT ĐỘNG",
+        "x": 5, "y": 10, "w": 90, "h": 10, "fontSize": "36px", "color": "#ffbd59", "align": "center"
+      },
+      {
+        "id": "t3-s3-act-01-2",
+        "type": "box",
+        "content": "<strong>Tên hoạt động:</strong> Chuẩn bị đội hình tranh biện<br><br><strong>Nội dung:</strong> Diễn đàn chuyên gia AI sắp bắt đầu. Các nhóm hãy nhanh chóng phân công nhiệm vụ và luyện tập để sẵn sàng trình bày ý kiến của mình.",
+        "x": 5, "y": 25, "w": 55, "h": 50, "fontSize": "22px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.3)"
+      },
+      {
+        "id": "t3-s3-act-01-3",
+        "type": "visual",
+        "content": "icon-group-4-people",
+        "x": 63, "y": 30, "w": 32, "h": 45
+      }
+    ]
+  },
+  {
+    "id": "T3-S3-ACT-02",
+    "stage": "GĐ3 - DIỄN TẬP CUỐI",
+    "title": "Chuẩn bị",
+    "type": "activity-prep",
+    "bgStyle": "digital-workspace",
+    "elements": [
+      {
+        "id": "t3-s3-a2-title",
+        "type": "heading",
+        "content": "CHUẨN BỊ",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#00ffcc", "align": "center"
+      },
+      {
+        "id": "t3-s3-a2-items",
+        "type": "box",
+        "content": "<h3>DỤNG CỤ:</h3><div style='font-size: 28px; color: #ffd633; margin-top: 20px;'>👉 Giấy<br>👉 Bút</div>",
+        "x": 10, "y": 20, "w": 38, "h": 48, "fontSize": "18px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 255, 204, 0.05)", "border": "1px solid rgba(0, 255, 204, 0.2)"
+      },
+      {
+        "id": "t3-s3-a2-format",
+        "type": "box",
+        "content": "<h3>HÌNH THỨC:</h3><div style='font-size: 32px; color: #00f3ff; margin-top: 25px;'>👉 Nhóm 4</div>",
+        "x": 52, "y": 20, "w": 38, "h": 48, "fontSize": "18px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S3-ACT-03",
+    "stage": "GĐ3 - DIỄN TẬP CUỐI",
+    "title": "Hướng dẫn thực hiện",
+    "type": "activity-howto",
+    "bgStyle": "dashboard-bg",
+    "elements": [
+      {
+        "id": "t3-s3-a3-title",
+        "type": "heading",
+        "content": "QUY TRÌNH THỰC HIỆN",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-s3-a3-steps",
+        "type": "box",
+        "content": "<div style='font-size: 18pt; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;'><div style='padding: 15px; border-top: 4px solid #ff66b2; background: rgba(255,102,178,0.03); border-radius: 6px;'><strong style='color: #ff66b2; display: block; margin-bottom: 8px;'>BƯỚC 1:</strong> Các nhóm cùng rà soát hồ sơ lập luận và nội dung đã chuẩn bị.</div><div style='padding: 15px; border-top: 4px solid #ffd633; background: rgba(255,214,51,0.03); border-radius: 6px;'><strong style='color: #ffd633; display: block; margin-bottom: 8px;'>BƯỚC 2:</strong> Thảo luận phân công người trình bày phù hợp.</div><div style='padding: 15px; border-top: 4px solid #00f3ff; background: rgba(0,243,255,0.03); border-radius: 6px;'><strong style='color: #00f3ff; display: block; margin-bottom: 8px;'>BƯỚC 3:</strong> Luyện tập nhanh phần trình bày để khớp thời gian quy định.</div></div>",
+        "x": 10, "y": 18, "w": 80, "h": 58, "fontSize": "16px", "color": "#ffffff", "align": "left", "bg": "rgba(255,255,255,0.02)", "border": "1px solid rgba(255,255,255,0.1)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S3-ACT-04",
+    "stage": "GĐ3 - DIỄN TẬP CUỐI",
+    "title": "Không gian thực hiện",
+    "type": "activity-workspace",
+    "bgStyle": "digital-workspace",
+    "elements": [
+      {
+        "id": "t3-s3-act-04-1",
+        "type": "heading",
+        "content": "NHIỆM VỤ: PHÂN CÔNG VAI TRÒ",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#ffd633", "align": "center"
+      },
+      {
+        "id": "t3-s3-act-04-2",
+        "type": "box",
+        "content": "<div style='color: #00f3ff; font-size: 20px; font-weight: bold; margin-bottom: 15px;'>👉 ĐỀ BÀI:</div><p style='font-size: 16px; line-height: 1.6; color: #ffffff;'>Hoàn thành việc phân công vai trò và luyện tập phần trình bày của nhóm.</p><div style='display: flex; flex-direction: column; gap: 10px; margin-top: 15px;'><div style='background: rgba(255, 102, 178, 0.08); border-left: 4px solid #ff66b2; padding: 10px;'><strong style='color: #ff66b2;'>Người nói 1:</strong> Giới thiệu lập trường và luận điểm chính.<br><input type='text' placeholder='Tên thành viên...' style='margin-top: 5px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,102,178,0.5); color: white; padding: 4px; border-radius: 4px; width: 250px;'></div><div style='background: rgba(255, 214, 51, 0.08); border-left: 4px solid #ffd633; padding: 10px;'><strong style='color: #ffd633;'>Người nói 2:</strong> Giải thích lý do và đưa ra ví dụ hoặc bằng chứng.<br><input type='text' placeholder='Tên thành viên...' style='margin-top: 5px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,214,51,0.5); color: white; padding: 4px; border-radius: 4px; width: 250px;'></div><div style='background: rgba(46, 184, 46, 0.08); border-left: 4px solid #2eb82e; padding: 10px;'><strong style='color: #2eb82e;'>Người nói 3:</strong> Trả lời câu hỏi chất vấn của nhóm bạn và tổng kết.<br><input type='text' placeholder='Tên thành viên...' style='margin-top: 5px; background: rgba(0,0,0,0.5); border: 1px solid rgba(46,184,46,0.5); color: white; padding: 4px; border-radius: 4px; width: 250px;'></div></div>",
+        "x": 10, "y": 15, "w": 65, "h": 70, "fontSize": "16px", "color": "#ffffff", "align": "left", "bg": "rgba(255,255,255,0.03)", "border": "1px solid rgba(255,255,255,0.1)"
+      },
+      {
+        "id": "t3-s3-act-04-3",
+        "type": "visual",
+        "content": "icon-group-4-people",
+        "x": 78, "y": 30, "w": 18, "h": 30
+      },
+      {
+        "id": "t3-s3-timer",
+        "type": "box",
+        "content": "<div style='text-align: center; font-size: 20px; color: #ffbd59; font-weight: bold;'>⏳ 05:00</div>",
+        "x": 78, "y": 70, "w": 18, "h": 10, "fontSize": "20px", "color": "#ffbd59", "align": "center", "bg": "rgba(0,0,0,0.5)", "border": "2px solid #ffbd59"
+      }
+    ]
+  },
+  {
+    "id": "T3-S3-ACT-06",
+    "stage": "GĐ3 - DIỄN TẬP CUỐI",
+    "title": "Chuyển tiếp",
+    "type": "activity-transition",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s3-a6-header",
+        "type": "subheading",
+        "content": "CHUYỂN TIẾP NHIỆM VỤ",
+        "x": 10, "y": 10, "w": 80, "h": 8, "fontSize": "24px", "color": "#8ab4f8", "align": "center"
+      },
+      {
+        "id": "t3-s3-a6-left",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Chúng ta vừa hoàn thành:</div><div style='font-size: 20px; color: #00f3ff; font-weight: bold; margin-top: 10px;'>👉 Phân công vai trò và luyện tập phần trình bày của nhóm.</div>",
+        "x": 10, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      },
+      {
+        "id": "t3-s3-a6-visual",
+        "type": "visual",
+        "content": "stage-transition-arrow",
+        "x": 51, "y": 38, "w": 10, "h": 15
+      },
+      {
+        "id": "t3-s3-a6-right",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Câu hỏi tiếp theo:</div><div style='font-size: 20px; color: #ffd633; font-weight: bold; margin-top: 10px;'>👉 Các nhóm sẽ bảo vệ ý kiến của mình như thế nào trong Diễn đàn chuyên gia AI?</div>",
+        "x": 64, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(255, 214, 51, 0.05)", "border": "1px solid rgba(255, 214, 51, 0.2)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S4-Intro",
+    "stage": "GĐ4 - TRANH BIỆN ĐỒNG ĐỘI VÀ CHẤT VẤN",
+    "title": "Giai đoạn 4: Tranh biện đồng đội và chất vấn",
+    "type": "stage-intro",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s4-1",
+        "type": "heading",
+        "content": "GIAI ĐOẠN 4",
+        "x": 5, "y": 35, "w": 90, "h": 15, "fontSize": "60px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-s4-2",
+        "type": "subheading",
+        "content": "TRANH BIỆN ĐỒNG ĐỘI VÀ CHẤT VẤN",
+        "x": 5, "y": 55, "w": 90, "h": 10, "fontSize": "40px", "color": "#ffffff", "align": "center"
+      },
+      {
+        "id": "t3-s4-3",
+        "type": "visual",
+        "content": "electric-clash-shield",
+        "x": 40, "y": 70, "w": 20, "h": 15
+      }
+    ]
+  },
+  {
+    "id": "T3-S4-ACT-01",
+    "stage": "GĐ4 - TRANH BIỆN ĐỒNG ĐỘI VÀ CHẤT VẤN",
+    "title": "Trình bày quan điểm Chuyên gia",
+    "type": "activity-intro",
+    "bgStyle": "dashboard-bg",
+    "elements": [
+      {
+        "id": "t3-s4-act-01-1",
+        "type": "heading",
+        "content": "GIỚI THIỆU HOẠT ĐỘNG",
+        "x": 5, "y": 10, "w": 90, "h": 10, "fontSize": "36px", "color": "#ffbd59", "align": "center"
+      },
+      {
+        "id": "t3-s4-act-01-2",
+        "type": "box",
+        "content": "<strong>Tên hoạt động:</strong> Trình bày quan điểm Chuyên gia<br><br><strong>Nội dung:</strong> Diễn đàn chuyên gia AI chính thức bắt đầu. Mỗi nhóm sẽ lần lượt trình bày và bảo vệ quan điểm của mình về thành phần câu lệnh mà nhóm phụ trách.",
+        "x": 5, "y": 25, "w": 55, "h": 50, "fontSize": "22px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.3)"
+      },
+      {
+        "id": "t3-s4-act-01-3",
+        "type": "visual",
+        "content": "electric-clash-shield",
+        "x": 63, "y": 30, "w": 32, "h": 45
+      }
+    ]
+  },
+  {
+    "id": "T3-S4-ACT-02",
+    "stage": "GĐ4 - TRANH BIỆN ĐỒNG ĐỘI VÀ CHẤT VẤN",
+    "title": "Chuẩn bị",
+    "type": "activity-prep",
+    "bgStyle": "digital-workspace",
+    "elements": [
+      {
+        "id": "t3-s4-a2-title",
+        "type": "heading",
+        "content": "CHUẨN BỊ",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#00ffcc", "align": "center"
+      },
+      {
+        "id": "t3-s4-a2-items",
+        "type": "box",
+        "content": "<h3>DỤNG CỤ:</h3><div style='font-size: 28px; color: #ffd633; margin-top: 20px;'>👉 Phiếu theo dõi lập luận<br>👉 Bút viết</div>",
+        "x": 10, "y": 20, "w": 38, "h": 48, "fontSize": "18px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 255, 204, 0.05)", "border": "1px solid rgba(0, 255, 204, 0.2)"
+      },
+      {
+        "id": "t3-s4-a2-format",
+        "type": "box",
+        "content": "<h3>HÌNH THỨC:</h3><div style='font-size: 32px; color: #00f3ff; margin-top: 25px;'>👉 4 Nhóm</div>",
+        "x": 52, "y": 20, "w": 38, "h": 48, "fontSize": "18px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S4-ACT-03",
+    "stage": "GĐ4 - TRANH BIỆN ĐỒNG ĐỘI VÀ CHẤT VẤN",
+    "title": "Hướng dẫn thực hiện",
+    "type": "activity-howto",
+    "bgStyle": "dashboard-bg",
+    "elements": [
+      {
+        "id": "t3-s4-a3-title",
+        "type": "heading",
+        "content": "QUY TRÌNH THỰC HIỆN",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-s4-a3-steps",
+        "type": "box",
+        "content": "<div style='font-size: 18pt; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;'><div style='padding: 15px; border-top: 4px solid #ff66b2; background: rgba(255,102,178,0.03); border-radius: 6px;'><strong style='color: #ff66b2; display: block; margin-bottom: 8px;'>BƯỚC 1:</strong> Lần lượt hai người nói đầu tiên đại diện của từng nhóm lên trình bày.</div><div style='padding: 15px; border-top: 4px solid #ffd633; background: rgba(255,214,51,0.03); border-radius: 6px;'><strong style='color: #ffd633; display: block; margin-bottom: 8px;'>BƯỚC 2:</strong> Các nhóm còn lại lắng nghe, ghi chú vào Phiếu theo dõi và đặt câu hỏi.</div><div style='padding: 15px; border-top: 4px solid #00f3ff; background: rgba(0,243,255,0.03); border-radius: 6px;'><strong style='color: #00f3ff; display: block; margin-bottom: 8px;'>BƯỚC 3:</strong> Người nói thứ 3 trả lời câu hỏi phản biện và tổng kết.</div></div>",
+        "x": 10, "y": 18, "w": 80, "h": 58, "fontSize": "16px", "color": "#ffffff", "align": "left", "bg": "rgba(255,255,255,0.02)", "border": "1px solid rgba(255,255,255,0.1)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S4-ACT-04",
+    "stage": "GĐ4 - TRANH BIỆN ĐỒNG ĐỘI VÀ CHẤT VẤN",
+    "title": "Không gian thực hiện",
+    "type": "activity-workspace",
+    "bgStyle": "digital-workspace",
+    "elements": [
+      {
+        "id": "t3-s4-act-04-1",
+        "type": "heading",
+        "content": "NHIỆM VỤ: TRANH BIỆN TẬP TRUNG",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#ffd633", "align": "center"
+      },
+      {
+        "id": "t3-s4-act-04-2",
+        "type": "box",
+        "content": "<div style='color: #00f3ff; font-size: 20px; font-weight: bold; margin-bottom: 15px;'>👉 CHỦ ĐỀ:</div><div style='font-size: 24px; font-style: italic; line-height: 1.6; color: #ffbd59; padding: 20px; border-left: 5px solid #ffbd59; background: rgba(255, 189, 89, 0.03);'>\"Thành phần không thể thiếu trong câu lệnh cho AI là _________\"</div><p style='margin-top: 20px; font-size: 16px; color: #e2e8f0;'><br><strong>Phiếu theo dõi lập luận:</strong></p><textarea placeholder='Ghi chú nhanh các điểm phản biện...' style='width: 100%; height: 120px; background: rgba(3, 8, 26, 0.65); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: white; padding: 10px; font-size: 16px; outline: none; resize: none; font-family: sans-serif; box-sizing: border-box;'></textarea>",
+        "x": 10, "y": 15, "w": 65, "h": 70, "fontSize": "16px", "color": "#ffffff", "align": "left", "bg": "rgba(255,255,255,0.03)", "border": "1px solid rgba(255,255,255,0.1)"
+      },
+      {
+        "id": "t3-s4-act-04-3",
+        "type": "visual",
+        "content": "electric-clash-shield",
+        "x": 78, "y": 30, "w": 18, "h": 30
+      },
+      {
+        "id": "t3-s4-timer",
+        "type": "box",
+        "content": "<div style='text-align: center; font-size: 20px; color: #ffbd59; font-weight: bold;'>⏳ 10:00</div>",
+        "x": 78, "y": 70, "w": 18, "h": 10, "fontSize": "20px", "color": "#ffbd59", "align": "center", "bg": "rgba(0,0,0,0.5)", "border": "2px solid #ffbd59"
+      }
+    ]
+  },
+  {
+    "id": "T3-S4-ACT-06",
+    "stage": "GĐ4 - TRANH BIỆN ĐỒNG ĐỘI VÀ CHẤT VẤN",
+    "title": "Chuyển tiếp",
+    "type": "activity-transition",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s4-a6-header",
+        "type": "subheading",
+        "content": "CHUYỂN TIẾP NHIỆM VỤ",
+        "x": 10, "y": 10, "w": 80, "h": 8, "fontSize": "24px", "color": "#8ab4f8", "align": "center"
+      },
+      {
+        "id": "t3-s4-a6-left",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Chúng ta vừa khám phá:</div><div style='font-size: 20px; color: #00f3ff; font-weight: bold; margin-top: 10px;'>👉 Lắng nghe và tìm hiểu quan điểm của cả 4 nhóm.</div>",
+        "x": 10, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      },
+      {
+        "id": "t3-s4-a6-visual",
+        "type": "visual",
+        "content": "stage-transition-arrow",
+        "x": 51, "y": 38, "w": 10, "h": 15
+      },
+      {
+        "id": "t3-s4-a6-right",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Câu hỏi tiếp theo:</div><div style='font-size: 20px; color: #ffd633; font-weight: bold; margin-top: 10px;'>👉 Khi bước vào phiên đối thoại trực tiếp, những cuộc đấu trí chất vấn chéo sẽ diễn ra dồn dập ra sao?</div>",
+        "x": 64, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(255, 214, 51, 0.05)", "border": "1px solid rgba(255, 214, 51, 0.2)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S6-Intro",
+    "stage": "GĐ6 - HỘI ĐỒNG CHUYÊN GIA KẾT LUẬN",
+    "title": "Giai đoạn 6: Hội đồng chuyên gia kết luận",
+    "type": "stage-intro",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s6-1",
+        "type": "heading",
+        "content": "GIAI ĐOẠN 6",
+        "x": 5, "y": 35, "w": 90, "h": 15, "fontSize": "60px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-s6-2",
+        "type": "subheading",
+        "content": "HỘI ĐỒNG CHUYÊN GIA KẾT LUẬN",
+        "x": 5, "y": 55, "w": 90, "h": 10, "fontSize": "40px", "color": "#ffffff", "align": "center"
+      },
+      {
+        "id": "t3-s6-3",
+        "type": "visual",
+        "content": "system-operation-check",
+        "x": 40, "y": 70, "w": 20, "h": 15
+      }
+    ]
+  },
+  {
+    "id": "T3-S6-ACT-05",
+    "stage": "GĐ6 - HỘI ĐỒNG CHUYÊN GIA KẾT LUẬN",
+    "title": "Kết quả & Đúc kết",
+    "type": "result",
+    "bgStyle": "dashboard-bg",
+    "elements": [
+      {
+        "id": "t3-s6-act-05-1",
+        "type": "heading",
+        "content": "KẾT LUẬN",
+        "x": 5, "y": 10, "w": 90, "h": 10, "fontSize": "36px", "color": "#ffbd59", "align": "center"
+      },
+      {
+        "id": "t3-s6-act-05-2",
+        "type": "box",
+        "content": "<strong>Kết quả:</strong> Bộ khuyến nghị sử dụng AI hiệu quả được hoàn thiện với sự đồng thuận của các chuyên gia, khẳng định: Sử dụng đầy đủ 4 thành phần lệnh:<br><br>1. Xác định rõ Vai trò.<br>2. Nêu đúng Nhiệm vụ.<br>3. Chỉ rõ Đối tượng.<br>4. Mô tả cụ thể Yêu cầu.<br><br><strong>Thông điệp chính:</strong> AI chỉ tạo ra kết quả tốt khi chúng ta đưa ra câu lệnh rõ ràng.",
+        "x": 5, "y": 25, "w": 55, "h": 65, "fontSize": "22px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.3)"
+      },
+      {
+        "id": "t3-s6-act-05-3",
+        "type": "visual",
+        "content": "system-operation-check",
+        "x": 63, "y": 30, "w": 32, "h": 45
+      }
+    ]
+  },
+  {
+    "id": "T3-S6-ACT-06",
+    "stage": "GĐ6 - HỘI ĐỒNG CHUYÊN GIA KẾT LUẬN",
+    "title": "Chuyển tiếp",
+    "type": "activity-transition",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s6-a6-header",
+        "type": "subheading",
+        "content": "CHUYỂN TIẾP NHIỆM VỤ",
+        "x": 10, "y": 10, "w": 80, "h": 8, "fontSize": "24px", "color": "#8ab4f8", "align": "center"
+      },
+      {
+        "id": "t3-s6-a6-left",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Chúng ta vừa hoàn thành:</div><div style='font-size: 20px; color: #00f3ff; font-weight: bold; margin-top: 10px;'>👉 Bộ khuyến nghị sử dụng AI hiệu quả.</div>",
+        "x": 10, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      },
+      {
+        "id": "t3-s6-a6-visual",
+        "type": "visual",
+        "content": "stage-transition-arrow",
+        "x": 51, "y": 38, "w": 10, "h": 15
+      },
+      {
+        "id": "t3-s6-a6-right",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Câu hỏi tiếp theo:</div><div style='font-size: 20px; color: #ffd633; font-weight: bold; margin-top: 10px;'>👉 Sau bài học hôm nay, em sẽ áp dụng những nguyên tắc nào khi sử dụng AI trong học tập?</div>",
+        "x": 64, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(255, 214, 51, 0.05)", "border": "1px solid rgba(255, 214, 51, 0.2)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S7-Intro",
+    "stage": "GĐ7 - NHẬT KÝ CHUYÊN GIA",
+    "title": "Giai đoạn 7: Nhật ký chuyên gia",
+    "type": "stage-intro",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s7-1",
+        "type": "heading",
+        "content": "GIAI ĐOẠN 7",
+        "x": 5, "y": 35, "w": 90, "h": 15, "fontSize": "60px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-s7-2",
+        "type": "subheading",
+        "content": "NHẬT KÝ CHUYÊN GIA",
+        "x": 5, "y": 55, "w": 90, "h": 10, "fontSize": "40px", "color": "#ffffff", "align": "center"
+      },
+      {
+        "id": "t3-s7-3",
+        "type": "visual",
+        "content": "icon-personal-notebook",
+        "x": 40, "y": 70, "w": 20, "h": 15
+      }
+    ]
+  },
+  {
+    "id": "T3-S7-ACT-01",
+    "stage": "GĐ7 - NHẬT KÝ CHUYÊN GIA",
+    "title": "Nhật ký Chuyên gia - Tập 3",
+    "type": "activity-intro",
+    "bgStyle": "dashboard-bg",
+    "elements": [
+      {
+        "id": "t3-s7-act-01-1",
+        "type": "heading",
+        "content": "GIỚI THIỆU HOẠT ĐỘNG",
+        "x": 5, "y": 10, "w": 90, "h": 10, "fontSize": "36px", "color": "#ffbd59", "align": "center"
+      },
+      {
+        "id": "t3-s7-act-01-2",
+        "type": "box",
+        "content": "<strong>Tên hoạt động:</strong> Nhật ký Chuyên gia - Tập 3<br><br><strong>Nội dung:</strong> Tự nhìn lại những điều mình học được và bài học muốn áp dụng khi sử dụng AI.",
+        "x": 5, "y": 25, "w": 55, "h": 50, "fontSize": "22px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.3)"
+      },
+      {
+        "id": "t3-s7-act-01-3",
+        "type": "visual",
+        "content": "icon-personal-notebook",
+        "x": 63, "y": 30, "w": 32, "h": 45
+      }
+    ]
+  },
+  {
+    "id": "T3-S7-ACT-02",
+    "stage": "GĐ7 - NHẬT KÝ CHUYÊN GIA",
+    "title": "Chuẩn bị",
+    "type": "activity-prep",
+    "bgStyle": "digital-workspace",
+    "elements": [
+      {
+        "id": "t3-s7-a2-title",
+        "type": "heading",
+        "content": "CHUẨN BỊ",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#00ffcc", "align": "center"
+      },
+      {
+        "id": "t3-s7-a2-items",
+        "type": "box",
+        "content": "<h3>DỤNG CỤ:</h3><div style='font-size: 28px; color: #ffd633; margin-top: 20px;'>👉 Phiếu \"Nhật ký chuyên gia\"<br>👉 Bút</div>",
+        "x": 10, "y": 20, "w": 38, "h": 48, "fontSize": "18px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 255, 204, 0.05)", "border": "1px solid rgba(0, 255, 204, 0.2)"
+      },
+      {
+        "id": "t3-s7-a2-format",
+        "type": "box",
+        "content": "<h3>HÌNH THỨC:</h3><div style='font-size: 32px; color: #00f3ff; margin-top: 25px;'>👉 Cá nhân</div>",
+        "x": 52, "y": 20, "w": 38, "h": 48, "fontSize": "18px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S7-ACT-04",
+    "stage": "GĐ7 - NHẬT KÝ CHUYÊN GIA",
+    "title": "Không gian thực hiện",
+    "type": "activity-workspace",
+    "bgStyle": "digital-workspace",
+    "elements": [
+      {
+        "id": "t3-s7-act-04-1",
+        "type": "heading",
+        "content": "NHIỆM VỤ: GHI NHẬT KÝ CÁ NHÂN",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#ffd633", "align": "center"
+      },
+      {
+        "id": "t3-s7-act-04-2",
+        "type": "box",
+        "content": "<div style='color: #00f3ff; font-size: 20px; font-weight: bold; margin-bottom: 15px;'>👉 HOÀN THÀNH PHIẾU NHẬT KÝ:</div><div style='display: flex; flex-direction: column; gap: 15px; height: calc(100% - 40px);'><div style='flex: 1;'><p style='font-size: 18px; margin-bottom: 8px;'>Điều em hiểu sâu hơn sau tranh biện là…</p><textarea placeholder='Nhập suy nghĩ của em...' style='width: 100%; height: calc(100% - 30px); background: rgba(3, 8, 26, 0.65); border: 1px solid rgba(0, 243, 255, 0.45); border-radius: 4px; color: white; padding: 10px; font-size: 16px; outline: none; resize: none;'></textarea></div><div style='flex: 1;'><p style='font-size: 18px; margin-bottom: 8px;'>Điều em muốn cải thiện là…</p><textarea placeholder='Nhập suy nghĩ của em...' style='width: 100%; height: calc(100% - 30px); background: rgba(3, 8, 26, 0.65); border: 1px solid rgba(255, 189, 89, 0.45); border-radius: 4px; color: white; padding: 10px; font-size: 16px; outline: none; resize: none;'></textarea></div></div>",
+        "x": 10, "y": 15, "w": 65, "h": 70, "fontSize": "16px", "color": "#ffffff", "align": "left", "bg": "rgba(255,255,255,0.03)", "border": "1px solid rgba(255,255,255,0.1)"
+      },
+      {
+        "id": "t3-s7-act-04-3",
+        "type": "visual",
+        "content": "icon-personal-notebook",
+        "x": 78, "y": 30, "w": 18, "h": 30
+      },
+      {
+        "id": "t3-s7-timer",
+        "type": "box",
+        "content": "<div style='text-align: center; font-size: 20px; color: #ffbd59; font-weight: bold;'>⏳ 04:00</div>",
+        "x": 78, "y": 70, "w": 18, "h": 10, "fontSize": "20px", "color": "#ffbd59", "align": "center", "bg": "rgba(0,0,0,0.5)", "border": "2px solid #ffbd59"
+      }
+    ]
+  },
+  {
+    "id": "T3-S7-ACT-06",
+    "stage": "GĐ7 - NHẬT KÝ CHUYÊN GIA",
+    "title": "Chuyển tiếp",
+    "type": "activity-transition",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s7-a6-header",
+        "type": "subheading",
+        "content": "CHUYỂN TIẾP NHIỆM VỤ",
+        "x": 10, "y": 10, "w": 80, "h": 8, "fontSize": "24px", "color": "#8ab4f8", "align": "center"
+      },
+      {
+        "id": "t3-s7-a6-left",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Chúng ta vừa hoàn thành:</div><div style='font-size: 20px; color: #00f3ff; font-weight: bold; margin-top: 10px;'>👉 Nhật ký ghi lại những điều mỗi chuyên gia học được sau Diễn đàn.</div>",
+        "x": 10, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      },
+      {
+        "id": "t3-s7-a6-visual",
+        "type": "visual",
+        "content": "stage-transition-arrow",
+        "x": 51, "y": 38, "w": 10, "h": 15
+      },
+      {
+        "id": "t3-s7-a6-right",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Câu hỏi tiếp theo:</div><div style='font-size: 20px; color: #ffd633; font-weight: bold; margin-top: 10px;'>👉 Em sẽ thực hiện cam kết nào để sử dụng AI hiệu quả trong học tập hằng ngày?</div>",
+        "x": 64, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(255, 214, 51, 0.05)", "border": "1px solid rgba(255, 214, 51, 0.2)"
+      }
+    ]
+  },
+  {
+    "id": "T3-S8-Intro",
+    "stage": "GĐ8 - VẬN HÀNH HỆ THỐNG",
+    "title": "Giai đoạn 8: Vận hành hệ thống",
+    "type": "stage-intro",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s8-1",
+        "type": "heading",
+        "content": "GIAI ĐOẠN 8",
+        "x": 5, "y": 35, "w": 90, "h": 15, "fontSize": "60px", "color": "#00f3ff", "align": "center"
+      },
+      {
+        "id": "t3-s8-2",
+        "type": "subheading",
+        "content": "VẬN HÀNH HỆ THỐNG",
+        "x": 5, "y": 55, "w": 90, "h": 10, "fontSize": "40px", "color": "#ffffff", "align": "center"
+      },
+      {
+        "id": "t3-s8-3",
+        "type": "visual",
+        "content": "action-checklist-board",
+        "x": 40, "y": 70, "w": 20, "h": 15
+      }
+    ]
+  },
+  {
+    "id": "T3-S8-ACT-01",
+    "stage": "GĐ8 - VẬN HÀNH HỆ THỐNG",
+    "title": "KÍCH HOẠT THẺ CAM KẾT",
+    "type": "activity-intro",
+    "bgStyle": "dashboard-bg",
+    "elements": [
+      {
+        "id": "t3-s8-act-01-1",
+        "type": "heading",
+        "content": "GIỚI THIỆU HOẠT ĐỘNG",
+        "x": 5, "y": 10, "w": 90, "h": 10, "fontSize": "36px", "color": "#ffbd59", "align": "center"
+      },
+      {
+        "id": "t3-s8-act-01-2",
+        "type": "box",
+        "content": "<strong>Tên hoạt động:</strong> Kích hoạt thẻ cam kết<br><br><strong>Nội dung:</strong> Diễn đàn chuyên gia AI đã hoàn thành. Bây giờ, mỗi chuyên gia sẽ kích hoạt thẻ cam kết của mình để áp dụng những điều đã học vào thực tế.",
+        "x": 5, "y": 25, "w": 55, "h": 50, "fontSize": "22px", "color": "#ffffff", "align": "left", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.3)"
+      },
+      {
+        "id": "t3-s8-act-01-3",
+        "type": "visual",
+        "content": "specialist-id-badge",
+        "x": 63, "y": 30, "w": 32, "h": 45
+      }
+    ]
+  },
+  {
+    "id": "T3-S8-ACT-04",
+    "stage": "GĐ8 - VẬN HÀNH HỆ THỐNG",
+    "title": "Không gian thực hiện",
+    "type": "activity-workspace",
+    "bgStyle": "digital-workspace",
+    "elements": [
+      {
+        "id": "t3-s8-act-04-1",
+        "type": "heading",
+        "content": "NHIỆM VỤ: KÝ THẺ CAM KẾT",
+        "x": 5, "y": 5, "w": 90, "h": 8, "fontSize": "28px", "color": "#ffd633", "align": "center"
+      },
+      {
+        "id": "t3-s8-act-04-2",
+        "type": "box",
+        "content": "<div style='color: #00f3ff; font-size: 20px; font-weight: bold; margin-bottom: 10px;'>👉 ĐỀ BÀI:</div><p style='font-size: 16px; line-height: 1.4; color: #ffffff;'>Hãy đọc lại nội dung, tích vào các ô cam kết, ký tên và bấm nút xác nhận.</p><div style='background: rgba(255, 255, 255, 0.95); border: 2px solid #ffbd59; padding: 20px; margin-top: 15px; border-radius: 8px; color: #1a202c; box-shadow: 0 4px 15px rgba(255,189,89,0.3);'><div style='text-align: center; font-size: 24px; font-weight: bold; color: #e53e3e; margin-bottom: 15px; border-bottom: 2px dashed #cbd5e0; padding-bottom: 10px;'>THẺ CAM KẾT CHUYÊN GIA AI</div><div style='font-style: italic; font-size: 18px; margin-bottom: 15px;'>\"Tôi cam kết sử dụng đầy đủ 4 thành phần khi viết câu lệnh AI, sử dụng AI để hỗ trợ việc học:\"</div><div style='display: flex; flex-direction: column; gap: 10px; font-size: 18px;'><label style='cursor: pointer; display: flex; align-items: center; gap: 10px;'><input type='checkbox' style='width: 20px; height: 20px;'> Xác định rõ Vai trò.</label><label style='cursor: pointer; display: flex; align-items: center; gap: 10px;'><input type='checkbox' style='width: 20px; height: 20px;'> Nêu đúng Nhiệm vụ.</label><label style='cursor: pointer; display: flex; align-items: center; gap: 10px;'><input type='checkbox' style='width: 20px; height: 20px;'> Chỉ rõ Đối tượng.</label><label style='cursor: pointer; display: flex; align-items: center; gap: 10px;'><input type='checkbox' style='width: 20px; height: 20px;'> Mô tả cụ thể Yêu cầu.</label></div><div style='margin-top: 20px; display: flex; justify-content: space-between; align-items: center;'><input type='text' placeholder='Ký và ghi rõ họ tên...' style='border: 1px solid #a0aec0; border-radius: 4px; padding: 8px; width: 250px; font-size: 16px; outline: none; background: #edf2f7; color: #2d3748;'><button onclick='window.triggerConfetti()' style='background: #38a169; color: white; border: none; padding: 10px 20px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1);'>HOÀN THÀNH NHIỆM VỤ</button></div></div>",
+        "x": 10, "y": 15, "w": 65, "h": 70, "fontSize": "16px", "color": "#ffffff", "align": "left", "bg": "rgba(255,255,255,0.03)", "border": "1px solid rgba(255,255,255,0.1)"
+      },
+      {
+        "id": "t3-s8-act-04-3",
+        "type": "visual",
+        "content": "specialist-id-badge",
+        "x": 78, "y": 30, "w": 18, "h": 30
+      },
+      {
+        "id": "t3-s8-timer",
+        "type": "box",
+        "content": "<div style='text-align: center; font-size: 20px; color: #ffbd59; font-weight: bold;'>⏳ 05:00</div>",
+        "x": 78, "y": 70, "w": 18, "h": 10, "fontSize": "20px", "color": "#ffbd59", "align": "center", "bg": "rgba(0,0,0,0.5)", "border": "2px solid #ffbd59"
+      }
+    ]
+  },
+  {
+    "id": "T3-S8-ACT-06",
+    "stage": "GĐ8 - VẬN HÀNH HỆ THỐNG",
+    "title": "Chuyển tiếp",
+    "type": "activity-transition",
+    "bgStyle": "stage-bg",
+    "elements": [
+      {
+        "id": "t3-s8-a6-header",
+        "type": "subheading",
+        "content": "CHUYỂN TIẾP NHIỆM VỤ",
+        "x": 10, "y": 10, "w": 80, "h": 8, "fontSize": "24px", "color": "#8ab4f8", "align": "center"
+      },
+      {
+        "id": "t3-s8-a6-left",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Chúng ta vừa hoàn thành:</div><div style='font-size: 20px; color: #00f3ff; font-weight: bold; margin-top: 10px;'>👉 Kích hoạt thẻ cam kết và sẵn sàng áp dụng những điều đã học vào thực tế.</div>",
+        "x": 10, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(0, 243, 255, 0.05)", "border": "1px solid rgba(0, 243, 255, 0.2)"
+      },
+      {
+        "id": "t3-s8-a6-visual",
+        "type": "visual",
+        "content": "stage-transition-arrow",
+        "x": 51, "y": 38, "w": 10, "h": 15
+      },
+      {
+        "id": "t3-s8-a6-right",
+        "type": "box",
+        "content": "<div style='font-size: 16px; color: #a0aec0;'>Tổng kết:</div><div style='font-size: 20px; color: #ffd633; font-weight: bold; margin-top: 10px;'>👉 Chúc mừng các chuyên gia công nghệ đã hoàn thành nhiệm vụ!</div>",
+        "x": 64, "y": 25, "w": 38, "h": 40, "fontSize": "16px", "color": "#ffffff", "align": "center", "bg": "rgba(255, 214, 51, 0.05)", "border": "1px solid rgba(255, 214, 51, 0.2)"
+      }
+    ]
+  }

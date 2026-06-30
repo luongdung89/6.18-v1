@@ -1,0 +1,616 @@
+diff --git a/app.js b/app.js
+index 29cdeaf..19bd776 100644
+--- a/app.js
++++ b/app.js
+@@ -60,6 +60,14 @@ const SLIDE_DURATIONS = {
+   'S6-ACT-04': 480,  // 8 mins
+   'S7-ACT-04': 240,  // 4 mins
+   'S8-ACT-04': 180,  // 3 mins
++  'T2-S4-ACT-04': 600, // 10 mins
++  'T2-S5-ACT-04': 300, // 5 mins
++  'T2-S6-ACT-04': 600, // 10 mins
++  'T3-S1-ACT-04': 180, // 3 mins
++  'T3-S3-ACT-04': 300, // 5 mins
++  'T3-S4-ACT-04': 600, // 10 mins
++  'T3-S7-ACT-04': 240, // 4 mins
++  'T3-S8-ACT-04': 300, // 5 mins
+   'T2-S3-ACT-04-A': 180,  // 3 mins
+   'T2-S3-ACT-04-B': 180,  // 3 mins
+   'T2-S3-ACT-04-C': 180,  // 3 mins
+@@ -83,7 +91,7 @@ let s5SlotData = [null, null, null, null];
+ 
+ // Load slides from LocalStorage or fallback to INITIAL_SLIDES from slides_data.js
+ function initApp() {
+-  const CURRENT_VERSION = 'v47_ui_encoding';
++  const CURRENT_VERSION = 'v67_content';
+   const savedVersion = safeGetItem('novastars_slides_version');
+   const savedData = safeGetItem('novastars_slides');
+   let loadedSuccessfully = false;
+@@ -242,7 +250,7 @@ function renderCurrentSlide() {
+   canvas.innerHTML = '';
+ 
+   // Check if filtering for locked periods (Tiết 3)
+-  if (currentPeriodFilter === 't3') {
++  if (false) { // currentPeriodFilter === 't3'
+     const periodName = 'TIẾT 3';
+     viewport.className = 'slide-viewport';
+     canvas.innerHTML = `
+@@ -1060,9 +1068,13 @@ document.addEventListener('fullscreenchange', () => {
+ let currentPeriodFilter = 'all';
+ 
+ function getPeriodForIndex(idx) {
+-  // Slides 0 to 51 (first 52 slides) belong to Tiết 1, slides 52+ belong to Tiết 2
+-  return idx < 52 ? 't1' : 't2';
+-}
++    const slide = slides[idx];
++    if (!slide) return 't1';
++    const id = slide.id.toUpperCase();
++    if (id.startsWith('T3')) return 't3';
++    if (id.startsWith('T2')) return 't2';
++    return 't1';
++  }
+ 
+ function setPeriodFilter(period) {
+   currentPeriodFilter = period;
+@@ -1078,7 +1090,7 @@ function setPeriodFilter(period) {
+   filterSlides();
+   
+   // If selecting locked periods, trigger render directly to show locked screen
+-  if (period === 't3') {
++  if (false) { // period === 't3'
+     renderCurrentSlide();
+   } else {
+     // Return to the first slide of that period on selection if currently outside
+@@ -1472,402 +1484,6 @@ function getTechVisualSVG(assetName) {
+         <!-- Floating stacked tech index cards -->
+         <!-- Card 3 -->
+         <rect x="65" y="55" width="85" height="55" rx="4" fill="#040b17" stroke="var(--neon-pink)" stroke-width="1.5" />
+-        <!-- Card 2 -->
+-        <rect x="50" y="40" width="85" height="55" rx="4" fill="#030815" stroke="var(--neon-green)" stroke-width="1.5" />
+-        <!-- Card 1 -->
+-        <rect x="35" y="25" width="85" height="55" rx="4" fill="#020610" stroke="var(--neon-blue)" stroke-width="1.5" />
+-        <line x1="45" y1="40" x2="105" y2="40" stroke="rgba(0, 243, 255, 0.4)" stroke-width="1.5" />
+-        <line x1="45" y1="52" x2="90" y2="52" stroke="rgba(0, 243, 255, 0.4)" stroke-width="1.5" />
+-        <line x1="45" y1="64" x2="95" y2="64" stroke="rgba(0, 243, 255, 0.4)" stroke-width="1.5" />
+-        <line x1="45" y1="72" x2="80" y2="72" stroke="rgba(0, 243, 255, 0.4)" stroke-width="1.5" />
+-      `;
+-      break;
+-
+-    case 'process-sandbox-testing':
+-      innerSVG = `
+-        <!-- Lab Flask with floating spark nodes -->
+-        <path d="M90 30 L110 30 L110 55 L135 105 A 15 15 0 0 1 125 125 L75 125 A 15 15 0 0 1 65 105 L90 55 Z" 
+-              fill="none" stroke="var(--neon-blue)" stroke-width="2.5" stroke-linejoin="round" />
+-        <!-- Fluid level -->
+-        <path d="M72 110 L128 110 L123 120 L77 120 Z" fill="rgba(0, 243, 255, 0.25)" />
+-        <!-- Sparks -->
+-        <circle cx="100" cy="80" r="3" fill="var(--neon-green)" />
+-        <circle cx="115" cy="70" r="2.5" fill="var(--neon-pink)" />
+-        <circle cx="85" cy="90" r="2" fill="var(--neon-green)" />
+-        <circle cx="100" cy="18" r="4" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" />
+-      `;
+-      break;
+-
+-    case 'specialist-id-badge':
+-      innerSVG = `
+-        <!-- Glow background -->
+-        <defs>
+-          <radialGradient id="badgeGlow" cx="50%" cy="50%" r="50%">
+-            <stop offset="0%" stop-color="#00ffcc" stop-opacity="0.2"/>
+-            <stop offset="100%" stop-color="#00ffcc" stop-opacity="0"/>
+-          </radialGradient>
+-        </defs>
+-        <rect x="10" y="10" width="180" height="180" fill="url(#badgeGlow)" />
+-        
+-        <!-- Badge Card body -->
+-        <rect x="40" y="30" width="120" height="140" rx="8" fill="#03081a" stroke="var(--neon-green)" stroke-width="2.5" />
+-        
+-        <!-- Clip hole at top -->
+-        <rect x="90" y="18" width="20" height="8" rx="2" fill="#121826" stroke="var(--neon-blue)" stroke-width="1.5" />
+-        <line x1="100" y1="10" x2="100" y2="18" stroke="var(--neon-blue)" stroke-width="2" />
+-        
+-        <!-- Avatar outline -->
+-        <circle cx="100" cy="75" r="22" fill="#020615" stroke="var(--neon-blue)" stroke-width="2" />
+-        <!-- Head & shoulders -->
+-        <g transform="translate(100, 75)">
+-          <circle cx="0" cy="-4" r="7" fill="var(--neon-blue)" />
+-          <path d="M-13 14 C-13 5, 13 5, 13 14 Z" fill="var(--neon-blue)" />
+-        </g>
+-        
+-        <!-- ID Badge Header -->
+-        <rect x="50" y="115" width="100" height="18" rx="3" fill="rgba(0, 255, 204, 0.1)" stroke="rgba(0, 255, 204, 0.3)" stroke-width="1" />
+-        <text x="100" y="128" fill="var(--neon-green)" font-size="9" font-family="sans-serif" font-weight="bold" text-anchor="middle">CHUYÊN GIA AI</text>
+-        
+-        <!-- Info lines -->
+-        <line x1="60" y1="145" x2="140" y2="145" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2" />
+-        <line x1="75" y1="155" x2="125" y2="155" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2" />
+-      `;
+-      break;
+-
+-    case 'abcd-answer-cards':
+-      innerSVG = `
+-        <!-- Stack of 4 cards -->
+-        <!-- Card D (Blue) -->
+-        <g transform="translate(105, 100) rotate(10)">
+-          <rect x="-25" y="-35" width="50" height="70" rx="6" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+-          <text x="0" y="12" fill="var(--neon-blue)" font-size="28" font-family="sans-serif" font-weight="bold" text-anchor="middle">D</text>
+-        </g>
+-        
+-        <!-- Card C (Green) -->
+-        <g transform="translate(45, 100) rotate(-15)">
+-          <rect x="-25" y="-35" width="50" height="70" rx="6" fill="#03081a" stroke="var(--neon-green)" stroke-width="2" />
+-          <text x="0" y="12" fill="var(--neon-green)" font-size="28" font-family="sans-serif" font-weight="bold" text-anchor="middle">C</text>
+-        </g>
+-        
+-        <!-- Card B (Yellow) -->
+-        <g transform="translate(115, 55) rotate(-5)">
+-          <rect x="-25" y="-35" width="50" height="70" rx="6" fill="#03081a" stroke="var(--neon-orange)" stroke-width="2" />
+-          <text x="0" y="12" fill="var(--neon-orange)" font-size="28" font-family="sans-serif" font-weight="bold" text-anchor="middle">B</text>
+-        </g>
+-        
+-        <!-- Card A (Pink) -->
+-        <g transform="translate(55, 45) rotate(5)">
+-          <rect x="-25" y="-35" width="50" height="70" rx="6" fill="#03081a" stroke="var(--neon-pink)" stroke-width="2" />
+-          <text x="0" y="12" fill="var(--neon-pink)" font-size="28" font-family="sans-serif" font-weight="bold" text-anchor="middle">A</text>
+-        </g>
+-      `;
+-      break;
+-
+-    case 'computer-data-screen':
+-      innerSVG = `
+-        <!-- Glowing background -->
+-        <defs>
+-          <radialGradient id="screenGlow" cx="50%" cy="50%" r="50%">
+-            <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.15"/>
+-            <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+-          </radialGradient>
+-        </defs>
+-        <rect x="5" y="5" width="190" height="190" fill="url(#screenGlow)" />
+-        
+-        <!-- Monitor stand -->
+-        <path d="M80 145 L120 145 L110 170 L90 170 Z" fill="#0c1020" stroke="var(--neon-blue)" stroke-width="2" />
+-        <rect x="70" y="170" width="60" height="6" rx="2" fill="#070c18" stroke="var(--neon-blue)" stroke-width="2" />
+-        
+-        <!-- Monitor frame -->
+-        <rect x="20" y="35" width="160" height="110" rx="8" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2.5" />
+-        <rect x="25" y="40" width="150" height="90" rx="3" fill="#000000" />
+-        
+-        <!-- Screen Data illustration (Dashboard) -->
+-        <!-- Chart bars -->
+-        <rect x="35" y="95" width="15" height="25" fill="var(--neon-pink)" opacity="0.8" />
+-        <rect x="55" y="80" width="15" height="40" fill="var(--neon-green)" opacity="0.8" />
+-        <rect x="75" y="65" width="15" height="55" fill="var(--neon-blue)" opacity="0.8" />
+-        <rect x="95" y="85" width="15" height="35" fill="var(--neon-orange)" opacity="0.8" />
+-        
+-        <!-- Grid lines behind bars -->
+-        <line x1="30" y1="120" x2="170" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+-        <line x1="30" y1="100" x2="170" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+-        <line x1="30" y1="80" x2="170" y2="80" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+-        <line x1="30" y1="60" x2="170" y2="60" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+-        
+-        <!-- Code lines / metadata on the right -->
+-        <line x1="125" y1="60" x2="165" y2="60" stroke="var(--neon-blue)" stroke-width="2.5" />
+-        <line x1="125" y1="72" x2="155" y2="72" stroke="var(--neon-green)" stroke-width="2.5" />
+-        <line x1="125" y1="84" x2="160" y2="84" stroke="var(--neon-pink)" stroke-width="2.5" />
+-        <line x1="125" y1="96" x2="145" y2="96" stroke="var(--neon-orange)" stroke-width="2.5" />
+-        
+-        <!-- Status indicator dot -->
+-        <circle cx="32" cy="48" r="3" fill="var(--neon-green)" />
+-        <circle cx="42" cy="48" r="3" fill="var(--neon-blue)" />
+-        <circle cx="52" cy="48" r="3" fill="var(--neon-pink)" />
+-      `;
+-      break;
+-
+-    case 'treasure-boxes-digital':
+-      innerSVG = `
+-        <!-- Glowing background radial -->
+-        <defs>
+-          <radialGradient id="boxGlow" cx="50%" cy="50%" r="50%">
+-            <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.25"/>
+-            <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
+-          </radialGradient>
+-        </defs>
+-        <rect x="10" y="10" width="180" height="180" fill="url(#boxGlow)" />
+-        
+-        <!-- Left Chest: Math Box (📘 Hộp Toán học) -->
+-        <g transform="translate(15, 45)">
+-          <rect x="5" y="40" width="65" height="45" rx="4" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+-          <path d="M5 40 C5 22, 70 22, 70 40 Z" fill="#020615" stroke="var(--neon-blue)" stroke-width="2" />
+-          <rect x="33" y="36" width="9" height="12" rx="1.5" fill="#000" stroke="var(--neon-green)" stroke-width="1.5" />
+-          <text x="37" y="68" fill="var(--neon-green)" font-size="16" font-family="monospace" font-weight="bold" text-anchor="middle">f(x)</text>
+-          <circle cx="15" cy="20" r="2.5" fill="var(--neon-green)" />
+-          <circle cx="65" cy="15" r="1.5" fill="var(--neon-green)" />
+-        </g>
+-
+-        <!-- Right Chest: History Box (📜 Hộp Lịch sử) -->
+-        <g transform="translate(100, 45)">
+-          <rect x="5" y="40" width="65" height="45" rx="4" fill="#03081a" stroke="var(--neon-orange)" stroke-width="2" />
+-          <path d="M5 40 C5 22, 70 22, 70 40 Z" fill="#020615" stroke="var(--neon-orange)" stroke-width="2" />
+-          <rect x="33" y="36" width="9" height="12" rx="1.5" fill="#000" stroke="var(--neon-pink)" stroke-width="1.5" />
+-          <text x="37" y="68" fill="var(--neon-pink)" font-size="16" font-family="sans-serif" font-weight="bold" text-anchor="middle">1954</text>
+-          <circle cx="10" cy="15" r="2" fill="var(--neon-pink)" />
+-          <circle cx="60" cy="22" r="3" fill="var(--neon-pink)" />
+-        </g>
+-      `;
+-      break;
+-
+-    case 'ai-sandbox-simulator':
+-      innerSVG = `
+-        <!-- Simulated Sandbox Arena grid -->
+-        <polygon points="100,20 180,60 180,120 100,160 20,120 20,60" fill="none" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1.5" />
+-        <polygon points="100,35 160,65 160,110 100,140 40,110 40,65" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+-        <!-- Diagonal division lasers -->
+-        <line x1="100" y1="35" x2="100" y2="140" stroke="rgba(0, 255, 204, 0.3)" stroke-width="1" />
+-        <line x1="40" y1="87" x2="160" y2="87" stroke="rgba(0, 255, 204, 0.3)" stroke-width="1" />
+-        <!-- Floating simulated values -->
+-        <circle cx="100" cy="87" r="8" fill="#03081a" stroke="var(--neon-green)" stroke-width="2" />
+-        <line x1="130" y1="52" x2="165" y2="52" stroke="var(--neon-pink)" stroke-width="1.5" />
+-        <line x1="135" y1="57" x2="160" y2="57" stroke="var(--neon-pink)" stroke-width="1.5" />
+-      `;
+-      break;
+-
+-    case 'icon-testing-group':
+-      innerSVG = `
+-        <!-- Floating circular tech graph -->
+-        <circle cx="100" cy="75" r="55" fill="none" stroke="rgba(0,255,204,0.15)" stroke-width="1.5" />
+-        <!-- 3 user avatar nodes -->
+-        <circle cx="55" cy="50" r="10" fill="#03081a" stroke="var(--neon-blue)" stroke-width="1.5" />
+-        <circle cx="145" cy="50" r="10" fill="#03081a" stroke="var(--neon-blue)" stroke-width="1.5" />
+-        <circle cx="100" cy="115" r="10" fill="#03081a" stroke="var(--neon-blue)" stroke-width="1.5" />
+-        <!-- Glowing focal point -->
+-        <polygon points="100,55 115,80 85,80" fill="rgba(255,189,89,0.15)" stroke="var(--neon-orange)" stroke-width="1.5" />
+-        <!-- Connection lines -->
+-        <line x1="55" y1="60" x2="90" y2="115" stroke="var(--neon-green)" stroke-width="1" />
+-        <line x1="145" y1="60" x2="110" y2="115" stroke="var(--neon-green)" stroke-width="1" />
+-        <line x1="65" y1="50" x2="135" y2="50" stroke="var(--neon-green)" stroke-width="1" />
+-      `;
+-      break;
+-
+-    case 'personal-reflection-diary':
+-      innerSVG = `
+-        <!-- Hologram Book pages open -->
+-        <path d="M100 130 C120 120, 160 120, 180 130 L180 40 C160 30, 120 30, 100 40 C80 30, 40 30, 20 40 L20 130 C40 120, 80 120, 100 130 Z" 
+-              fill="none" stroke="var(--neon-blue)" stroke-width="2.5" />
+-        <line x1="100" y1="40" x2="100" y2="130" stroke="var(--neon-blue)" stroke-width="1.5" />
+-        <!-- Content lines left page -->
+-        <line x1="32" y1="55" x2="88" y2="55" stroke="rgba(0, 243, 255, 0.3)" stroke-width="1.5" />
+-        <line x1="32" y1="70" x2="80" y2="70" stroke="rgba(0, 243, 255, 0.3)" stroke-width="1.5" />
+-        <line x1="32" y1="85" x2="85" y2="85" stroke="rgba(0, 243, 255, 0.3)" stroke-width="1.5" />
+-        <!-- Content lines right page -->
+-        <line x1="112" y1="55" x2="168" y2="55" stroke="rgba(0, 243, 255, 0.3)" stroke-width="1.5" />
+-        <line x1="112" y1="70" x2="160" y2="70" stroke="rgba(0, 243, 255, 0.3)" stroke-width="1.5" />
+-        <line x1="112" y1="85" x2="155" y2="85" stroke="rgba(0, 243, 255, 0.3)" stroke-width="1.5" />
+-      `;
+-      break;
+-
+-    case 'digital-diary-illustration':
+-      innerSVG = `
+-        <!-- Floating tablet layout with stylus -->
+-        <rect x="40" y="25" width="120" height="95" rx="6" fill="#03081a" stroke="var(--neon-green)" stroke-width="2" />
+-        <rect x="48" y="33" width="104" height="65" rx="2" fill="#000" stroke="rgba(0,255,204,0.15)" stroke-width="1" />
+-        <!-- Stylus pen -->
+-        <line x1="135" y1="110" x2="165" y2="80" stroke="var(--neon-pink)" stroke-width="3" stroke-linecap="round" />
+-        <circle cx="165" cy="80" r="1.5" fill="var(--neon-pink)" />
+-        <!-- Glowing check marks on notebook -->
+-        <path d="M60 55 L65 60 L75 50" fill="none" stroke="var(--neon-green)" stroke-width="2" />
+-        <path d="M60 75 L65 80 L75 70" fill="none" stroke="var(--neon-green)" stroke-width="2" />
+-        <line x1="85" y1="55" x2="140" y2="55" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+-        <line x1="85" y1="75" x2="130" y2="75" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+-      `;
+-      break;
+-
+-    case 'icon-personal-notebook':
+-      innerSVG = `
+-        <!-- Vertical personal tablet mockup -->
+-        <rect x="55" y="20" width="90" height="115" rx="5" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+-        <circle cx="100" cy="126" r="3" fill="var(--neon-blue)" />
+-        <!-- Lines inside -->
+-        <line x1="68" y1="40" x2="132" y2="40" stroke="rgba(0, 243, 255, 0.2)" stroke-width="2" />
+-        <line x1="68" y1="55" x2="120" y2="55" stroke="rgba(0, 243, 255, 0.2)" stroke-width="2" />
+-        <line x1="68" y1="70" x2="132" y2="70" stroke="rgba(0, 243, 255, 0.2)" stroke-width="2" />
+-        <line x1="68" y1="85" x2="110" y2="85" stroke="rgba(0, 243, 255, 0.2)" stroke-width="2" />
+-        <!-- Self check list items -->
+-        <rect x="68" y="100" width="6" height="6" fill="var(--neon-green)" />
+-        <rect x="80" y="100" width="6" height="6" fill="var(--neon-green)" />
+-        <rect x="92" y="100" width="6" height="6" fill="var(--neon-green)" />
+-      `;
+-      break;
+-
+-    case 'system-operation-check':
+-      innerSVG = `
+-        <!-- Floating circular dials -->
+-        <circle cx="100" cy="75" r="55" fill="none" stroke="var(--neon-blue)" stroke-width="2" stroke-dasharray="15 5 10 5" />
+-        <circle cx="100" cy="75" r="42" fill="none" stroke="var(--neon-green)" stroke-width="1.5" stroke-dasharray="4 4" />
+-        <!-- Rotating teeth effect dial -->
+-        <circle cx="100" cy="75" r="28" fill="none" stroke="var(--neon-pink)" stroke-width="3" stroke-dasharray="35 5" />
+-        <!-- Core metrics -->
+-        <circle cx="100" cy="75" r="14" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+-        <polygon points="100,70 104,78 96,78" fill="var(--neon-green)" />
+-      `;
+-      break;
+-
+-    case 'action-checklist-board':
+-      innerSVG = `
+-        <!-- Tech clipboard card -->
+-        <rect x="50" y="25" width="100" height="105" rx="4" fill="#03081a" stroke="var(--neon-green)" stroke-width="2" />
+-        <!-- Clipboard metal clamp -->
+-        <rect x="85" y="18" width="30" height="12" rx="2" fill="var(--neon-green)" />
+-        <!-- Checks with items lines -->
+-        <path d="M62 48 L66 52 L74 44" fill="none" stroke="var(--neon-green)" stroke-width="2" />
+-        <line x1="82" y1="48" x2="135" y2="48" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
+-        
+-        <path d="M62 73 L66 77 L74 69" fill="none" stroke="var(--neon-green)" stroke-width="2" />
+-        <line x1="82" y1="73" x2="135" y2="73" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
+-        
+-        <path d="M62 98 L66 102 L74 94" fill="none" stroke="var(--neon-green)" stroke-width="2" />
+-        <line x1="82" y1="98" x2="135" y2="98" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
+-      `;
+-      break;
+-
+-    case 'four-gears-error':
+-      innerSVG = `
+-        <!-- Gears connections -->
+-        <circle cx="60" cy="50" r="18" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+-        <circle cx="60" cy="50" r="4" fill="var(--neon-blue)" />
+-        <circle cx="100" cy="50" r="18" fill="none" stroke="var(--neon-green)" stroke-width="2" />
+-        <circle cx="100" cy="50" r="4" fill="var(--neon-green)" />
+-        <circle cx="140" cy="50" r="18" fill="none" stroke="var(--neon-yellow)" stroke-width="2" />
+-        <circle cx="140" cy="50" r="4" fill="var(--neon-yellow)" />
+-        
+-        <!-- Error gear at bottom -->
+-        <circle cx="100" cy="90" r="18" fill="none" stroke="var(--neon-red)" stroke-width="2.5" />
+-        <circle cx="100" cy="90" r="4" fill="var(--neon-red)" />
+-        <line x1="88" y1="78" x2="112" y2="102" stroke="var(--neon-red)" stroke-width="2" />
+-        <path d="M100 82 L100 88" stroke="var(--neon-red)" stroke-width="2" />
+-        <circle cx="100" cy="93" r="1" fill="var(--neon-red)" />
+-        
+-        <!-- Connecting lines showing transmission flow -->
+-        <line x1="78" y1="50" x2="82" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+-        <line x1="118" y1="50" x2="122" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+-        <line x1="100" y1="68" x2="100" y2="72" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+-        
+-        <!-- Gear teeth simulation -->
+-        <line x1="60" y1="28" x2="60" y2="32" stroke="var(--neon-blue)" stroke-width="2" />
+-        <line x1="60" y1="68" x2="60" y2="72" stroke="var(--neon-blue)" stroke-width="2" />
+-        <line x1="38" y1="50" x2="42" y2="50" stroke="var(--neon-blue)" stroke-width="2" />
+-        <line x1="78" y1="50" x2="82" y2="50" stroke="var(--neon-blue)" stroke-width="2" />
+-        
+-        <line x1="100" y1="28" x2="100" y2="32" stroke="var(--neon-green)" stroke-width="2" />
+-        <line x1="100" y1="68" x2="100" y2="72" stroke="var(--neon-green)" stroke-width="2" />
+-        <line x1="78" y1="50" x2="82" y2="50" stroke="var(--neon-green)" stroke-width="2" />
+-        <line x1="118" y1="50" x2="122" y2="50" stroke="var(--neon-green)" stroke-width="2" />
+-        
+-        <line x1="140" y1="28" x2="140" y2="32" stroke="var(--neon-yellow)" stroke-width="2" />
+-        <line x1="140" y1="68" x2="140" y2="72" stroke="var(--neon-yellow)" stroke-width="2" />
+-        <line x1="118" y1="50" x2="122" y2="50" stroke="var(--neon-yellow)" stroke-width="2" />
+-        <line x1="158" y1="50" x2="162" y2="50" stroke="var(--neon-yellow)" stroke-width="2" />
+-        
+-        <line x1="100" y1="68" x2="100" y2="72" stroke="var(--neon-red)" stroke-width="2" />
+-        <line x1="100" y1="108" x2="100" y2="112" stroke="var(--neon-red)" stroke-width="2" />
+-        <line x1="78" y1="90" x2="82" y2="90" stroke="var(--neon-red)" stroke-width="2" />
+-        <line x1="118" y1="90" x2="122" y2="90" stroke="var(--neon-red)" stroke-width="2" />
+-        
+-        <text x="100" y="132" fill="var(--neon-red)" font-size="9" text-anchor="middle" font-family="monospace">LỖI HỆ THỐNG: Bánh răng hỏng</text>
+-      `;
+-      break;
+-
+-    case 'security-lock-screen':
+-      innerSVG = `
+-        <line x1="30" y1="40" x2="170" y2="40" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
+-        <line x1="30" y1="70" x2="170" y2="70" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
+-        <line x1="30" y1="100" x2="170" y2="100" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
+-        <line x1="70" y1="20" x2="70" y2="120" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
+-        <line x1="130" y1="20" x2="130" y2="120" stroke="rgba(0, 243, 255, 0.15)" stroke-width="1" />
+-        
+-        <line x1="30" y1="55" x2="170" y2="55" stroke="var(--neon-blue)" stroke-width="2" opacity="0.8" />
+-        <circle cx="100" cy="70" r="45" fill="none" stroke="rgba(0, 243, 255, 0.2)" stroke-width="2" stroke-dasharray="10 10" />
+-        
+-        <rect x="85" y="65" width="30" height="24" rx="3" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+-        <path d="M90 65 L90 50 C90 40, 110 40, 110 50 L110 65" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+-        <circle cx="100" cy="75" r="3" fill="var(--neon-blue)" />
+-        <polygon points="99,75 101,75 102,83 98,83" fill="var(--neon-blue)" />
+-        
+-        <text x="100" y="112" fill="var(--neon-blue)" font-size="10" text-anchor="middle" font-family="monospace" font-weight="bold">HỆ THỐNG ĐÃ KHÓA</text>
+-        <rect x="70" y="122" width="12" height="12" rx="2" fill="none" stroke="var(--neon-blue)" stroke-width="1.5" />
+-        <rect x="90" y="122" width="12" height="12" rx="2" fill="none" stroke="var(--neon-blue)" stroke-width="1.5" />
+-        <rect x="110" y="122" width="12" height="12" rx="2" fill="none" stroke="var(--neon-blue)" stroke-width="1.5" />
+-        <rect x="130" y="122" width="12" height="12" rx="2" fill="none" stroke="var(--neon-blue)" stroke-width="1.5" />
+-      `;
+-      break;
+-
+-    case 'debate-four-badges':
+-      innerSVG = `
+-        <path d="M100 35 L125 45 L125 75 C125 95, 100 110, 100 110 C100 110, 75 95, 75 75 L75 45 Z" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2.5" />
+-        <path d="M95 50 L108 65 L95 72 L105 92" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+-        
+-        <circle cx="48" cy="40" r="22" fill="#03081a" stroke="#ff66b2" stroke-width="2" />
+-        <text x="48" y="43" fill="#ff66b2" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">VAI TRÒ</text>
+-        
+-        <circle cx="152" cy="40" r="22" fill="#03081a" stroke="#ffd633" stroke-width="2" />
+-        <text x="152" y="43" fill="#ffd633" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">NHIỆM VỤ</text>
+-        
+-        <circle cx="48" cy="100" r="22" fill="#03081a" stroke="#2eb82e" stroke-width="2" />
+-        <text x="48" y="103" fill="#2eb82e" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">ĐỐI TƯỢNG</text>
+-        
+-        <circle cx="152" cy="100" r="22" fill="#03081a" stroke="#00f3ff" stroke-width="2" />
+-        <text x="152" y="103" fill="#00f3ff" font-size="8" text-anchor="middle" font-family="sans-serif" font-weight="bold">YÊU CẦU</text>
+-        
+-        <line x1="75" y1="55" x2="70" y2="48" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3" />
+-        <line x1="125" y1="55" x2="130" y2="48" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3" />
+-        <line x1="75" y1="90" x2="70" y2="95" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3" />
+-        <line x1="125" y1="90" x2="130" y2="95" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3" />
+-      `;
+-      break;
+-
+-    case 'electric-clash-shield':
+-      innerSVG = `
+-        <path d="M20 70 L50 65 L40 85 L75 80" fill="none" stroke="var(--neon-blue)" stroke-width="3" />
+-        <circle cx="20" cy="40" r="16" fill="#03081a" stroke="var(--neon-blue)" stroke-width="2" />
+-        <text x="20" y="46" fill="var(--neon-blue)" font-size="18" text-anchor="middle" font-family="sans-serif" font-weight="bold">?</text>
+-        
+-        <path d="M180 70 L150 65 L160 85 L125 80" fill="none" stroke="var(--neon-green)" stroke-width="3" />
+-        <circle cx="180" cy="40" r="16" fill="#03081a" stroke="var(--neon-green)" stroke-width="2" />
+-        <path d="M174 34 L180 31 L186 34 L186 42 C186 47, 180 50, 180 50 C180 50, 174 47, 174 42 Z" fill="none" stroke="var(--neon-green)" stroke-width="1.5" />
+-        
+-        <circle cx="100" cy="80" r="28" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
+-        <polygon points="100,68 103,77 112,77 105,82 107,91 100,85 93,91 95,82 88,77 97,77" fill="var(--neon-yellow)" />
+-        
+-        <line x1="100" y1="80" x2="85" y2="65" stroke="var(--neon-yellow)" stroke-width="2" />
+-        <line x1="100" y1="80" x2="115" y2="65" stroke="var(--neon-yellow)" stroke-width="2" />
+-        <line x1="100" y1="80" x2="80" y2="85" stroke="var(--neon-yellow)" stroke-width="2" />
+-        <line x1="100" y1="80" x2="120" y2="85" stroke="var(--neon-yellow)" stroke-width="2" />
+-      `;
+-      break;
+ 
+     case 'project-folder-compressed':
+       innerSVG = `
+@@ -1907,6 +1523,63 @@ function getTechVisualSVG(assetName) {
+       `;
+       break;
+ 
++      case 'commitment-stamp':
++        innerSVG = `
++          <!-- Stamp outline -->
++          <circle cx="100" cy="100" r="50" fill="none" stroke="var(--neon-green)" stroke-width="4" stroke-dasharray="10 5" />
++          <circle cx="100" cy="100" r="40" fill="rgba(46, 184, 46, 0.2)" stroke="var(--neon-green)" stroke-width="2" />
++          <!-- Star icon -->
++          <path d="M100 70 L108 85 L125 85 L112 95 L116 110 L100 102 L84 110 L88 95 L75 85 L92 85 Z" fill="var(--neon-yellow)" />
++          <!-- Text Cam kết -->
++          <text x="100" y="125" font-family="Arial" font-size="12" font-weight="bold" fill="var(--neon-green)" text-anchor="middle">CAM KẾT</text>
++        `;
++        break;
++  
++      case 'fingerprint-scan':
++        innerSVG = `
++          <!-- Scanning beam -->
++          <line x1="50" y1="50" x2="150" y2="50" stroke="var(--neon-blue)" stroke-width="3">
++            <animate attributeName="y1" values="50;150;50" dur="2s" repeatCount="indefinite" />
++            <animate attributeName="y2" values="50;150;50" dur="2s" repeatCount="indefinite" />
++          </line>
++          <!-- Fingerprint outline -->
++          <path d="M70 120 C 70 70, 130 70, 130 120 M80 120 C 80 85, 120 85, 120 120 M90 120 C 90 100, 110 100, 110 120" fill="none" stroke="var(--neon-green)" stroke-width="4" stroke-linecap="round" />
++          <path d="M100 120 C 100 110, 100 110, 100 110" fill="none" stroke="var(--neon-green)" stroke-width="4" stroke-linecap="round" />
++        `;
++        break;
++  
++      case 'system-gears':
++        innerSVG = `
++          <!-- Gear 1 -->
++          <g class="spin-slow" style="transform-origin: 80px 80px;">
++            <circle cx="80" cy="80" r="25" fill="none" stroke="var(--neon-orange)" stroke-width="4" />
++            <path d="M80 45 L80 55 M80 105 L80 115 M45 80 L55 80 M105 80 L115 80 M55 55 L62 62 M98 98 L105 105 M105 55 L98 62 M62 98 L55 105" stroke="var(--neon-orange)" stroke-width="4" />
++          </g>
++          <!-- Gear 2 -->
++          <g class="spin-slow" style="transform-origin: 125px 115px; animation-direction: reverse; animation-duration: 8s;">
++            <circle cx="125" cy="115" r="15" fill="none" stroke="var(--neon-blue)" stroke-width="3" />
++            <path d="M125 90 L125 100 M125 130 L125 140 M100 115 L110 115 M140 115 L150 115 M107 97 L114 104 M136 126 L143 133 M143 97 L136 104 M114 126 L107 133" stroke="var(--neon-blue)" stroke-width="3" />
++          </g>
++        `;
++        break;
++  
++      case 'student-presentation-board':
++        innerSVG = `
++          <!-- Presentation Board -->
++          <rect x="40" y="40" width="120" height="70" rx="2" fill="rgba(255, 255, 255, 0.05)" stroke="var(--neon-blue)" stroke-width="2" />
++          <line x1="60" y1="110" x2="50" y2="150" stroke="var(--neon-blue)" stroke-width="2" />
++          <line x1="140" y1="110" x2="150" y2="150" stroke="var(--neon-blue)" stroke-width="2" />
++          <!-- Charts on board -->
++          <rect x="50" y="55" width="20" height="40" fill="var(--neon-green)" opacity="0.7" />
++          <rect x="75" y="70" width="20" height="25" fill="var(--neon-orange)" opacity="0.7" />
++          <rect x="100" y="45" width="20" height="50" fill="var(--neon-pink)" opacity="0.7" />
++          <!-- Student figure -->
++          <circle cx="145" cy="110" r="10" fill="var(--neon-yellow)" />
++          <line x1="145" y1="120" x2="145" y2="150" stroke="var(--neon-yellow)" stroke-width="4" />
++          <line x1="145" y1="125" x2="125" y2="115" stroke="var(--neon-yellow)" stroke-width="3" />
++        `;
++        break;
++
+     default:
+       innerSVG = `
+         <rect x="10" y="10" width="180" height="130" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+@@ -2432,3 +2105,85 @@ function jumpToPagePrompt() {
+ // STARTUP TRIGGER
+ // ==========================================================================
+ window.onload = initApp;
++
++
++// --- NEW TIẾT 3 LOGIC ---
++window.allowDropT3 = function(ev) {
++  ev.preventDefault();
++}
++
++window.dragT3 = function(ev) {
++  ev.dataTransfer.setData("text", ev.target.dataset.val);
++  ev.dataTransfer.setData("sourceId", ev.target.id);
++}
++
++window.dropT3 = function(ev) {
++  ev.preventDefault();
++  var data = ev.dataTransfer.getData("text");
++  var sourceId = ev.dataTransfer.getData("sourceId");
++  
++  if (ev.target.classList.contains('t3-dropzone')) {
++      ev.target.innerText = data;
++      ev.target.style.background = 'rgba(255,255,255,0.2)';
++      ev.target.style.color = '#fff';
++      ev.target.style.fontWeight = 'bold';
++  }
++}
++
++window.checkT3DragAnswers = function() {
++    let correct = 0;
++    for (let i = 1; i <= 4; i++) {
++        let dropzone = document.getElementById('t3-drop-' + i);
++        if (dropzone && dropzone.innerText.trim() === dropzone.dataset.correct) {
++            correct++;
++            dropzone.style.border = '2px solid var(--neon-green)';
++        } else if (dropzone) {
++            dropzone.style.border = '2px dashed var(--neon-red)';
++        }
++    }
++    if(correct === 4) alert('Chính xác tuyệt đối! Cả 4 đáp án đều đúng.');
++    else alert(`Bạn đã trả lời đúng ${correct}/4 câu. Hãy thử lại những câu sai nhé!`);
++}
++
++window.triggerCommitPopup = function() {
++    if (window.confetti) {
++        confetti({ particleCount: 300, spread: 160, origin: { y: 0.6 } });
++    }
++    
++    const overlay = document.createElement('div');
++    overlay.style.position = 'fixed';
++    overlay.style.top = '0'; overlay.style.left = '0';
++    overlay.style.width = '100vw'; overlay.style.height = '100vh';
++    overlay.style.backgroundColor = 'rgba(0,0,0,0.85)';
++    overlay.style.zIndex = '9999';
++    overlay.style.display = 'flex';
++    overlay.style.justifyContent = 'center';
++    overlay.style.alignItems = 'center';
++    overlay.id = 'commit-popup-overlay';
++    
++    const popup = document.createElement('div');
++    popup.style.background = 'linear-gradient(135deg, #1a202c, #2d3748)';
++    popup.style.padding = '40px 60px';
++    popup.style.borderRadius = '20px';
++    popup.style.border = '4px solid #ffbd59';
++    popup.style.boxShadow = '0 0 40px rgba(255,189,89,0.5)';
++    popup.style.textAlign = 'center';
++    popup.style.color = '#fff';
++    popup.style.animation = 'popin 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
++    
++    popup.innerHTML = `
++        <h1 style="color: #00f3ff; font-size: 48px; margin-bottom: 20px; text-shadow: 0 0 10px rgba(0,243,255,0.5);">🎉 CHÚC MỪNG! 🎉</h1>
++        <p style="font-size: 24px; line-height: 1.5; color: #e2e8f0;">Bạn đã chính thức hoàn thành nhiệm vụ và<br>trở thành một <strong>CHUYÊN GIA AI</strong> xuất sắc!</p>
++        <button onclick="document.body.removeChild(document.getElementById('commit-popup-overlay'))" style="margin-top: 30px; background: #ffbd59; color: #1a202c; border: none; padding: 15px 40px; font-size: 20px; font-weight: bold; border-radius: 30px; cursor: pointer; transition: transform 0.2s;">Hoàn tất</button>
++    `;
++    
++    if (!document.getElementById('popin-style')) {
++        const style = document.createElement('style');
++        style.id = 'popin-style';
++        style.innerHTML = `@keyframes popin { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }`;
++        document.head.appendChild(style);
++    }
++    
++    overlay.appendChild(popup);
++    document.body.appendChild(overlay);
++}

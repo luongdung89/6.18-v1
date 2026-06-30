@@ -1,0 +1,222 @@
+﻿<USER_REQUEST>
+PRE-LESSON
+P0-01 Welcome Screen
+•	Tên bài học: Bài 6.18: Sử dụng AI hiệu quả 
+•	Role: Chuyên gia công nghệ
+•	Tiết học: Tiết 2: Phòng chiến lược
+•	Mục tiêu bài học
+	Hiểu vì sao cả 4 thành phần của câu lệnh AI đều quan trọng.
+	Nhận biết điều gì xảy ra khi thiếu một trong các thành phần đó.
+•	Visual Theme: Phòng điều khiển công nghệ hiện đại với các luồng dữ liệu và mạng lưới AI đang hoạt động trên màn hình.
+P0-02 Big Question
+•	Big Question: Tại sao không thể thiếu bất kỳ thành phần nào trong câu lệnh AI 4 bước? 
+•	Visual: Một cỗ máy gồm 4 bánh răng liên kết với nhau. Một bánh răng bị hỏng khiến toàn bộ hệ thống báo lỗi.
+P0-03 Role Introduction
+•	Tên Role: Chuyên gia công nghệ
+•	Vai trò của học sinh: Thành viên của biệt đội chuyên gia phụ trách phân tích và xây dựng, phát triển hệ thống AI. 
+•	Nhiệm vụ của Role: Sàng lọc chứng cứ lỗi, tìm nguyên nhân, viết phương án và đóng gói hồ sơ tranh biện. 
+•	Visual Theme: thẻ thông tin định danh chuyên gia công nghệ (ID)
+==================================================
+STAGE & ACTIVITY FLOW
+STAGE-01
+•	Giai đoạn số: GĐ1 
+•	Tên giai đoạn: Mở khóa nhiệm vụ (Situation) 
+•	Visual Theme: Hệ thống mã khoá 
+ACT-01 Activity Introduction
+•	Tên hoạt động: Tái khởi động Hệ thống 
+•	Visual: Màn hình quét bảo mật đang hoạt động. Ở giữa là một ổ khóa số cùng dòng thông báo nhấp nháy:
+"Hệ thống đang khóa. Cần nhập đúng mật mã để tiếp tục."
+ACT-02 Preparation
+•	Dụng cụ: Giấy, bút. 
+•	Hình thức tổ chức: Cá nhân. 
+ACT-03 How To
+•	Bước 1: Quan sát nội dung nhiệm vụ trên màn hình
+•	Bước 2: Giơ tay trả lời nhanh câu hỏi để nhắc lại cấu trúc câu lệnh AI 4 thành phần đã học. 
+ACT-04 Activity Workspace
+•	Đề bài: Hệ thống Phòng chiến lược AI gửi thông báo bảo mật: "Chào mừng các chuyên gia trở lại. Để mở khóa hệ thống, hãy nhập đúng dãy mật mã là 4 thành phần của thuật toán ra lệnh cho AI." 
+Hãy trả lời: "Bốn thành phần của một câu lệnh AI đầy đủ là gì?
+•	Sản phẩm cần hoàn thành: Câu trả lời mở khóa chính xác phát biểu trước lớp. 
+•	Thời gian: 3 phút 
+ACT-05 Report & Debrief
+•	Kết quả: Dãy mật mã thuật toán 4 thành phần được kích hoạt chính xác: 
+Câu lệnh = AI là ai? +  Làm gì? + Cho ai? +  Kết quả thế nào?
+•	Thông điệp chính: Muốn AI hỗ trợ hiệu quả, cần xây dựng câu lệnh đầy đủ với cả 4 thành phần.
+ACT-06 Transition
+•	Chúng ta vừa khám phá: Mở khóa thành công hệ thống bằng cấu trúc câu lệnh AI 4 thành phần.
+•	Câu hỏi tiếp theo: Thách thức nào đang chờ đợi các biệt đội chuyên gia ở phía trước? 
+STAGE-02
+•	Giai đoạn số: GĐ2 
+•	Tên giai đoạn: Nhận thách thức AI
+•	Visual Theme: Trung tâm điều khiển chiến lược AI
+ACT-01 Activity Introduction
+•	Tên hoạt động: Đội hình tranh biện 
+•	Nội dung: Trung tâm điều khiển AI vừa nhận được một đề xuất gây tranh cãi:
+"Một số thành phần trong câu lệnh AI có thể không cần thiết và nên được loại bỏ để tiết kiệm thời gian."
+Nhiệm vụ của các đội chuyên gia là kiểm tra đề xuất này và bảo vệ thành phần mà đội mình phụ trách.
+•	Visual: Màn hình trung tâm hiện cảnh báo:
+Bên dưới là 4 huy hiệu chuyên gia đang sáng lên tương ứng 4 đội: 
+Đội Vai trò (AI là ai?)
+Đội Hành động (Làm gì?)
+Đội Đối tượng (Cho ai?)
+Đội Định dạng kết quả (Kết quả thế nào?)
+STAGE-03
+•	Giai đoạn số: GĐ3 
+•	Tên giai đoạn: Thu thập bằng chứng 
+•	Visual: Tập tài liệu hồ sơ 
+ACT-01 Activity Introduction
+•	Tên hoạt động: BẰNG CHỨNG THÉP
+•	Visual: Một kho dữ liệu đang phát cảnh báo. Trên màn hình xuất hiện các hồ sơ hội thoại AI được đánh dấu "Cần kiểm tra".
+ACT-02 Preparation
+•	Dụng cụ: Phiếu dữ liệu bằng chứng nhận từ giáo viên.
+•	Hình thức tổ chức: Nhóm 4. 
+ACT-03 How To
+•	Bước 1: Đọc các hồ sơ hội thoại AI do giáo viên cung cấp.
+•	Bước 2: Phân tích xem lỗi xuất hiện ở đâu. 
+•	Bước 3: Tìm và đánh dấu bằng chứng liên quan trực tiếp đến thành phần mà nhóm mình phụ trách. 
+ACT-04 Activity Workspace
+•	Đề bài: Đọc 4 hồ sơ dữ liệu lỗi dưới đây và tìm 1 hồ sơ bằng chứng giúp chứng minh thành phần của nhóm mình là cần thiết.
+o	Dữ liệu lỗi 1: Lập kế hoạch tập luyện chạy bộ trong 1 tuần cho người mới bắt đầu dưới dạng bảng.
+o	Dữ liệu lỗi 2: Hãy đóng vai hướng dẫn viên du lịch. Hãy giới thiệu cho du khách lần đầu đến Hà Nội. Trình bày dưới dạng 5 gạch đầu dòng.
+o	Dữ liệu lỗi 3: Hãy đóng vai đầu bếp, hướng dẫn cách làm bánh mì nướng bơ tỏi. Trình bày theo từng bước.
+o	Dữ liệu lỗi 4: Hãy đóng vai chuyên gia môi trường, giải thích lợi ích của việc trồng cây xanh cho học sinh lớp 6.
+•	Sản phẩm cần hoàn thành: Phiếu dữ liệu bằng chứng được sàng lọc 
+•	Thời gian: 7 phút 
+ACT-05 Report & Debrief
+•	Kết quả: 
+o	Dữ liệu lỗi 1: Thiếu "AI là ai" 
+o	Dữ liệu lỗi 2: Thiếu "Làm gì" 
+o	Dữ liệu lỗi 3: Thiếu "Cho ai" 
+o	Dữ liệu lỗi 4: Thiếu "Kết quả thế nào" 
+ACT-06 Transition
+•	Chúng ta vừa khám phá: Những bằng chứng cho thấy điều gì xảy ra khi câu lệnh AI thiếu thông tin quan trọng.
+•	Câu hỏi tiếp theo: Làm thế nào để biến các bằng chứng này thành những lập luận thuyết phục để bảo vệ thành phần của đội mình? 
+STAGE-04
+•	Giai đoạn số: GĐ4 
+•	Tên giai đoạn: Xây dựng lập luận
+•	Visual Theme: Trung tâm phân tích chiến lược AI
+ACT-01 Activity Introduction
+•	Tên hoạt động: Thiết lập sơ đồ chiến lược 
+•	Visual: Sơ đồ gồm 3 khối liên kết với nhau: Luận điểm-Lí do – Bằng chứng
+ACT-02 Preparation
+•	Dụng cụ: Sơ đồ cấu trúc lập luận ARE nhận từ giáo viên, bút. 
+•	Hình thức tổ chức: 4 Nhóm chuyên gia. 
+ACT-03 How To
+•	Bước 1: Thảo luận nhóm xác định vì sao thành phần của nhóm mình là cần thiết trong câu lệnh AI.
+•	Bước 2: Chọn những bằng chứng phù hợp đã thu thập ở nhiệm vụ trước.
+•	Bước 4: Hoàn thiện sơ đồ chiến lược của nhóm. 
+ACT-04 Activity Workspace
+•	Đề bài: Hoàn thiện sơ đồ lập luận chiến lược bảo vệ thành phần mà nhóm mình phụ trách 
+o	Luận điểm
+Thành phần __________ là một phần quan trọng và không thể thiếu trong câu lệnh AI.
+o	Lý do
+Giải thích vì sao AI cần thành phần này để hiểu đúng yêu cầu và tạo ra kết quả phù hợp.
+o	Bằng chứng
+Sử dụng một hoặc nhiều hồ sơ sự cố ở GĐ3 để chứng minh điều gì xảy ra khi thành phần này bị thiếu.
+•	Sản phẩm cần hoàn thành: Sơ đồ lập luận logic hoàn chỉnh của nhóm
+•	Thời gian: 8 phút 
+ACT-06 Transition
+•	Chúng ta vừa hoàn thành: Xây dựng bộ lập luận bảo vệ thành phần của đội mình.
+•	Câu hỏi tiếp theo: Liệu các lập luận này có đủ sức thuyết phục trước những câu hỏi phản biện từ các đội khác?
+STAGE-05 
+•	Giai đoạn số: GĐ5 
+•	Tên giai đoạn: Dự đoán phản biện
+•	Visual Theme: Dashboard phòng chiến lược 
+ACT-01 Activity Introduction
+•	Tên hoạt động: Hỏi xoáy - Đáp xoay 
+•	Visual: Đồ họa hai tia sét năng lượng điện tử va chạm vào nhau, một bên mang biểu tượng dấu chấm hỏi (Tấn công), một bên mang biểu tượng chiếc khiên công nghệ (Phòng thủ). 
+ACT-02 Preparation
+•	Dụng cụ học tập: Giấy, bút. 
+•	Hình thức tổ chức: 4 Nhóm chuyên gia
+ACT-03 How To
+•	Bước 1: Thảo luận dự đoán các câu hỏi các nhóm khác có thể đặt ra.
+•	Bước 2: Cùng xây dựng câu trả lời phản biện cho câu hỏi dự đoán.
+ACT-04 Activity Workspace
+Đề bài: Hoàn thành:
+Nếu chúng ta nói:
+_____________
+Đội khác sẽ phản đối điều gì?
+_____________
+Chúng ta trả lời thế nào?
+_____________
+•	Sản phẩm cần hoàn thành: Phiếu câu hỏi dự đoán và trả lời phản biện bảo vệ lập trường của nhóm. 
+•	Thời gian: 5 phút 
+ACT-06 Transition
+•	Chúng ta vừa khám phá: Xử lý các câu hỏi phản biện và củng cố lập luận của đội.
+•	Câu hỏi tiếp theo: Làm thế nào để tổng hợp toàn bộ bằng chứng và lập luận thành một hồ sơ hoàn chỉnh?
+STAGE-06
+•	Giai đoạn số: GĐ6 
+•	Tên giai đoạn: Hoàn thiện hồ sơ tranh biện (Action) 
+•	Visual Theme: Dashboard phòng chiến lược 
+ACT-01 Activity Introduction
+•	Tên hoạt động: Đóng gói hồ sơ chuyên gia
+•	Visual: Biểu tượng một tập tài liệu hồ sơ dự án số hóa (Project Folder Icon) đang được nén và đóng dấu xuất bản "HOÀN THÀNH" phát sáng. 
+ACT-02 Preparation
+•	Dụng cụ học tập: Giấy A4, bút màu trang trí. 
+•	Hình thức tổ chức: 4 Nhóm chuyên gia. 
+ACT-03 How To
+•	Bước 1: Thu thập các sản phẩm đã hoàn thành từ các nhiệm vụ trước
+•	Bước 2: Thiết kế "Hồ sơ chiến lược bảo vệ thành phần câu lệnh AI".
+•	Bước 3: Hoàn thành và trưng bày sản phẩm tại khu vực nhóm.
+ACT-04 Activity Workspace
+•	Đề bài: Thiết kế một Poster hồ sơ chuyên gia trên giấy A0 bao gồm:
+Tên thành phần nhóm phụ trách.
+Luận điểm chính
+Luận điểm phụ
+Ví dụ (bằng chứng)
+Câu trả lời phản biện
+•	Sản phẩm cần hoàn thành: Hồ sơ lập luận chiến lược hoàn chỉnh
+•	Thời gian: 8 phút 
+ACT-06 Transition
+•	Chúng ta vừa khám phá: Bộ hồ sơ chuyên gia bảo vệ cấu trúc câu lệnh AI. 
+•	Câu hỏi tiếp theo: Sau hành trình phân tích và bảo vệ từng thành phần, các chuyên gia đã rút ra bài học gì về cách sử dụng AI hiệu quả?
+STAGE-07
+•	Giai đoạn số: GĐ7 
+•	Tên giai đoạn: Nhật ký chuyên gia 
+•	Visual Theme: Cuốn sổ nhật kí số hoá 
+ACT-01 Activity Introduction
+•	Tên hoạt động: Nhật ký Chuyên gia AI
+•	Visual: Slide hiển thị giao diện một trang nhật ký cá nhân lật mở, 
+ACT-02 Preparation
+•	Dụng cụ: Phiếu "Nhật ký chuyên gia " nhận từ giáo viên, bút viết. 
+•	Hình thức tổ chức: Cá nhân. 
+ACT-04 Activity Workspace
+•	Đề bài: Hoàn thành phiếu Nhật ký cá nhân: 
+Điều em hiểu rõ hơn sau khi chuẩn bị tranh biện là…
+•	Sản phẩm cần hoàn thành: Phiếu viết nhật ký phản chiếu tư duy toàn diện của cá nhân học sinh. 
+•	Thời gian: 4 phút 
+ACT-06 Transition
+•	Câu hỏi tiếp theo: Làm sao để vận dụng cấu trúc câu lệnh này vào thực tế mà không bỏ sót các thành phần nào 
+STAGE-08
+•	Giai đoạn số: GĐ8 
+•	Tên giai đoạn: Vận hành hệ thống 
+•	Visual Theme: Hệ thống bánh xe vận hành 
+ACT-01 Activity Introduction
+•	Tên hoạt động: QUAN SÁT THÓI QUEN
+•	Visual: Biểu tượng kính lúp quan sát 
+ACT-04 Activity Workspace
+•	Đề bài: Quan sát trong tuần
+•	Khi đặt câu lệnh cho AI, em thường quên hoặc chưa chú ý đến thành phần nào nhất?"
+==================================================
+END LESSON
+END-01 Key Takeaways
+•	Hôm nay chúng ta học được:
+•  AI là một công cụ hỗ trợ xử lý thông tin dựa trên câu lệnh của người dùng.
+•  AI không thể tự hiểu suy nghĩ của con người, vì vậy kết quả phụ thuộc rất nhiều vào cách chúng ta đặt yêu cầu.
+• AI không cho ra kết quả phù hợp nếu thiếu một trong 4 thành phần trong câu lệnh AI.
+END-02 Big Question Revisit
+Big Question: Tại sao AI không cho ra kết quả phù hợp nếu thiếu bất kỳ thành phần nào trong câu lệnh? 
+•	Câu trả lời sau bài học: Vì mỗi thành phần trong câu lệnh đều có một vai trò riêng giúp AI hiểu đúng yêu cầu và tạo ra kết quả phù hợp.
+Thiếu "AI là ai?" → Câu trả lời có thể thiếu góc nhìn phù hợp.
+Thiếu "Làm gì?" → AI không biết cần thực hiện nhiệm vụ nào.
+Thiếu "Cho ai?" → Nội dung có thể không phù hợp với người nhận.
+Thiếu "Kết quả thế nào?" → Câu trả lời có thể khó sử dụng.
+
+Tạo slide cho tiết học 2, tách biệt với slide của tiết 1
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-06-22T17:29:19+07:00.
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from None to Gemini 3.5 Flash (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>

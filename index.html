@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hệ thống trình chiếu slide AI - Bài 6.18: Sử dụng AI hiệu quả</title>
-  <link rel="stylesheet" href="styles.css?v=27">
+  <link rel="stylesheet" href="styles.css?v=29">
 </head>
 <body>
 
@@ -23,7 +23,6 @@
       <button class="btn btn-secondary" id="mode-btn-design" onclick="toggleDesignMode()" style="margin-right: 10px;">Thiết Kế</button>
 
       <!-- File & Storage Operations -->
-      <button class="btn btn-secondary" id="btn-undo" onclick="undoAction()" disabled style="opacity: 0.5; cursor: not-allowed; margin-right: 5px;">Hoàn Tác (Ctrl+Z)</button>
       <button class="btn btn-primary" onclick="saveSlides()">Lưu Lại</button>
       <button class="btn btn-danger" onclick="resetDefaultSlides()">Khôi Phục Gốc</button>
     </div>
@@ -37,12 +36,10 @@
       <div class="sidebar-header">
         <h2>DANH SÁCH SLIDE</h2>
         <div class="period-tabs">
-          <button class="period-tab active" id="period-tab-all" onclick="setPeriodFilter('all')">Tất cả</button>
-          <button class="period-tab" id="period-tab-t1" onclick="setPeriodFilter('t1')">Tiết 1</button>
+          <button class="period-tab active" id="period-tab-t1" onclick="setPeriodFilter('t1')">Tiết 1</button>
           <button class="period-tab" id="period-tab-t2" onclick="setPeriodFilter('t2')">Tiết 2</button>
-          <button class="period-tab locked" id="period-tab-t3" onclick="setPeriodFilter('t3')">Tiết 3 🔒</button>
+          <button class="period-tab" id="period-tab-t3" onclick="setPeriodFilter('t3')">Tiết 3</button>
         </div>
-        <input type="text" class="sidebar-search" id="slide-search" placeholder="Tìm kiếm slide..." onkeyup="filterSlides()">
       </div>
       <div class="slide-list" id="slide-list-container">
         <!-- Rendered dynamically by app.js -->
@@ -161,7 +158,7 @@
   </footer>
 
   <!-- LOAD APPLICATION DATA AND LOGIC -->
-  <script src="slides_data.js?v=47"></script>
-  <script src="app.js?v=47"></script>
+  <script src="slides_data.js?v=64"></script>
+  <script src="app.js?v=71"></script>
 </body>
 </html>
